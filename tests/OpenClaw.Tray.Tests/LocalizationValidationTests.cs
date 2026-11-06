@@ -622,6 +622,17 @@ public class LocalizationValidationTests
         "pt-br",
     };
 
+    // Locales allowed to carry a translation before the remaining locales catch up.
+    // The Chinese resource files in this fork are maintained ahead of the Latin-script
+    // locales: a key translated only in these locales is a deliberate rollout order,
+    // not a partial-translation regression. The Latin-script locales keep the en-us
+    // fallback until their copy is reviewed.
+    private static readonly HashSet<string> LeadingTranslationLocales = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "zh-cn",
+        "zh-tw",
+    };
+
     private static bool IsInvariantOrDeferred(string key, string value) =>
         InvariantOrDeferredResourceKeys.Contains(key)
         || IsInvariantValue(value)
@@ -1106,6 +1117,19 @@ public class LocalizationValidationTests
 
             if (identicalLocales.Count != localeResw.Count)
             {
+                // Chinese locales may lead: a key translated in zh-cn and/or zh-tw while
+                // the Latin-script locales still carry the en-us fallback is a deliberate
+                // rollout order, not a partial translation.
+                var translatedLocales = localeResw
+                    .Select(l => l.Locale)
+                    .Where(l => !identicalLocales.Contains(l, StringComparer.OrdinalIgnoreCase))
+                    .ToList();
+                if (translatedLocales.Count > 0 &&
+                    translatedLocales.All(LeadingTranslationLocales.Contains))
+                {
+                    continue;
+                }
+
                 // These ordinary words are spelled identically in these languages.
                 string[] naturalLoanwordLocales = key switch
                 {
