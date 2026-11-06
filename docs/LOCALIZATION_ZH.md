@@ -37,6 +37,20 @@ Notes specific to this machine:
   redistributable). Build the project directly, or run the `zh-cn build`
   workflow on GitHub Actions where the runner has VS.
 
+## Terminology (zh-cn)
+
+| Concept | Use | Do not use |
+|---|---|---|
+| Channel | 通道 | 频道 / 渠道 |
+| This PC | 此电脑 | 此计算机 |
+| AI agent | 智能体 | 代理 (reserved for proxy: 浏览器代理 / 反向代理) |
+| Gateway | 网关 | Gateway, except product names (`OpenClawGateway`, `OpenClaw Gateway`) |
+| Session | 会话 | 对话 |
+| Node | 节点 | 节点机 |
+
+English words left inside Chinese sentences need the surrounding spaces removed
+("正在检查 网关 连接" reads wrong); the unification script does that.
+
 ## Verification
 
 | Check | Command |
