@@ -969,7 +969,7 @@ public class LocalizationValidationTests
     [InlineData("fr-fr", "Vérification de la connexion au Gateway...", "Tentative de connexion annulée.")]
     [InlineData("nl-nl", "De verbinding met de Gateway controleren...", "Verbindingspoging geannuleerd.")]
     [InlineData("pt-br", "Verificando a conexão com o Gateway...", "Tentativa de conexão cancelada.")]
-    [InlineData("zh-cn", "正在检查 Gateway 连接...", "连接尝试已取消。")]
+    [InlineData("zh-cn", "正在检查网关连接...", "连接尝试已取消。")]
     [InlineData("zh-tw", "正在檢查 Gateway 連線...", "連線嘗試已取消。")]
     public void NativeConnectionEditor_StatusCopyDoesNotDescribePackageInstallation(
         string locale, string checking, string cancelled)
