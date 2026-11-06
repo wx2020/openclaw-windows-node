@@ -42,12 +42,20 @@ public static class LocalizationHelper
         return Manager.CreateResourceContext();
     }
 
-    public static string GetString(string resourceKey)
+    public static string GetString(string resourceKey) => GetString(resourceKey, resourceKey);
+
+    /// <summary>
+    /// Looks up <paramref name="resourceKey"/> and returns <paramref name="fallback"/>
+    /// when no resource matches. Prefer this over the single-argument overload for
+    /// composed keys: otherwise a missing resource renders as the raw key (for
+    /// example <c>WorkspaceShell_Settings</c>) instead of usable text.
+    /// </summary>
+    public static string GetString(string resourceKey, string fallback)
     {
         var found = TryGetValueAsString(resourceKey, out var value, out var lookupFailure);
         if (found && !string.IsNullOrEmpty(value))
         {
-            return value;
+            return value!;
         }
 
         if (TryGetXamlPropertyResourcePath(resourceKey, out var propertyResourcePath))
@@ -55,7 +63,7 @@ public static class LocalizationHelper
             var propertyFound = TryGetValueAsString(propertyResourcePath, out value, out var propertyLookupFailure);
             if (propertyFound && !string.IsNullOrEmpty(value))
             {
-                return value;
+                return value!;
             }
 
             if (!found)
@@ -68,7 +76,7 @@ public static class LocalizationHelper
         {
             var logKey = $"{_languageOverride ?? "<default>"}:{resourceKey}:{lookupFailure.GetType().FullName}";
             if (s_loggedLookupFailures.ContainsKey(logKey))
-                return resourceKey;
+                return fallback;
 
             if (s_loggedLookupFailures.Count < MaxLoggedLookupFailures && s_loggedLookupFailures.TryAdd(logKey, 0))
             {
@@ -80,7 +88,7 @@ public static class LocalizationHelper
             }
         }
 
-        return resourceKey;
+        return fallback;
     }
 
     private static bool TryGetValueAsString(string resourceKey, out string? value, out Exception? lookupFailure)

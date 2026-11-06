@@ -8213,4 +8213,32 @@ Ga na inschrijving terug naar Instellingen &gt; Windows Update en controleer op 
   <data name="Chat_Run_ElapsedSeconds" xml:space="preserve"><value>{2} s</value></data>
   <data name="Chat_Questions_Resolving" xml:space="preserve"><value>Deze vraag wordt afgehandeld. Vernieuw om de status te controleren.</value></data>
   <data name="Chat_Questions_InvalidAnswer" xml:space="preserve"><value>Kies een geldig antwoord voor elke vraag.</value></data>
+  <data name="ChannelsPage_Badge_Running" xml:space="preserve"><value>running</value></data>
+  <data name="ChannelsPage_Badge_Configured" xml:space="preserve"><value>configured</value></data>
+  <data name="ChannelsPage_Badge_NotConfigured" xml:space="preserve"><value>not configured</value></data>
+  <data name="ChannelsPage_Badge_Connected" xml:space="preserve"><value>connected</value></data>
+  <data name="ChannelsPage_Badge_Linked" xml:space="preserve"><value>linked</value></data>
+  <data name="ChannelsPage_Badge_NotLinked" xml:space="preserve"><value>not linked</value></data>
+  <data name="ChannelsPage_Badge_Error" xml:space="preserve"><value>error</value></data>
+  <data name="ChannelsPage_Badge_UnavailableOnWindows" xml:space="preserve"><value>unavailable on Windows</value></data>
+  <data name="ChannelsPage_MetaNoChannels" xml:space="preserve"><value>this gateway didn't report any channels</value></data>
+  <data name="ChannelsPage_MetaNotConnectedChannels" xml:space="preserve"><value>connect to a gateway to see what channels are available</value></data>
+  <data name="ChannelsPage_MetaCommonChannelsFormat" xml:space="preserve"><value>showing {0} common channels (your gateway didn't list any: some may not work)</value></data>
+  <data name="ChannelsPage_MetaCountsFormat" xml:space="preserve"><value>{0} configured · {1} available to add</value></data>
+  <data name="ChannelsPage_LastProbeFormat" xml:space="preserve"><value>Last probe {0}</value></data>
+  <data name="ChannelsPage_LastEventFormat" xml:space="preserve"><value>Last event {0}</value></data>
+  <data name="ChannelsPage_ProbeMsFormat" xml:space="preserve"><value>{0} ms probe</value></data>
+  <data name="ChannelsPage_ReconnectAttemptOne" xml:space="preserve"><value>1 reconnect attempt</value></data>
+  <data name="ChannelsPage_ReconnectAttemptsFormat" xml:space="preserve"><value>{0} reconnect attempts</value></data>
+  <data name="ChannelsPage_AccountsFormat" xml:space="preserve"><value>{0} accounts</value></data>
+  <data name="ChannelsPage_ModeFormat" xml:space="preserve"><value>{0} mode</value></data>
+  <data name="ChannelsPage_ConfiguredLabel" xml:space="preserve"><value>Configured</value></data>
+  <data name="ChannelsPage_LinkedAsFormat" xml:space="preserve"><value>Linked as {0}</value></data>
+  <data name="ChannelsPage_AuthAgeFormat" xml:space="preserve"><value>Auth age {0}</value></data>
+  <data name="ChannelsPage_LastMessageFormat" xml:space="preserve"><value>Last message {0}</value></data>
+  <data name="ChannelsPage_ScanQrToLink" xml:space="preserve"><value>Scan a QR to link this device</value></data>
+  <data name="ChannelsPage_BannerSavedNotRunningTitleFormat" xml:space="preserve"><value>{0}: config saved, but not running yet</value></data>
+  <data name="ChannelsPage_BannerSavedNotRunningMessage" xml:space="preserve"><value>The gateway accepted the settings but didn't start the channel. Expand the channel below: the Status section and the diagnostic disclosure will show why.</value></data>
+  <data name="ChannelsPage_BannerRunningTitleFormat" xml:space="preserve"><value>{0} is running</value></data>
+  <data name="ChannelsPage_BannerRunningMessage" xml:space="preserve"><value>Configuration saved and the channel is up.</value></data>
 </root>

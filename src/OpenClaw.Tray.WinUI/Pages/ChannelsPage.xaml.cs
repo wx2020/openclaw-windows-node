@@ -509,14 +509,14 @@ public sealed partial class ChannelsPage : Page
                 // Gateway accepted config.set but the channel still isn't
                 // configured/running. Don't lie about it.
                 SaveBanner.Severity = InfoBarSeverity.Warning;
-                SaveBanner.Title = $"{pending.ChannelId}: config saved, but not running yet";
-                SaveBanner.Message = "The gateway accepted the settings but didn't start the channel. Expand the channel below: the Status section and the diagnostic disclosure will show why.";
+                SaveBanner.Title = LocalizationHelper.Format("ChannelsPage_BannerSavedNotRunningTitleFormat", pending.ChannelId);
+                SaveBanner.Message = LocalizationHelper.GetString("ChannelsPage_BannerSavedNotRunningMessage");
             }
             else if (!_pendingBannerIsAction && pending.Severity == InfoBarSeverity.Success && record != null && record.IsConfigured)
             {
                 SaveBanner.Severity = InfoBarSeverity.Success;
-                SaveBanner.Title = $"{pending.ChannelId} is running";
-                SaveBanner.Message = "Configuration saved and the channel is up.";
+                SaveBanner.Title = LocalizationHelper.Format("ChannelsPage_BannerRunningTitleFormat", pending.ChannelId);
+                SaveBanner.Message = LocalizationHelper.GetString("ChannelsPage_BannerRunningMessage");
                 // Clear the cached form values now that we're confirmed running.
                 _formValuesByChannel.Remove(pending.ChannelId);
             }
@@ -535,11 +535,11 @@ public sealed partial class ChannelsPage : Page
 
         MetaText.Text = records.Count == 0
             ? (connected
-                ? "this gateway didn't report any channels"
-                : "connect to a gateway to see what channels are available")
+                ? LocalizationHelper.GetString("ChannelsPage_MetaNoChannels")
+                : LocalizationHelper.GetString("ChannelsPage_MetaNotConnectedChannels"))
             : (connected && !gatewayReportedSomething
-                ? $"showing {records.Count} common channels (your gateway didn't list any: some may not work)"
-                : $"{configured.Count} configured · {available.Count} available to add");
+                ? LocalizationHelper.Format("ChannelsPage_MetaCommonChannelsFormat", records.Count)
+                : LocalizationHelper.Format("ChannelsPage_MetaCountsFormat", configured.Count, available.Count));
         ApplyNativeChannelFocus(snapshot);
     }
 
@@ -583,9 +583,9 @@ public sealed partial class ChannelsPage : Page
 
     private Expander BuildExpander(ChannelRecord record)
     {
-        var (dotBrushKey, badgeText, badgeSeverity, subtitles) = ResolveHeaderState(record);
+        var (dotBrushKey, badge, badgeSeverity, subtitles) = ResolveHeaderState(record);
 
-        var header = BuildHeader(record, dotBrushKey, badgeText, badgeSeverity, subtitles);
+        var header = BuildHeader(record, dotBrushKey, badge, badgeSeverity, subtitles);
         var body = BuildBody(record);
 
         // Symmetric 24 px horizontal padding — matches the Fluent 2 page
@@ -685,7 +685,7 @@ public sealed partial class ChannelsPage : Page
     private FrameworkElement BuildHeader(
         ChannelRecord record,
         string dotBrushKey,
-        string badgeText,
+        ChannelBadge badge,
         BadgeSeverity badgeSeverity,
         IReadOnlyList<string> subtitles)
     {
@@ -740,7 +740,7 @@ public sealed partial class ChannelsPage : Page
             Style = (Style)Application.Current.Resources["BodyStrongTextBlockStyle"],
             VerticalAlignment = VerticalAlignment.Center,
         });
-        topRow.Children.Add(BuildBadge(badgeText, badgeSeverity));
+        topRow.Children.Add(BuildBadge(BadgeText(badge), badgeSeverity));
         textColumn.Children.Add(topRow);
 
         if (subtitles.Count > 0)
@@ -2433,25 +2433,42 @@ public sealed partial class ChannelsPage : Page
 
     // ─── Header state resolution (dot color, badge, subtitle) ─────────────
 
-    private static (string DotBrushKey, string BadgeText, BadgeSeverity Severity, IReadOnlyList<string> Subtitles) ResolveHeaderState(ChannelRecord record)
+    /// <summary>
+    /// Channel state shown in the card badge. The badge text is resolved from
+    /// resources at render time; the gateway status tokens ("running",
+    /// "configured", ...) are read from the payload and never used as display
+    /// text, so a translation can never change how a channel is classified.
+    /// </summary>
+    private enum ChannelBadge
+    {
+        Running,
+        Configured,
+        NotConfigured,
+        Connected,
+        Linked,
+        NotLinked,
+        Error,
+        UnavailableOnWindows,
+    }
+
+    private static string BadgeText(ChannelBadge badge) =>
+        LocalizationHelper.GetString($"ChannelsPage_Badge_{badge}");
+
+    private static (string DotBrushKey, ChannelBadge Badge, BadgeSeverity Severity, IReadOnlyList<string> Subtitles) ResolveHeaderState(ChannelRecord record)
     {
         var raw = record.RawStatus;
-
-        // Status badge text follows naming.md status vocabulary: lowercase short
-        // forms (connected / connecting / disconnected / reconnecting, etc.).
-        // Stays consistent with the tray/Mission-Control status lines.
 
         IReadOnlyList<string> Single(string s) => new[] { s };
 
         // Unavailable on this OS short-circuit
         if (record.IsUnavailableOnWindows)
-            return ("SystemFillColorNeutralBrush", "unavailable on Windows", BadgeSeverity.Neutral, Single(ResolveTagline(record.Id)));
+            return ("SystemFillColorNeutralBrush", ChannelBadge.UnavailableOnWindows, BadgeSeverity.Neutral, Single(ResolveTagline(record.Id)));
 
         if (raw.ValueKind != JsonValueKind.Object)
         {
             return record.IsConfigured
-                ? ("SystemFillColorSuccessBrush", "configured", BadgeSeverity.Success, Array.Empty<string>())
-                : ("SystemFillColorNeutralBrush", "not configured", BadgeSeverity.Neutral, Single(ResolveTagline(record.Id)));
+                ? ("SystemFillColorSuccessBrush", ChannelBadge.Configured, BadgeSeverity.Success, Array.Empty<string>())
+                : ("SystemFillColorNeutralBrush", ChannelBadge.NotConfigured, BadgeSeverity.Neutral, Single(ResolveTagline(record.Id)));
         }
 
         var running = GetBool(raw, "running");
@@ -2462,27 +2479,27 @@ public sealed partial class ChannelsPage : Page
 
         // Error path
         if (!string.IsNullOrEmpty(lastError) && running != true)
-            return ("SystemFillColorCriticalBrush", "error", BadgeSeverity.Critical, BuildErrorSubtitleLines(raw, lastError!));
+            return ("SystemFillColorCriticalBrush", ChannelBadge.Error, BadgeSeverity.Critical, BuildErrorSubtitleLines(raw, lastError!));
 
         // WhatsApp-style flow: linked/connected
         if (record.Capabilities.HasFlag(ChannelCapabilities.CanShowQr))
         {
-            if (configured == false) return ("SystemFillColorNeutralBrush", "not configured", BadgeSeverity.Neutral, Single(ResolveTagline(record.Id)));
-            if (linked == false) return ("SystemFillColorCriticalBrush", "not linked", BadgeSeverity.Critical, Single("Scan a QR to link this device"));
-            if (connected == true) return ("SystemFillColorSuccessBrush", "connected", BadgeSeverity.Success, BuildWhatsAppSubtitleLines(raw));
-            if (running == true) return ("SystemFillColorCautionBrush", "running", BadgeSeverity.Caution, BuildWhatsAppSubtitleLines(raw));
-            return ("SystemFillColorCautionBrush", "linked", BadgeSeverity.Caution, BuildWhatsAppSubtitleLines(raw));
+            if (configured == false) return ("SystemFillColorNeutralBrush", ChannelBadge.NotConfigured, BadgeSeverity.Neutral, Single(ResolveTagline(record.Id)));
+            if (linked == false) return ("SystemFillColorCriticalBrush", ChannelBadge.NotLinked, BadgeSeverity.Critical, Single(LocalizationHelper.GetString("ChannelsPage_ScanQrToLink")));
+            if (connected == true) return ("SystemFillColorSuccessBrush", ChannelBadge.Connected, BadgeSeverity.Success, BuildWhatsAppSubtitleLines(raw));
+            if (running == true) return ("SystemFillColorCautionBrush", ChannelBadge.Running, BadgeSeverity.Caution, BuildWhatsAppSubtitleLines(raw));
+            return ("SystemFillColorCautionBrush", ChannelBadge.Linked, BadgeSeverity.Caution, BuildWhatsAppSubtitleLines(raw));
         }
 
         // Generic flow
         if (running == true)
         {
-            return ("SystemFillColorSuccessBrush", "running", BadgeSeverity.Success, BuildGenericSubtitleLines(record, raw));
+            return ("SystemFillColorSuccessBrush", ChannelBadge.Running, BadgeSeverity.Success, BuildGenericSubtitleLines(record, raw));
         }
         if (configured == true)
-            return ("SystemFillColorCautionBrush", "configured", BadgeSeverity.Caution, BuildGenericSubtitleLines(record, raw));
+            return ("SystemFillColorCautionBrush", ChannelBadge.Configured, BadgeSeverity.Caution, BuildGenericSubtitleLines(record, raw));
 
-        return ("SystemFillColorNeutralBrush", "not configured", BadgeSeverity.Neutral, Single(ResolveTagline(record.Id)));
+        return ("SystemFillColorNeutralBrush", ChannelBadge.NotConfigured, BadgeSeverity.Neutral, Single(ResolveTagline(record.Id)));
     }
 
     private static IReadOnlyList<string> BuildErrorSubtitleLines(JsonElement raw, string lastError)
@@ -2492,7 +2509,7 @@ public sealed partial class ChannelsPage : Page
         // without burying it in a comma-separated list.
         var lines = new List<string> { Truncate(lastError, 80) };
         if (raw.TryGetProperty("lastProbeAt", out var ts) && ts.ValueKind == JsonValueKind.Number && ts.TryGetDouble(out var d))
-            lines.Add("Last probe " + FormatRelative(d));
+            lines.Add(LocalizationHelper.Format("ChannelsPage_LastProbeFormat", FormatRelative(d)));
         return lines;
     }
 
@@ -2506,14 +2523,14 @@ public sealed partial class ChannelsPage : Page
         if (raw.TryGetProperty("self", out var self) && self.ValueKind == JsonValueKind.Object)
         {
             var e164 = GetString(self, "e164") ?? GetString(self, "jid");
-            if (!string.IsNullOrEmpty(e164)) lines.Add("Linked as " + e164);
+            if (!string.IsNullOrEmpty(e164)) lines.Add(LocalizationHelper.Format("ChannelsPage_LinkedAsFormat", e164));
         }
 
         var activityParts = new List<string>();
         if (raw.TryGetProperty("authAgeMs", out var age) && age.ValueKind == JsonValueKind.Number && age.TryGetDouble(out var ageD))
-            activityParts.Add("Auth age " + FormatAge(ageD));
+            activityParts.Add(LocalizationHelper.Format("ChannelsPage_AuthAgeFormat", FormatAge(ageD)));
         if (raw.TryGetProperty("lastMessageAt", out var lm) && lm.ValueKind == JsonValueKind.Number && lm.TryGetDouble(out var lmd))
-            activityParts.Add("Last message " + FormatRelative(lmd));
+            activityParts.Add(LocalizationHelper.Format("ChannelsPage_LastMessageFormat", FormatRelative(lmd)));
         if (activityParts.Count > 0) lines.Add(string.Join(" · ", activityParts));
 
         return lines;
@@ -2535,27 +2552,29 @@ public sealed partial class ChannelsPage : Page
         if (GetString(raw, "botUsername") is { Length: > 0 } bot) line1Parts.Add("@" + bot);
         else if (GetString(raw, "webhookUrl") is { Length: > 0 } hook) line1Parts.Add(Truncate(hook, 48));
         if (generic?.Mode is { Length: > 0 } mode)
-            line1Parts.Add(char.ToUpperInvariant(mode[0]) + mode[1..] + " mode");
+            line1Parts.Add(LocalizationHelper.Format("ChannelsPage_ModeFormat", char.ToUpperInvariant(mode[0]) + mode[1..]));
         if (record.Accounts.Count > 1)
-            line1Parts.Add($"{record.Accounts.Count} accounts");
+            line1Parts.Add(LocalizationHelper.Format("ChannelsPage_AccountsFormat", record.Accounts.Count));
         if (line1Parts.Count > 0) lines.Add(string.Join(" · ", line1Parts));
 
         // Line 2: activity / probe.
         var line2Parts = new List<string>();
         if (generic?.LastEventAt is double lastEvent && lastEvent > 0)
-            line2Parts.Add("Last event " + FormatRelative(lastEvent));
+            line2Parts.Add(LocalizationHelper.Format("ChannelsPage_LastEventFormat", FormatRelative(lastEvent)));
         else if (generic?.LastProbeAt is double lastProbe && lastProbe > 0)
-            line2Parts.Add("Last probe " + FormatRelative(lastProbe));
+            line2Parts.Add(LocalizationHelper.Format("ChannelsPage_LastProbeFormat", FormatRelative(lastProbe)));
         if (generic?.Probe is { Ok: true, ElapsedMs: double el })
-            line2Parts.Add($"{(int)el} ms probe");
+            line2Parts.Add(LocalizationHelper.Format("ChannelsPage_ProbeMsFormat", (int)el));
         if (line2Parts.Count > 0) lines.Add(string.Join(" · ", line2Parts));
 
         // Line 3: caution (reconnect attempts).
         if (generic?.ReconnectAttempts is int n && n > 0)
-            lines.Add($"{n} reconnect attempt{(n == 1 ? "" : "s")}");
+            lines.Add(n == 1
+                ? LocalizationHelper.GetString("ChannelsPage_ReconnectAttemptOne")
+                : LocalizationHelper.Format("ChannelsPage_ReconnectAttemptsFormat", n));
 
         if (lines.Count == 0 && record.IsConfigured)
-            lines.Add("Configured");
+            lines.Add(LocalizationHelper.GetString("ChannelsPage_ConfiguredLabel"));
         return lines;
     }
 

@@ -8212,4 +8212,32 @@
   <data name="Chat_Run_ElapsedSeconds" xml:space="preserve"><value>{2}秒</value></data>
   <data name="Chat_Questions_Resolving" xml:space="preserve"><value>正在處理此問題。請重新整理以查看其狀態。</value></data>
   <data name="Chat_Questions_InvalidAnswer" xml:space="preserve"><value>請為每個問題選擇有效的答案。</value></data>
+  <data name="ChannelsPage_Badge_Running" xml:space="preserve"><value>執行中</value></data>
+  <data name="ChannelsPage_Badge_Configured" xml:space="preserve"><value>已設定</value></data>
+  <data name="ChannelsPage_Badge_NotConfigured" xml:space="preserve"><value>未設定</value></data>
+  <data name="ChannelsPage_Badge_Connected" xml:space="preserve"><value>已連線</value></data>
+  <data name="ChannelsPage_Badge_Linked" xml:space="preserve"><value>已連結</value></data>
+  <data name="ChannelsPage_Badge_NotLinked" xml:space="preserve"><value>未連結</value></data>
+  <data name="ChannelsPage_Badge_Error" xml:space="preserve"><value>錯誤</value></data>
+  <data name="ChannelsPage_Badge_UnavailableOnWindows" xml:space="preserve"><value>Windows 上無法使用</value></data>
+  <data name="ChannelsPage_MetaNoChannels" xml:space="preserve"><value>此閘道未回報任何通道</value></data>
+  <data name="ChannelsPage_MetaNotConnectedChannels" xml:space="preserve"><value>連線到閘道以查看可用通道</value></data>
+  <data name="ChannelsPage_MetaCommonChannelsFormat" xml:space="preserve"><value>顯示 {0} 個通用通道（您的閘道未列出任何通道：部分可能無法使用）</value></data>
+  <data name="ChannelsPage_MetaCountsFormat" xml:space="preserve"><value>{0} 個已設定 · {1} 個可新增</value></data>
+  <data name="ChannelsPage_LastProbeFormat" xml:space="preserve"><value>上次探測 {0}</value></data>
+  <data name="ChannelsPage_LastEventFormat" xml:space="preserve"><value>上次事件 {0}</value></data>
+  <data name="ChannelsPage_ProbeMsFormat" xml:space="preserve"><value>{0} 毫秒探測</value></data>
+  <data name="ChannelsPage_ReconnectAttemptOne" xml:space="preserve"><value>1 次重新連線嘗試</value></data>
+  <data name="ChannelsPage_ReconnectAttemptsFormat" xml:space="preserve"><value>{0} 次重新連線嘗試</value></data>
+  <data name="ChannelsPage_AccountsFormat" xml:space="preserve"><value>{0} 個帳號</value></data>
+  <data name="ChannelsPage_ModeFormat" xml:space="preserve"><value>{0} 模式</value></data>
+  <data name="ChannelsPage_ConfiguredLabel" xml:space="preserve"><value>已設定</value></data>
+  <data name="ChannelsPage_LinkedAsFormat" xml:space="preserve"><value>已連結為 {0}</value></data>
+  <data name="ChannelsPage_AuthAgeFormat" xml:space="preserve"><value>驗證時長 {0}</value></data>
+  <data name="ChannelsPage_LastMessageFormat" xml:space="preserve"><value>上次訊息 {0}</value></data>
+  <data name="ChannelsPage_ScanQrToLink" xml:space="preserve"><value>掃描 QR 碼以連結此裝置</value></data>
+  <data name="ChannelsPage_BannerSavedNotRunningTitleFormat" xml:space="preserve"><value>{0}：設定已儲存，但尚未執行</value></data>
+  <data name="ChannelsPage_BannerSavedNotRunningMessage" xml:space="preserve"><value>閘道已接受設定，但未啟動該通道。請展開下方通道：狀態區域與診斷詳細資料會說明原因。</value></data>
+  <data name="ChannelsPage_BannerRunningTitleFormat" xml:space="preserve"><value>{0} 正在執行</value></data>
+  <data name="ChannelsPage_BannerRunningMessage" xml:space="preserve"><value>設定已儲存，通道已啟動。</value></data>
 </root>

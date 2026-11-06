@@ -8212,4 +8212,32 @@
   <data name="Chat_Run_ElapsedSeconds" xml:space="preserve"><value>{2}秒</value></data>
   <data name="Chat_Questions_Resolving" xml:space="preserve"><value>正在处理此问题。请刷新以查看其状态。</value></data>
   <data name="Chat_Questions_InvalidAnswer" xml:space="preserve"><value>请为每个问题选择有效的答案。</value></data>
+  <data name="ChannelsPage_Badge_Running" xml:space="preserve"><value>运行中</value></data>
+  <data name="ChannelsPage_Badge_Configured" xml:space="preserve"><value>已配置</value></data>
+  <data name="ChannelsPage_Badge_NotConfigured" xml:space="preserve"><value>未配置</value></data>
+  <data name="ChannelsPage_Badge_Connected" xml:space="preserve"><value>已连接</value></data>
+  <data name="ChannelsPage_Badge_Linked" xml:space="preserve"><value>已关联</value></data>
+  <data name="ChannelsPage_Badge_NotLinked" xml:space="preserve"><value>未关联</value></data>
+  <data name="ChannelsPage_Badge_Error" xml:space="preserve"><value>错误</value></data>
+  <data name="ChannelsPage_Badge_UnavailableOnWindows" xml:space="preserve"><value>Windows 上不可用</value></data>
+  <data name="ChannelsPage_MetaNoChannels" xml:space="preserve"><value>此网关未上报任何通道</value></data>
+  <data name="ChannelsPage_MetaNotConnectedChannels" xml:space="preserve"><value>连接到网关以查看可用通道</value></data>
+  <data name="ChannelsPage_MetaCommonChannelsFormat" xml:space="preserve"><value>显示 {0} 个通用通道（您的网关未列出任何通道：部分可能不可用）</value></data>
+  <data name="ChannelsPage_MetaCountsFormat" xml:space="preserve"><value>{0} 个已配置 · {1} 个可添加</value></data>
+  <data name="ChannelsPage_LastProbeFormat" xml:space="preserve"><value>上次探测 {0}</value></data>
+  <data name="ChannelsPage_LastEventFormat" xml:space="preserve"><value>上次事件 {0}</value></data>
+  <data name="ChannelsPage_ProbeMsFormat" xml:space="preserve"><value>{0} 毫秒探测</value></data>
+  <data name="ChannelsPage_ReconnectAttemptOne" xml:space="preserve"><value>1 次重连尝试</value></data>
+  <data name="ChannelsPage_ReconnectAttemptsFormat" xml:space="preserve"><value>{0} 次重连尝试</value></data>
+  <data name="ChannelsPage_AccountsFormat" xml:space="preserve"><value>{0} 个账号</value></data>
+  <data name="ChannelsPage_ModeFormat" xml:space="preserve"><value>{0} 模式</value></data>
+  <data name="ChannelsPage_ConfiguredLabel" xml:space="preserve"><value>已配置</value></data>
+  <data name="ChannelsPage_LinkedAsFormat" xml:space="preserve"><value>已关联为 {0}</value></data>
+  <data name="ChannelsPage_AuthAgeFormat" xml:space="preserve"><value>认证时长 {0}</value></data>
+  <data name="ChannelsPage_LastMessageFormat" xml:space="preserve"><value>上次消息 {0}</value></data>
+  <data name="ChannelsPage_ScanQrToLink" xml:space="preserve"><value>扫描二维码以关联此设备</value></data>
+  <data name="ChannelsPage_BannerSavedNotRunningTitleFormat" xml:space="preserve"><value>{0}：配置已保存，但尚未运行</value></data>
+  <data name="ChannelsPage_BannerSavedNotRunningMessage" xml:space="preserve"><value>网关已接受设置，但未启动该通道。请展开下方通道：状态区域和诊断详情会说明原因。</value></data>
+  <data name="ChannelsPage_BannerRunningTitleFormat" xml:space="preserve"><value>{0} 正在运行</value></data>
+  <data name="ChannelsPage_BannerRunningMessage" xml:space="preserve"><value>配置已保存，通道已启动。</value></data>
 </root>
