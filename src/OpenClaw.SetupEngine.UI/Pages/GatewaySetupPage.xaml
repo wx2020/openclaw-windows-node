@@ -61,7 +61,7 @@
         <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
             <controls:SetupProgressIndicator x:Name="FlowProgress" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Button x:Uid="Onboarding_V2_Back" Content="Back" MinWidth="100" HorizontalAlignment="Left" Click="Back_Click" />
-            <Button Grid.Column="1" x:Name="PrimaryButton" Content="Install"
+            <Button x:Uid="SetupXaml_Install" Grid.Column="1" x:Name="PrimaryButton" Content="Install"
                     MinWidth="100" Click="Install_Click" Style="{StaticResource AccentButtonStyle}" />
         </Grid>
     </Grid>

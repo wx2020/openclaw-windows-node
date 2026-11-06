@@ -58,12 +58,16 @@ Notes specific to this machine:
 
 ## Known remaining work
 
-- Remaining hard-coded UI copy in `ChannelsPage` (banners, taglines, state
-  subtitles), `CronPage` (`next in ...`), `ConnectionPagePlan` (`up ...`) and
-  `SettingsPage` has not been moved to resw yet.
-- `Settings`, `Usage`, `About` in the workspace owner menu are still English:
-  the label doubles as the `WorkspaceShell_` key suffix. They can now be
-  translated safely because only the resource value changes, but the upstream
-  key set should be reviewed before doing so.
-- The SetupEngine wizard reads the Tray assembly's resource map, so its copy
-  follows the same resw files and needs no separate translation.
+- `OpenClaw.SetupEngine.UI` has no compiled resource map of its own in unpackaged
+  builds, so its XAML `x:Uid` strings resolved to nothing and fell back to the
+  English literals. The project now ships its own
+  `Strings/<locale>/Resources.resw` (keys copied from the tray file, plus the
+  `SetupXaml_*` keys for previously hard-coded literals). When new copy is added
+  to setup XAML, add the key to **that** project's resw as well.
+
+- Intentional English that must stay: gateway status tokens used as payload keys
+  (`running`, `configured`, ...), gateway-produced text, log and exception
+  messages, and brand/protocol names (`OpenClaw`, `WSL`, `Ollama`, `system.run`).
+- Copy added by a future upstream release needs a translation pass; the
+  `LocalizationValidationTests` all-or-none rule now allows the Chinese locales
+  to lead, so only the zh-cn file has to be filled in.

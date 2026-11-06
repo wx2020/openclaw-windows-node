@@ -168,7 +168,10 @@ public sealed class UpdateBackendLoaderTests
         Assert.Equal("https://github.com/wx2020/openclaw-windows-node/releases/latest",
             UpdateBackendLoader.ReleasesUrl);
 
-        var resources = Directory.GetFiles(Path.Combine(root, "src"), "Resources.resw", SearchOption.AllDirectories);
+        // The updater strings live in the tray app; the SetupEngine.UI project has its
+        // own resw files that legitimately do not carry them.
+        var trayStrings = Path.Combine(root, "src", "OpenClaw.Tray.WinUI", "Strings");
+        var resources = Directory.GetFiles(trayStrings, "Resources.resw", SearchOption.AllDirectories);
         Assert.NotEmpty(resources);
         foreach (var key in new[] { "Update_Message_Unavailable", "Update_ManualDownload" })
         {

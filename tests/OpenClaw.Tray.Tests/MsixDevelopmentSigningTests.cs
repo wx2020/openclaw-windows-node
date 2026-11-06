@@ -404,8 +404,10 @@ public sealed class MsixDevelopmentSigningTests
     [Fact]
     public void StoreUpdateMessageExistsInEveryLocale()
     {
+        // Only the tray app carries the store/update copy; SetupEngine.UI has its own
+        // resw files with a different key set.
         var resources = Directory.GetFiles(
-            Path.Combine(TestRepositoryPaths.GetRepositoryRoot(), "src"),
+            Path.Combine(TestRepositoryPaths.GetRepositoryRoot(), "src", "OpenClaw.Tray.WinUI", "Strings"),
             "Resources.resw",
             SearchOption.AllDirectories);
 

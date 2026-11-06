@@ -12,7 +12,7 @@
         <StackPanel x:Name="InstallHeader" Grid.Row="0" Padding="40,4,40,0" Spacing="4">
             <controls:OnboardingMascot x:Name="ProgressMascot" Mood="Working"
                                       HorizontalAlignment="Center" />
-            <TextBlock x:Name="TitleText" Text="Setting up OpenClaw"
+            <TextBlock x:Uid="SetupXaml_SettingUp" x:Name="TitleText" Text="Setting up OpenClaw"
                        Style="{StaticResource TitleTextBlockStyle}"
                        HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" />
             <TextBlock x:Name="SubtitleText"
@@ -66,11 +66,11 @@
                     <ProgressBar x:Name="DownloadProgress" Minimum="0" Maximum="1" Visibility="Collapsed" />
                 </StackPanel>
 
-                <InfoBar x:Name="TailscaleAuthorizationPanel" Visibility="Collapsed" IsOpen="True" IsClosable="False"
+                <InfoBar x:Uid="SetupXaml_AuthorizeTailscale" x:Name="TailscaleAuthorizationPanel" Visibility="Collapsed" IsOpen="True" IsClosable="False"
                          Severity="Informational" Title="Authorize Tailscale">
                     <StackPanel Spacing="4">
                         <TextBlock x:Name="TailscaleAuthorizationText" TextWrapping="Wrap" />
-                        <HyperlinkButton x:Name="TailscaleAuthorizationLink" Content="Open Tailscale authorization"
+                        <HyperlinkButton x:Uid="SetupXaml_OpenTailscaleAuth" x:Name="TailscaleAuthorizationLink" Content="Open Tailscale authorization"
                                          HorizontalAlignment="Left" Click="TailscaleAuthorization_Click" />
                     </StackPanel>
                 </InfoBar>
@@ -98,7 +98,7 @@
                                            IsTextSelectionEnabled="True" />
                             </ScrollViewer>
                         </Border>
-                        <HyperlinkButton x:Name="OpenLogButton" Grid.Row="1"
+                        <HyperlinkButton x:Uid="SetupXaml_OpenLogFile" x:Name="OpenLogButton" Grid.Row="1"
                                 Content="Open log file"
                                 HorizontalAlignment="Right" Margin="0,4,0,0"
                                 Click="OpenLog_Click" Padding="8,4" />
@@ -125,11 +125,11 @@
                 </Border>
             </Grid>
             <StackPanel Spacing="6">
-                <TextBlock Text="Gateway installed"
+                <TextBlock x:Uid="SetupXaml_GatewayInstalled" Text="Gateway installed"
                            Style="{StaticResource TitleTextBlockStyle}"
                            HorizontalAlignment="Center" TextAlignment="Center"
                            AutomationProperties.LiveSetting="Assertive" />
-                <TextBlock Text="Your private OpenClaw gateway is up and running on this PC."
+                <TextBlock x:Uid="SetupXaml_PrivateGatewayRunning" Text="Your private OpenClaw gateway is up and running on this PC."
                            Style="{StaticResource BodyTextBlockStyle}"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                            HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" />
@@ -146,8 +146,8 @@
                     <FontIcon Grid.Column="0" Glyph="&#xE72A;" FontSize="18" IsTextScaleFactorEnabled="False"
                               Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" VerticalAlignment="Center" />
                     <StackPanel Grid.Column="1" Spacing="2">
-                        <TextBlock Text="Up next: OpenClaw onboard" Style="{StaticResource BodyStrongTextBlockStyle}" />
-                        <TextBlock Text="A few quick questions. Choose your AI provider, model, and key to connect your agent."
+                        <TextBlock x:Uid="SetupXaml_UpNextOnboard" Text="Up next: OpenClaw onboard" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                        <TextBlock x:Uid="SetupXaml_QuickQuestions" Text="A few quick questions. Choose your AI provider, model, and key to connect your agent."
                                    Style="{StaticResource CaptionTextBlockStyle}"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                     </StackPanel>
@@ -158,7 +158,7 @@
         <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Margin="0,12,0,16">
             <controls:SetupProgressIndicator x:Name="FlowProgress" Grid.ColumnSpan="2"
                                             HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Button x:Name="OnboardButton" Grid.Column="1" Content="Start OpenClaw onboard"
+            <Button x:Uid="SetupXaml_StartOnboard" x:Name="OnboardButton" Grid.Column="1" Content="Start OpenClaw onboard"
                     Visibility="Collapsed" MinWidth="100" HorizontalAlignment="Right"
                     Margin="48,0" Style="{StaticResource AccentButtonStyle}"
                     Click="Onboard_Click" />

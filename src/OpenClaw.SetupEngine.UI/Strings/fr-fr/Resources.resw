@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Onboarding_Copy_GatewayExistingDescription.Text" xml:space="preserve"><value>Se connecter sans installer de Gateway ni d’IA locale sur ce PC.</value></data>
+  <data name="Onboarding_Copy_GatewayExistingTitle.Text" xml:space="preserve"><value>Se connecter à un Gateway existant</value></data>
+  <data name="Onboarding_Copy_GatewayIntro.Text" xml:space="preserve"><value>Le Gateway relie votre assistant IA à vos applications et outils. Choisissez où il s’exécute. Vous pourrez modifier ce choix plus tard.</value></data>
+  <data name="Onboarding_Copy_GatewayLocalDescription.Text" xml:space="preserve"><value>Installer un Gateway OpenClaw privé dans WSL.</value></data>
+  <data name="Onboarding_Copy_GatewayLocalTitle.Text" xml:space="preserve"><value>Installer un Gateway local (WSL)</value></data>
+  <data name="Onboarding_Copy_GatewayTitle.Text" xml:space="preserve"><value>Configurer OpenClaw</value></data>
+  <data name="Onboarding_Copy_Recommended.Text" xml:space="preserve"><value>Recommandé</value></data>
+  <data name="Onboarding_Copy_SafetyLink.Content" xml:space="preserve"><value>En savoir plus sur les risques et la sécurité</value></data>
+  <data name="Onboarding_Finishing_Detail.Text" xml:space="preserve"><value>Application de vos choix, redémarrage d’OpenClaw et vérification de votre IA. Cela peut prendre quelques minutes.</value></data>
+  <data name="Onboarding_Finishing_Heading.Text" xml:space="preserve"><value>Finalisation de la configuration</value></data>
+  <data name="Onboarding_Flow_WelcomeDescription.Text" xml:space="preserve"><value>OpenClaw est votre assistant IA pour accomplir vos tâches sur votre PC.</value></data>
+  <data name="Onboarding_LocalAi_RecheckAvailabilityButton.Content" xml:space="preserve"><value>Revérifier</value></data>
+  <data name="Onboarding_LocalAi_UnavailableDetailsButton.Content" xml:space="preserve"><value>Voir pourquoi</value></data>
+  <data name="Onboarding_Native_Back.Content" xml:space="preserve"><value>Retour</value></data>
+  <data name="Onboarding_Native_Cancel.Content" xml:space="preserve"><value>Annuler la configuration</value></data>
+  <data name="Onboarding_Native_CollectDiagnostics.Content" xml:space="preserve"><value>Collecter les diagnostics du Gateway</value></data>
+  <data name="Onboarding_Native_Description.Text" xml:space="preserve"><value>Installer et configurer un Gateway OpenClaw sur cet appareil</value></data>
+  <data name="Onboarding_Native_FeaturesNote.Text" xml:space="preserve"><value>Ces fonctionnalités Windows deviennent utilisables une fois le mode nœud connecté et associé au Gateway. Les autorisations Windows et les approbations de commandes restent applicables.</value></data>
+  <data name="Onboarding_Native_ProgressSubtitle.Text" xml:space="preserve"><value>Companion préparera votre Gateway, puis vous aidera à connecter votre IA.</value></data>
+  <data name="Onboarding_Native_Recovery.Header" xml:space="preserve"><value>Récupération du Gateway</value></data>
+  <data name="Onboarding_Native_Restart.Content" xml:space="preserve"><value>Redémarrer le Gateway</value></data>
+  <data name="Onboarding_Native_Retry.Content" xml:space="preserve"><value>Réessayer la configuration</value></data>
+  <data name="Onboarding_Native_RetryAi.Content" xml:space="preserve"><value>Recommencer la configuration de l'IA</value></data>
+  <data name="Onboarding_Native_Terminal.Content" xml:space="preserve"><value>Ouvrir le terminal</value></data>
+  <data name="Onboarding_Native_Title.Text" xml:space="preserve"><value>Installer un Gateway natif local</value></data>
+  <data name="Onboarding_Native_ViewLog.Content" xml:space="preserve"><value>Afficher le journal de configuration</value></data>
+  <data name="Onboarding_Native_WindowsUpdate.Content" xml:space="preserve"><value>Ouvrir Windows Update</value></data>
+  <data name="Onboarding_Ready_Channels.Description" xml:space="preserve"><value>WhatsApp, Telegram et plus encore. Vous choisissez quand vous connecter.</value></data>
+  <data name="Onboarding_Ready_Channels.Header" xml:space="preserve"><value>Connecter des canaux</value></data>
+  <data name="Onboarding_Ready_Chat.Description" xml:space="preserve"><value>Ouvrir le Chat avec votre agent.</value></data>
+  <data name="Onboarding_Ready_Chat.Header" xml:space="preserve"><value>Parler à mon agent</value></data>
+  <data name="Onboarding_Ready_Return.Content" xml:space="preserve"><value>Vérifier à nouveau</value></data>
+  <data name="Onboarding_Ready_Skills.Description" xml:space="preserve"><value>Parcourir les compétences de votre agent. Rien n'est installé automatiquement.</value></data>
+  <data name="Onboarding_Ready_Skills.Header" xml:space="preserve"><value>Explorer les compétences</value></data>
+  <data name="Onboarding_V2_AlternativeRoutes.Content" xml:space="preserve"><value>Distant, MCP local ou configuration ultérieure</value></data>
+  <data name="Onboarding_V2_AlternativesTitle.Text" xml:space="preserve"><value>Choisir un autre parcours de configuration</value></data>
+  <data name="Onboarding_V2_Back.Content" xml:space="preserve"><value>Retour</value></data>
+  <data name="Onboarding_V2_CapabilitiesTitle.Text" xml:space="preserve"><value>Capacités du PC</value></data>
+  <data name="Onboarding_V2_ClassicSettings.Content" xml:space="preserve"><value>Ouvrir les paramètres de connexion classiques</value></data>
+  <data name="Onboarding_V2_CliCard.Header" xml:space="preserve"><value>OpenClaw CLI</value></data>
+  <data name="Onboarding_V2_Continue.Content" xml:space="preserve"><value>Continuer</value></data>
+  <data name="Onboarding_V2_Custom.Text" xml:space="preserve"><value>Capacités personnalisées</value></data>
+  <data name="Onboarding_V2_DeferredRoute.Description" xml:space="preserve"><value>Vérifiez vos choix sans installer WSL ni modifier les Gateways enregistrés.</value></data>
+  <data name="Onboarding_V2_DeferredRoute.Header" xml:space="preserve"><value>Configurer un Gateway plus tard</value></data>
+  <data name="Onboarding_V2_DeviceFixed.Text" xml:space="preserve"><value>Les informations de base et l'état de l'appareil restent disponibles lorsque le service de nœud fonctionne. Ils ne dépendent pas d'un profil.</value></data>
+  <data name="Onboarding_V2_ExactCommands.Header" xml:space="preserve"><value>Commandes et fichiers exacts</value></data>
+  <data name="Onboarding_V2_ExistingRoute.Description" xml:space="preserve"><value>Utilisez une connexion enregistrée ou existante. Aucune installation WSL.</value></data>
+  <data name="Onboarding_V2_ExistingRoute.Header" xml:space="preserve"><value>Gateway existant</value></data>
+  <data name="Onboarding_V2_GatewayCard.Header" xml:space="preserve"><value>Service Gateway local</value></data>
+  <data name="Onboarding_V2_HostUnavailable.Message" xml:space="preserve"><value>Ouvrez la configuration depuis l'application Companion pour utiliser son éditeur de connexion natif.</value></data>
+  <data name="Onboarding_V2_HostUnavailable.Title" xml:space="preserve"><value>L'éditeur de connexion est indisponible dans cet hôte de configuration</value></data>
+  <data name="Onboarding_V2_LocalAiCard.Description" xml:space="preserve"><value>llama-server géré pour Windows, facultatif. Indépendant du partage Ollama.</value></data>
+  <data name="Onboarding_V2_LocalAiCard.Header" xml:space="preserve"><value>Local AI</value></data>
+  <data name="Onboarding_V2_LocalAiModel.Header" xml:space="preserve"><value>Modèle</value></data>
+  <data name="Onboarding_V2_LocalAiReview.Header" xml:space="preserve"><value>Local AI</value></data>
+  <data name="Onboarding_V2_Mcp.Description" xml:space="preserve"><value>Utilisez des clients MCP locaux sans Gateway.</value></data>
+  <data name="Onboarding_V2_Mcp.Header" xml:space="preserve"><value>Serveur MCP local</value></data>
+  <data name="Onboarding_V2_McpRoute.Description" xml:space="preserve"><value>Activez le MCP local sans Gateway. Vérifiez ensuite les capacités du PC.</value></data>
+  <data name="Onboarding_V2_McpRoute.Header" xml:space="preserve"><value>MCP local uniquement</value></data>
+  <data name="Onboarding_V2_NativeSettings.Text" xml:space="preserve"><value>Les autorisations d'exécution et de bac à sable, le consentement de capture mémorisé, les jetons MCP et la configuration vocale restent dans Companion Settings.</value></data>
+  <data name="Onboarding_V2_NetworkConsent.Content" xml:space="preserve"><value>J'autorise cette modification globale du réseau et cet arrêt unique de WSL.</value></data>
+  <data name="Onboarding_V2_NetworkExplanation.Text" xml:space="preserve"><value>Local AI nécessite le réseau WSL en miroir. L'installation modifiera le fichier global .wslconfig et arrêtera une fois toutes les distributions WSL en cours. Aucune distribution ne sera supprimée. Enregistrez d'abord votre travail WSL.</value></data>
+  <data name="Onboarding_V2_NetworkRequired.Title" xml:space="preserve"><value>Modification du réseau WSL requise</value></data>
+  <data name="Onboarding_V2_Next.Content" xml:space="preserve"><value>Suivant</value></data>
+  <data name="Onboarding_V2_NodeMode.Description" xml:space="preserve"><value>Proposez les capacités de ce PC via un Gateway connecté.</value></data>
+  <data name="Onboarding_V2_NodeMode.Header" xml:space="preserve"><value>Node mode</value></data>
+  <data name="Onboarding_V2_Ollama.Description" xml:space="preserve"><value>Partagez un service Ollama Windows existant. Cela n'installe pas Local AI et ne modifie pas votre profil de capacités.</value></data>
+  <data name="Onboarding_V2_Ollama.Header" xml:space="preserve"><value>Partage Ollama</value></data>
+  <data name="Onboarding_V2_ProfileFullDescription.Text" xml:space="preserve"><value>Les huit capacités, dont la caméra, la localisation et le contrôle du navigateur.</value></data>
+  <data name="Onboarding_V2_ProfileFullTitle.Text" xml:space="preserve"><value>Ouvert</value></data>
+  <data name="Onboarding_V2_ProfileReadOnlyDescription.Text" xml:space="preserve"><value>Canvas et capture d’écran. L’exécution de commandes est désactivée.</value></data>
+  <data name="Onboarding_V2_ProfileReadOnlyTitle.Text" xml:space="preserve"><value>Strict</value></data>
+  <data name="Onboarding_V2_ProfileStandardDescription.Text" xml:space="preserve"><value>Commandes, Canvas, capture d’écran et voix.</value></data>
+  <data name="Onboarding_V2_ProfileStandardTitle.Text" xml:space="preserve"><value>Équilibré</value></data>
+  <data name="Onboarding_V2_RemoteRoute.Description" xml:space="preserve"><value>Utilisez l'éditeur natif d'adresse, de code de configuration ou de connexion SSH.</value></data>
+  <data name="Onboarding_V2_RemoteRoute.Header" xml:space="preserve"><value>Gateway distant</value></data>
+  <data name="Onboarding_V2_ReplacementWarning.Title" xml:space="preserve"><value>Ce remplacement peut supprimer définitivement les données WSL</value></data>
+  <data name="Onboarding_V2_Retry.Content" xml:space="preserve"><value>Réessayer</value></data>
+  <data name="Onboarding_V2_ReturnToReview.Content" xml:space="preserve"><value>Revenir à la vérification</value></data>
+  <data name="Onboarding_V2_ReviewIntro.Text" xml:space="preserve"><value>Vérifiez les modifications avant le début de l'installation.</value></data>
+  <data name="Onboarding_V2_ReviewTitle.Text" xml:space="preserve"><value>Configuration du Gateway WSL</value></data>
+  <data name="Onboarding_V2_StartupCard.Header" xml:space="preserve"><value>Lancer OpenClaw à l'ouverture de session</value></data>
+  <data name="Onboarding_V2_TailscaleAuthMode.Header" xml:space="preserve"><value>Se connecter au Gateway WSL</value></data>
+  <data name="Onboarding_V2_TailscaleBrowser.Content" xml:space="preserve"><value>Se connecter avec un navigateur pendant l'installation</value></data>
+  <data name="Onboarding_V2_TailscaleCard.Description" xml:space="preserve"><value>Accès privé au tailnet, pas d'accès public Funnel. Facultatif et désactivé par défaut.</value></data>
+  <data name="Onboarding_V2_TailscaleCard.Header" xml:space="preserve"><value>Tailscale Serve</value></data>
+  <data name="Onboarding_V2_TailscaleKey.Content" xml:space="preserve"><value>Utiliser une clé d'authentification à usage unique</value></data>
+  <data name="Onboarding_V2_TailscaleKeyInput.Header" xml:space="preserve"><value>Clé d'authentification Tailscale</value></data>
+  <data name="Onboarding_V2_TailscaleKeyInput.PlaceholderText" xml:space="preserve"><value>Conservée uniquement pour cette session de configuration</value></data>
+  <data name="Onboarding_V2_TailscalePrerequisite.Text" xml:space="preserve"><value>Installez Tailscale sur Windows et connectez-vous avec MagicDNS activé. Le Gateway WSL se connecte séparément.</value></data>
+  <data name="Onboarding_V2_TailscaleTrust.Description" xml:space="preserve"><value>Désactivé par défaut. Activez uniquement si les ACL du tailnet doivent participer au contrôle d'accès du Gateway.</value></data>
+  <data name="Onboarding_V2_TailscaleTrust.Header" xml:space="preserve"><value>Faire confiance aux identités Tailscale pour l'authentification Gateway</value></data>
+  <data name="Onboarding_V2_WelcomeChat.Description" xml:space="preserve"><value>Utilisez Chat natif avec le fournisseur d'IA de votre choix.</value></data>
+  <data name="Onboarding_V2_WelcomeChat.Header" xml:space="preserve"><value>Discutez avec votre IA</value></data>
+  <data name="Onboarding_V2_WelcomeGateway.Description" xml:space="preserve"><value>Exécutez ici un Gateway WSL privé ou connectez-vous à un Gateway existant.</value></data>
+  <data name="Onboarding_V2_WelcomeGateway.Header" xml:space="preserve"><value>Gardez le contrôle de votre Gateway</value></data>
+  <data name="Onboarding_V2_WelcomePc.Description" xml:space="preserve"><value>Choisissez les capacités du PC à activer. Les autorisations Windows et les approbations d’exécution restent distinctes.</value></data>
+  <data name="Onboarding_V2_WelcomePc.Header" xml:space="preserve"><value>Laissez les agents vous aider sur ce PC</value></data>
+  <data name="Onboarding_V2_WelcomeTitle.Text" xml:space="preserve"><value>Bienvenue dans OpenClaw</value></data>
+  <data name="Onboarding_V2_WelcomeTrust.Message" xml:space="preserve"><value>Les agents IA sont puissants et leur donner accès à votre PC comporte des risques. Ils peuvent commettre des erreurs, modifier ou supprimer des fichiers, ou exposer des informations privées.
+
+Vous pouvez contrôler et limiter l’accès d’OpenClaw à votre PC.</value></data>
+  <data name="Onboarding_V2_WelcomeTrust.Title" xml:space="preserve"><value>Avant de commencer</value></data>
+  <data name="Onboarding_V2_WindowTitle.Text" xml:space="preserve"><value>Configuration OpenClaw</value></data>
+  <data name="Onboarding_V3_FineTune.Text" xml:space="preserve"><value>Ajuster</value></data>
+  <data name="Onboarding_V3_ProfileHelp.Text" xml:space="preserve"><value>Choisissez un profil. Ouvrez Ajuster pour consulter ou modifier chaque capacité.</value></data>
+  <data name="Onboarding_V3_TransportRequired.Message" xml:space="preserve"><value>Activez Node mode ou Local MCP Server pour utiliser ces capacités. Vos choix sont conservés.</value></data>
+  <data name="Onboarding_V3_TransportRequired.Title" xml:space="preserve"><value>Les capacités sont indisponibles</value></data>
+  <data name="Onboarding_V4_ConnectionOptions.Text" xml:space="preserve"><value>Options de connexion</value></data>
+  <data name="Onboarding_V4_DetailedActivity.Header" xml:space="preserve"><value>Activité détaillée</value></data>
+  <data name="Onboarding_V4_PhaseConnect.Header" xml:space="preserve"><value>Démarrer et vérifier la connexion</value></data>
+  <data name="Onboarding_V4_PhaseInstall.Header" xml:space="preserve"><value>Installer le Gateway</value></data>
+  <data name="Onboarding_V4_PhasePrepare.Header" xml:space="preserve"><value>Préparer votre PC</value></data>
+  <data name="Onboarding_Welcome_LocalAiAvailableBadge.Text" xml:space="preserve"><value>Votre PC prend en charge l’IA locale</value></data>
+  <data name="SetupXaml_AllSet.Text" xml:space="preserve"><value>All set!</value></data>
+  <data name="SetupXaml_AuthorizeTailscale.Title" xml:space="preserve"><value>Authorize Tailscale</value></data>
+  <data name="SetupXaml_CapabilityProfileApplied.Text" xml:space="preserve"><value>Capability profile applied</value></data>
+  <data name="SetupXaml_Close.Content" xml:space="preserve"><value>Close</value></data>
+  <data name="SetupXaml_ConnectedReady.Text" xml:space="preserve"><value>This PC is connected and ready to use</value></data>
+  <data name="SetupXaml_ConnectingGateway.Text" xml:space="preserve"><value>Connecting to gateway...</value></data>
+  <data name="SetupXaml_Continue.Content" xml:space="preserve"><value>Continue</value></data>
+  <data name="SetupXaml_DevicePaired.Text" xml:space="preserve"><value>Device paired</value></data>
+  <data name="SetupXaml_EditableInSettings.Text" xml:space="preserve"><value>Editable any time in Companion Settings</value></data>
+  <data name="SetupXaml_EnterValue.PlaceholderText" xml:space="preserve"><value>Enter value</value></data>
+  <data name="SetupXaml_FinishingSetup.Text" xml:space="preserve"><value>Finishing setup</value></data>
+  <data name="SetupXaml_GatewayInstalled.Text" xml:space="preserve"><value>Gateway installed</value></data>
+  <data name="SetupXaml_Install.Content" xml:space="preserve"><value>Install</value></data>
+  <data name="SetupXaml_LaunchAtStartup.Text" xml:space="preserve"><value>Launch OpenClaw at startup</value></data>
+  <data name="SetupXaml_LiveGatewayOutput.Text" xml:space="preserve"><value>Live gateway output</value></data>
+  <data name="SetupXaml_LocalAiInstalled.Text" xml:space="preserve"><value>Local AI installed</value></data>
+  <data name="SetupXaml_LocalAiRequirements.Message" xml:space="preserve"><value>This PC does not meet one or more Local AI requirements.</value></data>
+  <data name="SetupXaml_LocalAiUnavailable.Title" xml:space="preserve"><value>Local AI is not available</value></data>
+  <data name="SetupXaml_LocalGatewayRunning.Text" xml:space="preserve"><value>Local gateway running</value></data>
+  <data name="SetupXaml_MoreOptions.Content" xml:space="preserve"><value>More options</value></data>
+  <data name="SetupXaml_NodeModeEnabled.Title" xml:space="preserve"><value>Node mode enabled</value></data>
+  <data name="SetupXaml_NodeModeMessage.Message" xml:space="preserve"><value>The gateway can use this PC for screen capture, camera, and system commands.</value></data>
+  <data name="SetupXaml_NotReadyYet.Content" xml:space="preserve"><value>No, I'm not ready yet</value></data>
+  <data name="SetupXaml_Onboard.Text" xml:space="preserve"><value>OpenClaw onboard</value></data>
+  <data name="SetupXaml_OpenChat.Content" xml:space="preserve"><value>Open chat</value></data>
+  <data name="SetupXaml_OpenLogFile.Content" xml:space="preserve"><value>Open log file</value></data>
+  <data name="SetupXaml_OpenTailscaleAuth.Content" xml:space="preserve"><value>Open Tailscale authorization</value></data>
+  <data name="SetupXaml_OpenTerminal.Content" xml:space="preserve"><value>Open terminal</value></data>
+  <data name="SetupXaml_PrivateGatewayRunning.Text" xml:space="preserve"><value>Your private OpenClaw gateway is up and running on this PC.</value></data>
+  <data name="SetupXaml_QuickQuestions.Text" xml:space="preserve"><value>A few quick questions. Choose your AI provider, model, and key to connect your agent.</value></data>
+  <data name="SetupXaml_ReadyToGo.Text" xml:space="preserve"><value>OpenClaw is ready to go</value></data>
+  <data name="SetupXaml_RestartGateway.Content" xml:space="preserve"><value>Restart gateway</value></data>
+  <data name="SetupXaml_RestartNow.Content" xml:space="preserve"><value>Yes, restart now</value></data>
+  <data name="SetupXaml_RestartOnboard.Text" xml:space="preserve"><value>Restart onboard</value></data>
+  <data name="SetupXaml_RetryFallback.Content" xml:space="preserve"><value>Retry with configured fallback</value></data>
+  <data name="SetupXaml_SettingUp.Text" xml:space="preserve"><value>Setting up OpenClaw</value></data>
+  <data name="SetupXaml_Skip.Content" xml:space="preserve"><value>Skip</value></data>
+  <data name="SetupXaml_SkipAndExit.Text" xml:space="preserve"><value>Skip &amp; exit</value></data>
+  <data name="SetupXaml_StartOnboard.Content" xml:space="preserve"><value>Start OpenClaw onboard</value></data>
+  <data name="SetupXaml_UpNextOnboard.Text" xml:space="preserve"><value>Up next: OpenClaw onboard</value></data>
+  <data name="SetupXaml_ViewFullLog.Content" xml:space="preserve"><value>View full log →</value></data>
+</root>

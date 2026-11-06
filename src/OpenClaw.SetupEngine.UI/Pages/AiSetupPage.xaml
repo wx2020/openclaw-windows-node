@@ -78,7 +78,7 @@
             <StackPanel Spacing="12">
                 <InfoBar x:Name="ErrorBar" IsOpen="False" IsClosable="False" Severity="Error">
                     <InfoBar.ActionButton>
-                        <Button x:Name="CloseBlockedSetupButton"
+                        <Button x:Uid="SetupXaml_Close" x:Name="CloseBlockedSetupButton"
                                 Content="Close" Visibility="Collapsed" Click="CloseBlockedSetup_Click" />
                     </InfoBar.ActionButton>
                 </InfoBar>

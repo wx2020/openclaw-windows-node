@@ -11,7 +11,7 @@
     <Grid Padding="40,4,40,24" RowDefinitions="Auto,*,Auto">
         <StackPanel Spacing="4">
             <controls:OnboardingMascot x:Name="MascotHero" Mood="Thinking" HorizontalAlignment="Center" />
-            <TextBlock x:Name="Heading" Text="Finishing setup"
+            <TextBlock x:Uid="SetupXaml_FinishingSetup" x:Name="Heading" Text="Finishing setup"
                        Style="{StaticResource TitleTextBlockStyle}" TextAlignment="Center" TextWrapping="Wrap" />
             <TextBlock x:Name="Prompt"
                        Style="{StaticResource BodyTextBlockStyle}" TextAlignment="Center" TextWrapping="Wrap" />

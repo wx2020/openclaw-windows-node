@@ -7,7 +7,7 @@
         <TextBlock x:Name="LocalAiProfileSelectionText" TextWrapping="Wrap" Visibility="Collapsed"
                    AutomationProperties.AutomationId="LocalAiProfileSelectionText"
                    AutomationProperties.LiveSetting="Polite" />
-        <InfoBar x:Name="LocalAiUnavailablePanel"
+        <InfoBar x:Uid="SetupXaml_LocalAiUnavailable" x:Name="LocalAiUnavailablePanel"
                  AutomationProperties.AutomationId="LocalAiUnavailablePanel"
                  AutomationProperties.LiveSetting="Polite"
                  IsOpen="True" IsClosable="False" Severity="Informational" Visibility="Collapsed"
