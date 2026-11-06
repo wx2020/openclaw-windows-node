@@ -1,5 +1,6 @@
 using OpenClaw.Connection;
 using OpenClaw.Shared;
+using OpenClawTray.Helpers;
 using OpenClawTray.Services;
 using System;
 using System.Collections.Generic;
@@ -136,7 +137,7 @@ internal sealed record ConnectionPagePlan
     // ─── Status strip ───
     public string StripGlyph { get; init; } = OpenClawTray.Helpers.FluentIconCatalog.System; // PC1 default — "no gateway yet"
     public ConnectionAccent StripAccent { get; init; } = ConnectionAccent.Neutral;
-    public string StripHeadline { get; init; } = "Not connected";
+    public string StripHeadline { get; init; } = LocalizationHelper.GetString("Common_NotConnected");
     public string StripSub { get; init; } = "";
     public string? StripHeadlineResourceKey { get; init; }
     public string? StripSubResourceKey { get; init; }
@@ -271,7 +272,7 @@ internal sealed record ConnectionPagePlan
                 Mode = ConnectionPageMode.Cockpit,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.Sync,
                 StripAccent = ConnectionAccent.Neutral,
-                StripHeadline = "Disconnecting…",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_Disconnecting"),
                 StripSub = displayName,
                 StripShowProgress = true,
                 ActiveGatewayDisplayName = displayName,
@@ -364,8 +365,8 @@ internal sealed record ConnectionPagePlan
                 Mode = ConnectionPageMode.Welcome,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.System,
                 StripAccent = ConnectionAccent.Neutral,
-                StripHeadline = "No gateway yet",
-                StripSub = "Add a gateway to get started.",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_NoGatewayHeadline"),
+                StripSub = LocalizationHelper.GetString("ConnectionPlan_NoGatewaySub"),
                 NodeCard = idleNodeCard,
             };
         }
@@ -377,8 +378,8 @@ internal sealed record ConnectionPagePlan
             Mode = ConnectionPageMode.Cockpit,
             StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.System,
             StripAccent = ConnectionAccent.Neutral,
-            StripHeadline = "Not connected",
-            StripSub = "Pick a gateway below, or add a new one.",
+            StripHeadline = LocalizationHelper.GetString("Common_NotConnected"),
+            StripSub = LocalizationHelper.GetString("ConnectionPlan_PickGatewaySub"),
             NodeCard = idleNodeCard,
             RelevantGatewayId = activeRecord?.Id,
         };
@@ -393,10 +394,10 @@ internal sealed record ConnectionPagePlan
             Mode = ConnectionPageMode.Cockpit,
             StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.Sync, // replaced visually by ProgressRing
             StripAccent = ConnectionAccent.Caution,
-            StripHeadline = "Connecting…",
-            StripSub = !string.IsNullOrEmpty(url) ? url : "Reaching gateway",
+            StripHeadline = LocalizationHelper.GetString("ConnectionPlan_Connecting"),
+            StripSub = !string.IsNullOrEmpty(url) ? url : LocalizationHelper.GetString("ConnectionPlan_ReachingGateway"),
             StripShowProgress = true,
-            StripPrimaryLabel = "Cancel",
+            StripPrimaryLabel = LocalizationHelper.GetString("Common_Cancel"),
             StripPrimaryAction = ConnectionPrimaryAction.Cancel,
             OperatorCard = OperatorCardState.Connecting,
             NodeCard = NodeCardState.Hidden, // hidden until operator connects
@@ -422,7 +423,7 @@ internal sealed record ConnectionPagePlan
             Mode = ConnectionPageMode.Cockpit,
             StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.StatusOk,
             StripAccent = ConnectionAccent.Success,
-            StripHeadline = "Connected",
+            StripHeadline = LocalizationHelper.GetString("Common_Connected"),
             StripSub = sub,
             OperatorCard = OperatorCardState.Active,
             NodeCard = BuildNodeCardState(snap, settings),
@@ -446,11 +447,11 @@ internal sealed record ConnectionPagePlan
             ? ConnectionCardPlanSanitizer.Sanitize(snap.NodeError!)
             : snap.NodeState switch
             {
-                RoleConnectionState.PairingRejected => "Node pairing was rejected.",
-                RoleConnectionState.RateLimited => "Node is rate-limited by the gateway.",
-                RoleConnectionState.Error => "Node reported an error.",
-                RoleConnectionState.Idle when snap.NodeConnectionIntended => "Node mode is enabled, but the node has not connected.",
-                _ => "Connection is impaired.",
+                RoleConnectionState.PairingRejected => LocalizationHelper.GetString("ConnectionPlan_NodePairingRejected"),
+                RoleConnectionState.RateLimited => LocalizationHelper.GetString("ConnectionPlan_NodeRateLimited"),
+                RoleConnectionState.Error => LocalizationHelper.GetString("ConnectionPlan_NodeError"),
+                RoleConnectionState.Idle when snap.NodeConnectionIntended => LocalizationHelper.GetString("ConnectionPlan_NodeNotConnected"),
+                _ => LocalizationHelper.GetString("ConnectionPlan_ConnectionImpaired"),
             };
 
         // SSH-tunnel-specific framing if the tunnel is the likely cause
@@ -463,9 +464,9 @@ internal sealed record ConnectionPagePlan
             Mode = ConnectionPageMode.Cockpit,
             StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.StatusWarn,
             StripAccent = ConnectionAccent.Caution,
-            StripHeadline = tunnelLikely ? "Connection degraded" : "Connection degraded",
+            StripHeadline = tunnelLikely ? LocalizationHelper.GetString("ConnectionPlan_ConnectionDegraded") : LocalizationHelper.GetString("ConnectionPlan_ConnectionDegraded"),
             StripSub = reason,
-            StripPrimaryLabel = tunnelLikely ? "Restart tunnel" : "Reconnect",
+            StripPrimaryLabel = tunnelLikely ? LocalizationHelper.GetString("ConnectionPlan_RestartTunnel") : LocalizationHelper.GetString("Common_Reconnect"),
             StripPrimaryAction = tunnelLikely ? ConnectionPrimaryAction.RestartTunnel : ConnectionPrimaryAction.Reconnect,
             OperatorCard = OperatorCardState.Paused,
             NodeCard = BuildNodeCardState(snap, settings),
@@ -499,8 +500,8 @@ internal sealed record ConnectionPagePlan
                 Recovery = RecoveryCategory.Pairing,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.Lock,
                 StripAccent = ConnectionAccent.Caution,
-                StripHeadline = "Awaiting approval",
-                StripSub = "Approve this client on the gateway host. Connection will resume automatically.",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_AwaitingApproval"),
+                StripSub = LocalizationHelper.GetString("ConnectionPlan_AwaitingApprovalSub"),
                 // No strip-level CTA here: the inline Copy button in
                 // RecoveryApproveCmdBlock owns the copy action, and surfacing
                 // an accent "Copy command" CTA in the strip header on top of
@@ -510,7 +511,7 @@ internal sealed record ConnectionPagePlan
                 StripPrimaryLabel = null,
                 StripPrimaryAction = ConnectionPrimaryAction.None,
                 RecoveryApproveCommand = cmd,
-                RecoveryDetail = "Run on the gateway host:",
+                RecoveryDetail = LocalizationHelper.GetString("ConnectionPlan_RunOnGatewayHost"),
                 ActiveGatewayDisplayName = name,
                 RelevantGatewayId = rec?.Id,
                 ActiveGatewayHasSshTunnel = rec?.SshTunnel != null,
@@ -542,11 +543,11 @@ internal sealed record ConnectionPagePlan
                 Recovery = RecoveryCategory.Tailscale,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.StatusErr,
                 StripAccent = ConnectionAccent.Critical,
-                StripHeadline = "Tailscale gateway unavailable",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_TailscaleUnavailable"),
                 StripSub = string.IsNullOrEmpty(err)
-                    ? $"Can't reach the private tailnet endpoint {url}."
+                    ? string.Format(LocalizationHelper.GetString("ConnectionPlan_TailnetUnreachableFormat"), url)
                     : err,
-                StripPrimaryLabel = "Retry",
+                StripPrimaryLabel = LocalizationHelper.GetString("Common_Retry"),
                 StripPrimaryAction = ConnectionPrimaryAction.Retry,
                 RecoveryDetail = err,
                 ActiveGatewayDisplayName = name,
@@ -564,9 +565,9 @@ internal sealed record ConnectionPagePlan
                 Recovery = RecoveryCategory.LocalPortConflict,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.StatusWarn,
                 StripAccent = ConnectionAccent.Caution,
-                StripHeadline = "Local gateway port conflict",
-                StripSub = "Another process is using this managed gateway address. OpenClaw will not send gateway credentials to an unverified listener.",
-                StripPrimaryLabel = "Retry",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_PortConflict"),
+                StripSub = LocalizationHelper.GetString("ConnectionPlan_PortConflictSub"),
+                StripPrimaryLabel = LocalizationHelper.GetString("Common_Retry"),
                 StripPrimaryAction = ConnectionPrimaryAction.Retry,
                 ActiveGatewayDisplayName = name,
                 ActiveGatewayDetailLine = url,
@@ -580,9 +581,9 @@ internal sealed record ConnectionPagePlan
                 Recovery = RecoveryCategory.Auth,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.StatusErr,
                 StripAccent = ConnectionAccent.Critical,
-                StripHeadline = "Authentication failed",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_AuthFailed"),
                 StripSub = string.IsNullOrEmpty(err)
-                    ? $"Token for {name} is no longer valid."
+                    ? string.Format(LocalizationHelper.GetString("ConnectionPlan_TokenInvalidFormat"), name)
                     : err,
                 // No strip-level "Re-pair" CTA: the RecoveryAuthPasteBlock
                 // below the strip already exposes a paste-setup-code + Apply
@@ -605,9 +606,9 @@ internal sealed record ConnectionPagePlan
                 Recovery = RecoveryCategory.TokenDrift,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.StatusErr,
                 StripAccent = ConnectionAccent.Critical,
-                StripHeadline = "Device needs re-pairing",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_RePairing"),
                 StripSub = string.IsNullOrEmpty(err)
-                    ? $"The saved device token for {name} is no longer trusted by the gateway."
+                    ? string.Format(LocalizationHelper.GetString("ConnectionPlan_DeviceTokenUntrustedFormat"), name)
                     : err,
                 StripPrimaryLabel = null,
                 StripPrimaryAction = ConnectionPrimaryAction.None,
@@ -625,9 +626,9 @@ internal sealed record ConnectionPagePlan
                 Recovery = RecoveryCategory.Scope,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.Lock,
                 StripAccent = ConnectionAccent.Critical,
-                StripHeadline = "Not enough access",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_NotEnoughAccess"),
                 StripSub = string.IsNullOrEmpty(err)
-                    ? $"This device is connected but lacks the scopes it needs on {name}."
+                    ? string.Format(LocalizationHelper.GetString("ConnectionPlan_MissingScopesFormat"), name)
                     : err,
                 StripPrimaryLabel = null,
                 StripPrimaryAction = ConnectionPrimaryAction.None,
@@ -644,11 +645,11 @@ internal sealed record ConnectionPagePlan
                 Recovery = RecoveryCategory.Tls,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.StatusErr,
                 StripAccent = ConnectionAccent.Critical,
-                StripHeadline = "Secure connection failed",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_SecureFailed"),
                 StripSub = string.IsNullOrEmpty(err)
-                    ? "The gateway's transport could not be secured."
+                    ? LocalizationHelper.GetString("ConnectionPlan_SecureFailedSub")
                     : err,
-                StripPrimaryLabel = "Retry",
+                StripPrimaryLabel = LocalizationHelper.GetString("Common_Retry"),
                 StripPrimaryAction = ConnectionPrimaryAction.Retry,
                 RecoveryDetail = err,
                 ActiveGatewayDisplayName = name,
@@ -663,9 +664,9 @@ internal sealed record ConnectionPagePlan
                 Recovery = RecoveryCategory.RateLimited,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.StatusWarn,
                 StripAccent = ConnectionAccent.Caution,
-                StripHeadline = "Too many failed attempts",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_TooManyAttempts"),
                 StripSub = string.IsNullOrEmpty(err)
-                    ? "The gateway is temporarily limiting connection attempts from this client."
+                    ? LocalizationHelper.GetString("ConnectionPlan_TooManyAttemptsSub")
                     : err,
                 StripPrimaryLabel = null,
                 StripPrimaryAction = ConnectionPrimaryAction.None,
@@ -682,9 +683,9 @@ internal sealed record ConnectionPagePlan
                 Recovery = RecoveryCategory.Tunnel,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.StatusErr,
                 StripAccent = ConnectionAccent.Critical,
-                StripHeadline = "Can't reach gateway",
-                StripSub = "SSH tunnel is down: " + (err.Length > 0 ? err : "last attempt failed."),
-                StripPrimaryLabel = "Restart tunnel",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_CantReachGateway"),
+                StripSub = LocalizationHelper.GetString("ConnectionPlan_SshTunnelDown") + (err.Length > 0 ? err : LocalizationHelper.GetString("ConnectionPlan_LastAttemptFailed")),
+                StripPrimaryLabel = LocalizationHelper.GetString("ConnectionPlan_RestartTunnel"),
                 StripPrimaryAction = ConnectionPrimaryAction.RestartTunnel,
                 RecoveryDetail = err,
                 ActiveGatewayDisplayName = name,
@@ -699,9 +700,9 @@ internal sealed record ConnectionPagePlan
                 Recovery = RecoveryCategory.Server,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.StatusErr,
                 StripAccent = ConnectionAccent.Critical,
-                StripHeadline = "Can't reach gateway",
-                StripSub = string.IsNullOrEmpty(err) ? "Gateway returned an error." : err,
-                StripPrimaryLabel = "Retry",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_CantReachGateway"),
+                StripSub = string.IsNullOrEmpty(err) ? LocalizationHelper.GetString("ConnectionPlan_GatewayErrorSub") : err,
+                StripPrimaryLabel = LocalizationHelper.GetString("Common_Retry"),
                 StripPrimaryAction = ConnectionPrimaryAction.Retry,
                 RecoveryDetail = err,
                 ActiveGatewayDisplayName = name,
@@ -717,13 +718,13 @@ internal sealed record ConnectionPagePlan
                 Recovery = RecoveryCategory.Network,
                 StripGlyph = OpenClawTray.Helpers.FluentIconCatalog.StatusErr,
                 StripAccent = ConnectionAccent.Critical,
-                StripHeadline = "Can't reach gateway",
+                StripHeadline = LocalizationHelper.GetString("ConnectionPlan_CantReachGateway"),
                 StripSub = string.IsNullOrEmpty(err)
                     ? (string.IsNullOrEmpty(url)
-                        ? "Connection refused."
-                        : $"Connection refused at {url}.")
+                        ? LocalizationHelper.GetString("ConnectionPlan_ConnectionRefused")
+                        : string.Format(LocalizationHelper.GetString("ConnectionPlan_ConnectionRefusedAtFormat"), url))
                     : err,
-                StripPrimaryLabel = "Retry",
+                StripPrimaryLabel = LocalizationHelper.GetString("Common_Retry"),
                 StripPrimaryAction = ConnectionPrimaryAction.Retry,
                 RecoveryDetail = err,
                 ActiveGatewayDisplayName = name,
@@ -903,12 +904,12 @@ internal sealed record ConnectionPagePlan
         var bits = new List<string>(4);
         var url = ConnectionCardPlanSanitizer.SanitizeGatewayUrl(rec?.Url);
         if (!string.IsNullOrEmpty(url)) bits.Add(url);
-        if (rec?.SshTunnel != null) bits.Add("via SSH tunnel");
+        if (rec?.SshTunnel != null) bits.Add(LocalizationHelper.GetString("ConnectionPlan_ViaSshTunnel"));
         var credential = FormatCredentialSummary(snap);
         if (!string.IsNullOrEmpty(credential)) bits.Add(credential);
         if (!string.IsNullOrWhiteSpace(self?.ServerVersion)) bits.Add($"v{self!.ServerVersion}");
         if (self?.UptimeMs is long uptime && uptime > 0)
-            bits.Add($"up {FormatUptime(uptime)}");
+            bits.Add(string.Format(LocalizationHelper.GetString("ConnectionPlan_UpFormat"), FormatUptime(uptime)));
         return string.Join(" • ", bits);
     }
 
@@ -916,10 +917,10 @@ internal sealed record ConnectionPagePlan
     {
         return source switch
         {
-            CredentialResolver.SourceNodeDeviceToken => "paired via node device token",
-            CredentialResolver.SourceDeviceToken => "paired via device token",
-            CredentialResolver.SourceSharedGatewayToken => "shared token",
-            CredentialResolver.SourceBootstrapToken => "bootstrap token",
+            CredentialResolver.SourceNodeDeviceToken => LocalizationHelper.GetString("ConnectionPlan_CredentialNodeDeviceToken"),
+            CredentialResolver.SourceDeviceToken => LocalizationHelper.GetString("ConnectionPlan_CredentialDeviceToken"),
+            CredentialResolver.SourceSharedGatewayToken => LocalizationHelper.GetString("ConnectionPlan_CredentialSharedToken"),
+            CredentialResolver.SourceBootstrapToken => LocalizationHelper.GetString("ConnectionPlan_CredentialBootstrapToken"),
             _ => "",
         };
     }
@@ -935,10 +936,10 @@ internal sealed record ConnectionPagePlan
         var status = useOperator ? snap.OperatorCredentialStatus : snap.NodeCredentialStatus;
         var fallbackUsed = useOperator ? snap.OperatorCredentialFallbackUsed : snap.NodeCredentialFallbackUsed;
         if (fallbackUsed || status == GatewayCredentialResolutionStatus.FallbackUsed)
-            return $"{label} (fallback)";
+            return string.Format(LocalizationHelper.GetString("ConnectionPlan_CredentialFallbackFormat"), label);
         if (status == GatewayCredentialResolutionStatus.BootstrapRequired ||
             (useOperator ? snap.OperatorCredentialBootstrapRequired : snap.NodeCredentialBootstrapRequired))
-            return $"{label} (pairing required)";
+            return string.Format(LocalizationHelper.GetString("ConnectionPlan_CredentialPairingRequiredFormat"), label);
 
         return label;
     }
@@ -1006,10 +1007,10 @@ internal sealed record ConnectionPagePlan
     private static string FormatUptime(long uptimeMs)
     {
         var span = TimeSpan.FromMilliseconds(uptimeMs);
-        if (span.TotalDays >= 1) return $"{(int)span.TotalDays}d {span.Hours}h";
-        if (span.TotalHours >= 1) return $"{(int)span.TotalHours}h {span.Minutes}m";
-        if (span.TotalMinutes >= 1) return $"{(int)span.TotalMinutes}m";
-        return $"{(int)span.TotalSeconds}s";
+        if (span.TotalDays >= 1) return string.Format(LocalizationHelper.GetString("ConnectionPlan_UptimeDaysHoursFormat"), (int)span.TotalDays, span.Hours);
+        if (span.TotalHours >= 1) return string.Format(LocalizationHelper.GetString("ConnectionPlan_UptimeHoursMinutesFormat"), (int)span.TotalHours, span.Minutes);
+        if (span.TotalMinutes >= 1) return string.Format(LocalizationHelper.GetString("ConnectionPlan_UptimeMinutesFormat"), (int)span.TotalMinutes);
+        return string.Format(LocalizationHelper.GetString("ConnectionPlan_UptimeSecondsFormat"), (int)span.TotalSeconds);
     }
 
     /// <summary>Maps an accent enum to the ThemeResource brush key used in XAML.</summary>

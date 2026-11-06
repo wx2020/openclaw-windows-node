@@ -91,8 +91,8 @@ public partial class App : IActivationPlanSink
 
                 dialog = new ContentDialog
                 {
-                    Title = "Confirm OpenClaw action",
-                    Content = $"A deep link wants to {confirmation.ActionDisplayName}.",
+                    Title = LocalizationHelper.GetString("App_DeepLinkTitle"),
+                    Content = LocalizationHelper.Format("App_DeepLinkBodyFormat", confirmation.ActionDisplayName),
                     PrimaryButtonText = "Allow",
                     CloseButtonText = "Cancel",
                     DefaultButton = ContentDialogButton.Close,

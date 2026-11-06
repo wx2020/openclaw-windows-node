@@ -426,7 +426,7 @@ public sealed partial class InstancesPage : Page
         {
             header.Children.Add(new TextBlock
             {
-                Text = $"· {row.NodeStatusRaw}",
+                Text = LocalizationHelper.Format("InstancesPage_NodeStatusFormat", row.NodeStatusRaw),
                 Style = (Style)Application.Current.Resources["CaptionTextBlockStyle"],
                 Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"],
                 VerticalAlignment = VerticalAlignment.Center,

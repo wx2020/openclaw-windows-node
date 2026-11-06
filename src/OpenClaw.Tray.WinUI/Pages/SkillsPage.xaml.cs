@@ -149,7 +149,7 @@ public sealed partial class SkillsPage : Page
             return;
         }
         AgentFilterCombo.IsEnabled = true;
-        AgentFilterCombo.Items.Add(new ComboBoxItem { Content = "All Agents", Tag = "" });
+        AgentFilterCombo.Items.Add(new ComboBoxItem { Content = LocalizationHelper.GetString("Common_AllAgents"), Tag = "" });
         foreach (var id in CurrentApp.AppState?.GetAgentIds() ?? new List<string> { "main" })
             AgentFilterCombo.Items.Add(new ComboBoxItem { Content = id, Tag = id });
         AgentFilterCombo.SelectedIndex = 0;

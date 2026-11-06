@@ -36,8 +36,8 @@ public sealed partial class CompletePage : Page
                 StartupRow.Visibility = args.ShowStartupPreference ? Visibility.Visible : Visibility.Collapsed;
                 SetupReviewSummary review = args.ReviewSummary ?? SetupReviewSummaryBuilder.Build(new SetupConfig());
                 GatewaySummaryText.Text = review.CompletionGatewaySummary;
-                TitleText.Text = "All set!";
-                SubtitleText.Text = "OpenClaw is ready to go";
+                TitleText.Text = SetupLocalization.GetString("Setup_AllSetTitle");
+                SubtitleText.Text = SetupLocalization.GetString("Setup_ReadySubtitle");
                 SubtitleText.Visibility = Visibility.Visible;
                 ErrorCard.Visibility = Visibility.Collapsed;
                 HelpLink.Visibility = Visibility.Collapsed;
@@ -49,8 +49,8 @@ public sealed partial class CompletePage : Page
                     LocalAiSummaryTitle.Text = review.LocalAiTitle ?? "Local AI installed";
                     LocalAiSummaryDescription.Text = review.LocalAiDescription ??
                         "The native llama-server router is ready. The model loads on the first request.";
-                    SubtitleText.Text = "OpenClaw and Local AI are ready";
-                    LaunchButton.Content = "Open chat";
+                    SubtitleText.Text = SetupLocalization.GetString("Setup_ReadyWithLocalAi");
+                    LaunchButton.Content = SetupLocalization.GetString("Setup_OpenChat");
                 }
                 if (args.NativeGatewayUrl is { } nativeUrl)
                 {
@@ -79,8 +79,8 @@ public sealed partial class CompletePage : Page
                     SuccessIcon.Visibility = Visibility.Collapsed;
                     FailureIcon.Visibility = Visibility.Collapsed;
                     RestartIcon.Visibility = Visibility.Visible;
-                    TitleText.Text = "Restart required";
-                    SubtitleText.Text = "OpenClaw needs to restart Windows to continue the installation. Would you like to restart now?";
+                    TitleText.Text = SetupLocalization.GetString("Setup_RestartRequiredTitle");
+                    SubtitleText.Text = SetupLocalization.GetString("Setup_RestartPrompt");
                     SubtitleText.TextWrapping = TextWrapping.Wrap;
                     SubtitleText.TextAlignment = TextAlignment.Center;
                     SubtitleText.Visibility = Visibility.Visible;
@@ -105,13 +105,13 @@ public sealed partial class CompletePage : Page
                 SuccessIcon.Visibility = Visibility.Collapsed;
                 FailureIcon.Visibility = Visibility.Visible;
                 RestartIcon.Visibility = Visibility.Collapsed;
-                TitleText.Text = "Setup failed";
+                TitleText.Text = SetupLocalization.GetString("Setup_SetupFailedTitle");
                 SubtitleText.Visibility = Visibility.Collapsed;
                 NodeModeBanner.Visibility = Visibility.Collapsed;
                 StartupRow.Visibility = Visibility.Collapsed;
                 SummaryPanel.Visibility = Visibility.Collapsed;
                 LocalAiSummaryCard.Visibility = Visibility.Collapsed;
-                LaunchButton.Content = "Close";
+                LaunchButton.Content = SetupLocalization.GetString("Common_Close");
                 FallbackButton.Visibility = args.CanRetryGatewayFallback
                     ? Visibility.Visible
                     : Visibility.Collapsed;
@@ -137,7 +137,7 @@ public sealed partial class CompletePage : Page
                 if (args.LogPath != null)
                 {
                     var displayPath = LogFileLauncher.ResolveRealPath(args.LogPath);
-                    ViewLogLink.Content = $"View full log → {displayPath}";
+                    ViewLogLink.Content = SetupLocalization.Format("Setup_ViewFullLogFormat", displayPath);
                     ToolTipService.SetToolTip(ViewLogLink, displayPath);
                     ViewLogLink.Visibility = Visibility.Visible;
                 }
@@ -176,7 +176,7 @@ public sealed partial class CompletePage : Page
         // cleanup removed it. The link must not promise a folder that is unavailable.
         if (Directory.Exists(displayDirectory))
         {
-            ViewServerLogLink.Content = $"Open Local AI logs → {displayDirectory}";
+            ViewServerLogLink.Content = SetupLocalization.Format("Setup_OpenLocalAiLogsFormat", displayDirectory);
             ToolTipService.SetToolTip(ViewServerLogLink, displayDirectory);
             ViewServerLogLink.Visibility = Visibility.Visible;
         }
@@ -250,19 +250,19 @@ public sealed partial class CompletePage : Page
     {
         RestartNowButton.IsEnabled = false;
         RestartLaterButton.IsEnabled = false;
-        SubtitleText.Text = "Windows is restarting...";
+        SubtitleText.Text = SetupLocalization.GetString("Setup_WindowsRestarting");
 
         await s_windowsRestartLauncher.RestartAsync();
     }
 
     private void ShowRestartError(Exception ex)
     {
-        ErrorText.Text = $"Windows could not be restarted: {ex.Message}";
+        ErrorText.Text = SetupLocalization.Format("Setup_RestartFailedFormat", ex.Message);
         ErrorCard.Visibility = Visibility.Visible;
         ViewLogLink.Visibility = Visibility.Collapsed;
         RestartNowButton.IsEnabled = true;
         RestartLaterButton.IsEnabled = true;
-        SubtitleText.Text = "OpenClaw needs to restart Windows to continue the installation. Would you like to restart now?";
+        SubtitleText.Text = SetupLocalization.GetString("Setup_RestartPrompt");
     }
 
 }

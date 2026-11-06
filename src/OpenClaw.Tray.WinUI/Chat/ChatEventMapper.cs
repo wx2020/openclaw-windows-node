@@ -39,8 +39,8 @@ internal static class ChatEventMapper
             "patch" => new(MapPatch(evt)),
             "job" => new(MapJob(evt)),
             "approval" => MapApproval(evt),
-            "compaction" => new(MapCompaction(evt)),
-            "run_status" => new(MapRunStatus(evt)),
+            "compaction" => new(MapCompaction(evt, getString)),
+            "run_status" => new(MapRunStatus(evt, getString)),
             "fallback" => new(MapFallback(evt, getString)),
             "notice" => new(MapNotice(evt, getString)),
             "usage" => new(MapUsage(evt)),
@@ -247,15 +247,15 @@ internal static class ChatEventMapper
         return phaseProperty.GetString()?.ToLowerInvariant() switch
         {
             "start" => new ChatThinkingEvent("", evt.RunId),
-            "waiting-approval" => new ChatProgressEvent("Waiting for approval"),
-            "approval-resolved" => new ChatProgressEvent("Working"),
+            "waiting-approval" => new ChatProgressEvent(Localized("Chat_Status_WaitingApproval", "Waiting for approval", getString)),
+            "approval-resolved" => new ChatProgressEvent(Localized("Chat_Status_Working", "Working", getString)),
             "fallback" or "fallback_cleared" => MapFallback(evt, getString),
             "end" => new ChatTurnEndEvent(),
             "error" => new ChatErrorEvent(
                 evt.Summary ??
                 (evt.Data.TryGetProperty("message", out var message)
-                    ? message.GetString() ?? "Agent error"
-                    : "Agent error")),
+                    ? message.GetString() ?? Localized("Chat_Status_AgentError", "Agent error", getString)
+                    : Localized("Chat_Status_AgentError", "Agent error", getString))),
             _ => null,
         };
     }
@@ -474,23 +474,23 @@ internal static class ChatEventMapper
             ? "Tool blocked"
             : "Tool failed";
 
-    private static ChatEvent? MapCompaction(AgentEventInfo evt)
+    private static ChatEvent? MapCompaction(AgentEventInfo evt, Func<string, string>? getString)
     {
         if (evt.Data.ValueKind != JsonValueKind.Object)
             return null;
         return StringProperty(evt.Data, "phase") switch
         {
-            "start" => new ChatProgressEvent("Compacting context"),
+            "start" => new ChatProgressEvent(Localized("Chat_Status_Compacting", "Compacting context", getString)),
             "end" when evt.Data.TryGetProperty("willRetry", out var retry) && retry.ValueKind == JsonValueKind.True =>
-                new ChatProgressEvent("Retrying after context compaction"),
-            "end" => new ChatProgressEvent("Working"),
+                new ChatProgressEvent(Localized("Chat_Status_RetryingAfterCompaction", "Retrying after context compaction", getString)),
+            "end" => new ChatProgressEvent(Localized("Chat_Status_Working", "Working", getString)),
             _ => null,
         };
     }
 
-    private static ChatEvent? MapRunStatus(AgentEventInfo evt) =>
+    private static ChatEvent? MapRunStatus(AgentEventInfo evt, Func<string, string>? getString) =>
         evt.Data.ValueKind == JsonValueKind.Object && StringProperty(evt.Data, "phase") == "retrying"
-            ? new ChatProgressEvent("Retrying the model request") : null;
+            ? new ChatProgressEvent(Localized("Chat_Status_RetryingRequest", "Retrying the model request", getString)) : null;
 
     private static ChatEvent? MapUsage(AgentEventInfo evt) =>
         !string.IsNullOrWhiteSpace(evt.RunId) && evt.Seq > 0

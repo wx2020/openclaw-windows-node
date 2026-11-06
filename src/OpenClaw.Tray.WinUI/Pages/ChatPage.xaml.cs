@@ -736,7 +736,7 @@ public sealed partial class ChatPage : Page
                     new ChatThread
                     {
                         Id = DefaultThreadId,
-                        Title = "Accessibility session",
+                        Title = LocalizationHelper.GetString("ChatPage_AccessibilitySessionTitle"),
                         Status = ChatThreadStatus.Running,
                         Activity = ChatActivity.Idle,
                         Model = "test-model",
@@ -744,7 +744,7 @@ public sealed partial class ChatPage : Page
                     new ChatThread
                     {
                         Id = MainThreadId,
-                        Title = $"Route target: {MainThreadId}",
+                        Title = LocalizationHelper.Format("ChatPage_RouteTargetFormat", MainThreadId),
                         Status = ChatThreadStatus.Running,
                         Activity = ChatActivity.Idle,
                         Model = "test-model",
@@ -752,7 +752,7 @@ public sealed partial class ChatPage : Page
                     new ChatThread
                     {
                         Id = ForkThreadId,
-                        Title = $"Route target: {ForkThreadId}",
+                        Title = LocalizationHelper.Format("ChatPage_RouteTargetFormat", ForkThreadId),
                         Status = ChatThreadStatus.Running,
                         Activity = ChatActivity.Idle,
                         Model = "test-model",

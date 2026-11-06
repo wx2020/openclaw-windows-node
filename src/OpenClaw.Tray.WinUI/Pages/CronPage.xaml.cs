@@ -391,7 +391,7 @@ public sealed partial class CronPage : Page
         if (_submittingJob) return;
         if (!_cronLoading.CanEdit)
         {
-            ShowFormError("Wait for the latest cron jobs to finish loading before saving changes.");
+            ShowFormError(LocalizationHelper.GetString("CronPage_FormWaitLoading"));
             return;
         }
 
@@ -399,20 +399,20 @@ public sealed partial class CronPage : Page
         var name = FormName.Text?.Trim();
         if (string.IsNullOrEmpty(name))
         {
-            ShowFormError("Name is required.");
+            ShowFormError(LocalizationHelper.GetString("CronPage_FormNameRequired"));
             return;
         }
 
         var message = FormMessage.Text?.Trim();
         if (string.IsNullOrEmpty(message))
         {
-            ShowFormError("Prompt is required.");
+            ShowFormError(LocalizationHelper.GetString("CronPage_FormPromptRequired"));
             return;
         }
 
         if (CurrentApp.GatewayClient is not { IsConnectedToGateway: true } client)
         {
-            ShowFormError("Not connected to gateway.");
+            ShowFormError(LocalizationHelper.GetString("CronPage_FormNotConnected"));
             return;
         }
 
@@ -425,7 +425,7 @@ public sealed partial class CronPage : Page
             var expr = FormCronExpr.Text?.Trim();
             if (string.IsNullOrEmpty(expr))
             {
-                ShowFormError("Cron expression is required.");
+                ShowFormError(LocalizationHelper.GetString("CronPage_FormCronRequired"));
                 return;
             }
             var tz = CronScheduleTimezone.ResolveSave(_preservedScheduleTz, GetSelectedTag(FormTimezone));
@@ -437,7 +437,7 @@ public sealed partial class CronPage : Page
         {
             if (!int.TryParse(FormEveryValue.Text?.Trim(), out var everyVal) || everyVal <= 0)
             {
-                ShowFormError("Enter a valid interval number.");
+                ShowFormError(LocalizationHelper.GetString("CronPage_FormIntervalInvalid"));
                 return;
             }
             var unitStr = GetSelectedTag(FormEveryUnit) ?? "60000";
@@ -450,19 +450,19 @@ public sealed partial class CronPage : Page
             var date = FormAtDate.Date;
             if (date == null)
             {
-                ShowFormError("Date is required for 'at' schedule.");
+                ShowFormError(LocalizationHelper.GetString("CronPage_FormDateRequired"));
                 return;
             }
             if (!TryParseTime(FormAtTime.Text, out var time))
             {
-                ShowFormError("Invalid time. Use format like '3:30 PM' or '15:30'.");
+                ShowFormError(LocalizationHelper.GetString("CronPage_FormTimeInvalid"));
                 return;
             }
             var dt = date.Value.Date + time;
             var localDto = new DateTimeOffset(dt, TimeZoneInfo.Local.GetUtcOffset(dt));
             if (localDto < DateTimeOffset.Now)
             {
-                ShowFormError("Scheduled time must be in the future.");
+                ShowFormError(LocalizationHelper.GetString("CronPage_FormFutureRequired"));
                 return;
             }
             var isoAt = localDto.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
@@ -1025,7 +1025,7 @@ public sealed partial class CronPage : Page
                 if (_expandedJobIds.Contains(vm.Id)) vm.IsExpanded = true;
             }
 
-            JobCountText.Text = $"({jobs.Count})";
+            JobCountText.Text = LocalizationHelper.Format("Common_ParenthesizedCountFormat", jobs.Count);
             if (jobs.Count > 0)
             {
                 // Don't rebuild cards if we're currently editing inline (would lose the form)
@@ -2086,7 +2086,7 @@ public sealed partial class CronPage : Page
         if (!string.IsNullOrEmpty(model)) metaParts.Add(model);
         if (!string.IsNullOrEmpty(provider)) metaParts.Add(provider);
         if (totalTokens > 0) metaParts.Add($"{totalTokens:N0} tokens");
-        if (delivered) metaParts.Add("delivered");
+        if (delivered) metaParts.Add(LocalizationHelper.GetString("CronPage_Delivered"));
         else if (!string.IsNullOrEmpty(deliveryStatus)) metaParts.Add(deliveryStatus);
 
         if (metaParts.Count > 0)
@@ -2195,9 +2195,9 @@ public sealed partial class CronPage : Page
         {
             var until = vm.NextRunAtMs - nowMs;
             if (until > 0)
-                parts.Add($"next in {FormatRelativeTime(until)}");
+                parts.Add(LocalizationHelper.Format("CronPage_NextInFormat", FormatRelativeTime(until)));
             else if (!isRunning)
-                parts.Add("overdue");
+                parts.Add(LocalizationHelper.GetString("CronPage_Overdue"));
         }
 
         if (parts.Count > 0)

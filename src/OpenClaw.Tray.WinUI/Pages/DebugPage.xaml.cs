@@ -341,7 +341,7 @@ public sealed partial class DebugPage : Page
         {
             DetailRichText.Blocks.Add(new Paragraph
             {
-                Inlines = { new Run { Text = "No log file found.", Foreground = DimTextBrush } }
+                Inlines = { new Run { Text = LocalizationHelper.GetString("DebugPage_NoLogFile"), Foreground = DimTextBrush } }
             });
             AppendPlain("No log file found.\n");
             return;
@@ -361,7 +361,7 @@ public sealed partial class DebugPage : Page
             if (_detailMode != DetailMode.Log || _detailGeneration != generation) return;
             DetailRichText.Blocks.Add(new Paragraph
             {
-                Inlines = { new Run { Text = $"Failed to read log: {ex.Message}", Foreground = ErrorTextBrush } }
+                Inlines = { new Run { Text = LocalizationHelper.Format("DebugPage_LogReadFailedFormat", ex.Message), Foreground = ErrorTextBrush } }
             });
             return;
         }
@@ -637,7 +637,7 @@ public sealed partial class DebugPage : Page
                 }
                 else
                 {
-                    DeviceIdText.Text = "Not found";
+                    DeviceIdText.Text = LocalizationHelper.GetString("Common_NotFound");
                 }
 
                 if (doc.RootElement.TryGetProperty("publicKey", out var pk))
@@ -648,18 +648,18 @@ public sealed partial class DebugPage : Page
                 }
                 else
                 {
-                    PublicKeyText.Text = "Not found";
+                    PublicKeyText.Text = LocalizationHelper.GetString("Common_NotFound");
                 }
             }
             else
             {
-                DeviceIdText.Text = "No device key file";
+                DeviceIdText.Text = LocalizationHelper.GetString("DebugPage_NoDeviceKeyFile");
                 PublicKeyText.Text = "—";
             }
         }
         catch (Exception ex)
         {
-            DeviceIdText.Text = $"Error: {ex.Message}";
+            DeviceIdText.Text = LocalizationHelper.Format("Common_ErrorFormat", ex.Message);
             PublicKeyText.Text = "—";
         }
     }

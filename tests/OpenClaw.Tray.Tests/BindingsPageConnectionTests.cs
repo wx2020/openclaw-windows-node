@@ -37,7 +37,7 @@ public sealed class BindingsPageConnectionTests
 
             Assert.Equal(Visibility.Collapsed, page.LoadingState.Visibility);
             Assert.True(page.ConnectionInfoBar.IsOpen);
-            Assert.Equal("BindingsPage_GatewayDisconnected.Title", page.ConnectionInfoBar.Title);
+            Assert.Equal("Gateway disconnected", page.ConnectionInfoBar.Title);
             Assert.False(page.RefreshButton.IsEnabled);
             Assert.Equal(1, gateway.ConfigRequests);
         }
@@ -94,8 +94,8 @@ public sealed class BindingsPageConnectionTests
             Assert.Equal(1, gateway.ConfigRequests);
             Assert.Equal(Visibility.Collapsed, page.LoadingState.Visibility);
             Assert.True(page.ConnectionInfoBar.IsOpen);
-            Assert.Equal("BindingsPage_CouldNotLoadBindings", page.ConnectionInfoBar.Title);
-            Assert.Equal("BindingsPage_ConfigRequestFailed.Message", page.ConnectionInfoBar.Message);
+            Assert.Equal("Could not load bindings", page.ConnectionInfoBar.Title);
+            Assert.Equal("The gateway did not return bindings. Refresh to try again.", page.ConnectionInfoBar.Message);
             Assert.Equal(InfoBarSeverity.Error, page.ConnectionInfoBar.Severity);
             Assert.True(page.RefreshButton.IsEnabled);
 
@@ -206,7 +206,7 @@ public sealed class BindingsPageConnectionTests
 
             Assert.Equal(Visibility.Collapsed, page.LoadingState.Visibility);
             Assert.True(page.ConnectionInfoBar.IsOpen);
-            Assert.Equal("BindingsPage_ConfigRequestFailed.Message", page.ConnectionInfoBar.Message);
+            Assert.Equal("The gateway did not return bindings. Refresh to try again.", page.ConnectionInfoBar.Message);
             Assert.True(page.RefreshButton.IsEnabled);
         }
         finally

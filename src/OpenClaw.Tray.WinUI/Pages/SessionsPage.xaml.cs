@@ -666,7 +666,7 @@ public sealed partial class SessionsPage : Page
                 SuggestedFileName = System.IO.Path.GetFileNameWithoutExtension(
                     SessionTranscriptFormatter.SuggestFileName(key)),
             };
-            picker.FileTypeChoices.Add("Text file", new List<string> { ".txt" });
+            picker.FileTypeChoices.Add(LocalizationHelper.GetString("Common_TextFile"), new List<string> { ".txt" });
             WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
 
             var file = await picker.PickSaveFileAsync();
@@ -787,11 +787,11 @@ public sealed partial class SessionsPage : Page
         _ = _archived.RefreshAsync(client);
         if (RefreshLabel is not null)
         {
-            RefreshLabel.Text = "Refreshing...";
+            RefreshLabel.Text = LocalizationHelper.GetString("Common_Refreshing");
             _refreshTimer?.Stop();
             _refreshTimer = DispatcherQueue.CreateTimer();
             _refreshTimer.Interval = TimeSpan.FromSeconds(1);
-            _refreshTimer.Tick += (t, a) => { RefreshLabel.Text = "Refresh"; _refreshTimer.Stop(); };
+            _refreshTimer.Tick += (t, a) => { RefreshLabel.Text = LocalizationHelper.GetString("Common_Refresh"); _refreshTimer.Stop(); };
             _refreshTimer.Start();
         }
     }

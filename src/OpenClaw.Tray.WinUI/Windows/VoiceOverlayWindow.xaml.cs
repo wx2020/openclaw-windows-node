@@ -48,7 +48,7 @@ public sealed partial class VoiceOverlayWindow : WindowEx
 
         if (_testOnly)
         {
-            Title = "Test Voice Input";
+            Title = LocalizationHelper.GetString("VoiceOverlay_TestTitle");
             IsAlwaysOnTop = false;
         }
         Title = AppIdentity.DecorateWindowTitle(Title);

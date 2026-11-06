@@ -449,7 +449,7 @@ public sealed partial class ConnectionStatusWindow : WindowEx
             ((App)Microsoft.UI.Xaml.Application.Current).GatewayDirectConnectService;
         if (directConnectService is null)
         {
-            DirectConnectResult.Text = "✗ Gateway connection services are unavailable.";
+            DirectConnectResult.Text = $"✗ {LocalizationHelper.GetString("ConnectionStatus_ServicesUnavailable")}";
             return;
         }
 

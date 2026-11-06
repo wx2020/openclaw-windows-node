@@ -524,7 +524,7 @@ internal sealed class WorkspaceSessionMenuController
                 SuggestedFileName = System.IO.Path.GetFileNameWithoutExtension(
                     SessionTranscriptFormatter.SuggestFileName(session.Key)),
             };
-            picker.FileTypeChoices.Add("Text file", new List<string> { ".txt" });
+            picker.FileTypeChoices.Add(LocalizationHelper.GetString("Common_TextFile"), new List<string> { ".txt" });
             WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
 
             var file = await picker.PickSaveFileAsync();

@@ -91,7 +91,7 @@ internal sealed class CommandCenterStateBuilder
             {
                 Severity = GatewayDiagnosticSeverity.Critical,
                 Category = "mcp",
-                Title = "Local MCP failed",
+                Title = LocalizationHelper.GetString("CommandCenter_LocalMcpFailedTitle"),
                 Detail = mcpStartupError
             });
         }
@@ -104,8 +104,8 @@ internal sealed class CommandCenterStateBuilder
             {
                 Severity = GatewayDiagnosticSeverity.Info,
                 Category = "mcp",
-                Title = "Local MCP only",
-                Detail = "Local MCP tools are listening on this PC without a gateway node connection."
+                Title = LocalizationHelper.GetString("CommandCenter_LocalMcpOnlyTitle"),
+                Detail = LocalizationHelper.GetString("CommandCenter_Detail_LocalMcpListening")
             });
         }
 
@@ -137,8 +137,8 @@ internal sealed class CommandCenterStateBuilder
             {
                 Severity = GatewayDiagnosticSeverity.Warning,
                 Category = "gateway",
-                Title = "Connection degraded",
-                Detail = "The operator connection is available, but one required role is blocked."
+                Title = LocalizationHelper.GetString("CommandCenter_ConnectionDegradedTitle"),
+                Detail = LocalizationHelper.GetString("CommandCenter_Detail_OperatorRoleBlocked")
             });
         }
         else if (overallState == OpenClaw.Connection.OverallConnectionState.PairingRequired)
@@ -147,8 +147,8 @@ internal sealed class CommandCenterStateBuilder
             {
                 Severity = GatewayDiagnosticSeverity.Warning,
                 Category = "pairing",
-                Title = "Pairing required",
-                Detail = "Approve the pending operator or node pairing request to finish connecting."
+                Title = LocalizationHelper.GetString("CommandCenter_PairingRequiredTitle"),
+                Detail = LocalizationHelper.GetString("CommandCenter_Detail_ApprovePairing")
             });
         }
         else if (_snapshot.Status == ConnectionStatus.Error)
@@ -158,7 +158,7 @@ internal sealed class CommandCenterStateBuilder
                 Severity = GatewayDiagnosticSeverity.Critical,
                 Category = "gateway",
                 Title = LocalizationHelper.GetString("CommandCenter_GatewayConnectionError"),
-                Detail = "The tray is not currently connected to the gateway."
+                Detail = LocalizationHelper.GetString("CommandCenter_Detail_NotConnected")
             });
         }
         else if (_snapshot.Status != ConnectionStatus.Connected)
@@ -191,7 +191,7 @@ internal sealed class CommandCenterStateBuilder
                 Severity = GatewayDiagnosticSeverity.Info,
                 Category = "channel",
                 Title = LocalizationHelper.GetString("CommandCenter_NoChannelsReported"),
-                Detail = "The gateway health payload did not report any channels."
+                Detail = LocalizationHelper.GetString("CommandCenter_Detail_NoChannelsReported")
             });
         }
         else if (_snapshot.Channels.Length == 0 && _snapshot.Status == ConnectionStatus.Connected && _snapshot.Settings?.EnableNodeMode == true)
@@ -201,7 +201,7 @@ internal sealed class CommandCenterStateBuilder
                 Severity = GatewayDiagnosticSeverity.Info,
                 Category = "gateway",
                 Title = LocalizationHelper.GetString("CommandCenter_WaitingForGatewayHealth"),
-                Detail = "Node mode is connected. Channel/session inventories are filled from gateway health events when available."
+                Detail = LocalizationHelper.GetString("CommandCenter_Detail_NodeModeInventories")
             });
         }
         else if (_snapshot.Channels.Length > 0 && _snapshot.Channels.All(c => !ChannelHealth.IsHealthyStatus(c.Status)))
@@ -211,7 +211,7 @@ internal sealed class CommandCenterStateBuilder
                 Severity = GatewayDiagnosticSeverity.Warning,
                 Category = "channel",
                 Title = LocalizationHelper.GetString("CommandCenter_NoChannelsRunning"),
-                Detail = "Channels are configured but none are reporting a running/ready state."
+                Detail = LocalizationHelper.GetString("CommandCenter_Detail_ChannelsNotRunning")
             });
         }
 
@@ -222,7 +222,7 @@ internal sealed class CommandCenterStateBuilder
                 Severity = GatewayDiagnosticSeverity.Info,
                 Category = "node",
                 Title = LocalizationHelper.GetString("CommandCenter_NoNodesReported"),
-                Detail = "node.list did not report any connected nodes. Pair a Windows node or verify the operator token has node inventory access."
+                Detail = LocalizationHelper.GetString("CommandCenter_Detail_NoNodesReported")
             });
         }
 
@@ -374,7 +374,7 @@ internal sealed class CommandCenterStateBuilder
                     Severity = GatewayDiagnosticSeverity.Info,
                     Category = "browser",
                     Title = LocalizationHelper.GetString("CommandCenter_BrowserProxyHostNotDetected"),
-                    Detail = "browser.proxy needs a compatible browser-control host listening on the gateway port + 2.",
+                    Detail = LocalizationHelper.GetString("CommandCenter_Detail_BrowserProxyHost"),
                     RepairAction = "Copy browser setup guidance",
                     // string formatter — no UI
                     CopyText = CommandCenterTextHelper.BuildBrowserSetupGuidance(port.Port, topology, tunnel, browserControlPort)

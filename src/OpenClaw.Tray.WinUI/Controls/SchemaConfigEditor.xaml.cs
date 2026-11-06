@@ -262,7 +262,7 @@ public sealed partial class SchemaConfigEditor : UserControl
         {
             fieldPanel.Children.Add(new TextBlock
             {
-                Text = $"Default: {FormatScalar(defaultEl)}",
+                Text = LocalizationHelper.Format("SchemaConfigEditor_DefaultValueFormat", FormatScalar(defaultEl)),
                 FontSize = 11,
                 Foreground = SecondaryBrush,
                 TextWrapping = TextWrapping.Wrap
@@ -444,7 +444,7 @@ public sealed partial class SchemaConfigEditor : UserControl
             IsClosable = false,
             Severity = InfoBarSeverity.Informational,
             Title = label,
-            Message = "This array uses complex items. Edit its JSON below; local validation will run before Save is enabled."
+            Message = LocalizationHelper.GetString("SchemaConfigEditor_ComplexArrayHint")
         });
 
         if (!string.IsNullOrEmpty(description))
@@ -507,7 +507,7 @@ public sealed partial class SchemaConfigEditor : UserControl
             IsClosable = false,
             Severity = InfoBarSeverity.Informational,
             Title = label,
-            Message = "Enter a JSON object, e.g. {\"key\": \"value\"}. Changes are validated before Save is enabled."
+            Message = LocalizationHelper.GetString("SchemaConfigEditor_ObjectHint")
         });
 
         if (!string.IsNullOrEmpty(description))

@@ -1749,7 +1749,7 @@ public sealed partial class ConnectionPage : Page
         {
             sub.Children.Add(new TextBlock
             {
-                Text = $"• {row.AuthModeLabel}",
+                Text = LocalizationHelper.Format("ConnectionPage_AuthModeBulletFormat", row.AuthModeLabel),
                 Style = (Style)Application.Current.Resources["CaptionTextBlockStyle"],
                 Foreground = ResolveBrush("TextFillColorTertiaryBrush"),
             });
@@ -1767,7 +1767,7 @@ public sealed partial class ConnectionPage : Page
         {
             sub.Children.Add(new TextBlock
             {
-                Text = "• WSL",
+                Text = LocalizationHelper.GetString("ConnectionPage_WslBullet"),
                 Style = (Style)Application.Current.Resources["CaptionTextBlockStyle"],
                 Foreground = ResolveBrush("TextFillColorSecondaryBrush"),
             });
@@ -1776,7 +1776,7 @@ public sealed partial class ConnectionPage : Page
         {
             sub.Children.Add(new TextBlock
             {
-                Text = $"• {row.LastConnectedRelative}",
+                Text = LocalizationHelper.Format("ConnectionPage_LastConnectedBulletFormat", row.LastConnectedRelative),
                 Style = (Style)Application.Current.Resources["CaptionTextBlockStyle"],
                 Foreground = ResolveBrush("TextFillColorTertiaryBrush"),
             });
@@ -2790,7 +2790,7 @@ public sealed partial class ConnectionPage : Page
             if (!ct.IsCancellationRequested)
             {
                 Logger.Warn($"ConnectionPage: Gateway connectivity test failed for {GatewayUrlHelper.SanitizeForDisplay(rawUrl)}: {ex.Message}");
-                AddTestResultText.Text = "✗ Unable to test gateway connection. Check the URL and try again.";
+                AddTestResultText.Text = $"✗ {LocalizationHelper.GetString("ConnectionPage_TestFailedHint")}";
                 AddTestResultText.Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemFillColorCriticalBrush"];
             }
         }

@@ -1,4 +1,5 @@
 using OpenClaw.Shared;
+using OpenClawTray.Helpers;
 using OpenClaw.Shared.Sessions;
 using System;
 using System.Collections.Generic;
@@ -78,40 +79,40 @@ internal sealed class TrayDashboardSummaryBuilder
     private (TrayHealthSeverity, string) ClassifyHealth()
     {
         if (!string.IsNullOrEmpty(_snapshot.AuthFailureMessage))
-            return (TrayHealthSeverity.Critical, "Authentication failed");
+            return (TrayHealthSeverity.Critical, LocalizationHelper.GetString("ConnectionPlan_AuthFailed"));
 
         if (HasRelevantMcpStartupError())
-            return (TrayHealthSeverity.Critical, "Local MCP failed");
+            return (TrayHealthSeverity.Critical, LocalizationHelper.GetString("CommandCenter_LocalMcpFailedTitle"));
 
         if (IsStandaloneMcpOnly())
         {
-            return (TrayHealthSeverity.Ok, "Local MCP only");
+            return (TrayHealthSeverity.Ok, LocalizationHelper.GetString("CommandCenter_LocalMcpOnlyTitle"));
         }
 
         var pending = _snapshot.NodePendingPairCount + _snapshot.DevicePendingPairCount;
         if (pending > 0)
-            return (TrayHealthSeverity.Caution, $"Pairing approval pending ({pending})");
+            return (TrayHealthSeverity.Caution, string.Format(LocalizationHelper.GetString("TrayMenu_PairingPendingFormat"), pending));
 
         if (_snapshot.OverallState is { } overall)
         {
             return overall switch
             {
                 OpenClaw.Connection.OverallConnectionState.Connected or
-                OpenClaw.Connection.OverallConnectionState.Ready => (TrayHealthSeverity.Ok, "Connected"),
-                OpenClaw.Connection.OverallConnectionState.Connecting => (TrayHealthSeverity.Caution, "Connecting…"),
-                OpenClaw.Connection.OverallConnectionState.Degraded => (TrayHealthSeverity.Caution, "Connection degraded"),
-                OpenClaw.Connection.OverallConnectionState.PairingRequired => (TrayHealthSeverity.Caution, "Pairing required"),
-                OpenClaw.Connection.OverallConnectionState.Error => (TrayHealthSeverity.Critical, "Connection error"),
-                _ => (TrayHealthSeverity.Neutral, "Disconnected"),
+                OpenClaw.Connection.OverallConnectionState.Ready => (TrayHealthSeverity.Ok, LocalizationHelper.GetString("Common_Connected")),
+                OpenClaw.Connection.OverallConnectionState.Connecting => (TrayHealthSeverity.Caution, LocalizationHelper.GetString("ConnectionPlan_Connecting")),
+                OpenClaw.Connection.OverallConnectionState.Degraded => (TrayHealthSeverity.Caution, LocalizationHelper.GetString("ConnectionPlan_ConnectionDegraded")),
+                OpenClaw.Connection.OverallConnectionState.PairingRequired => (TrayHealthSeverity.Caution, LocalizationHelper.GetString("CommandCenter_PairingRequiredTitle")),
+                OpenClaw.Connection.OverallConnectionState.Error => (TrayHealthSeverity.Critical, LocalizationHelper.GetString("Common_ConnectionError")),
+                _ => (TrayHealthSeverity.Neutral, LocalizationHelper.GetString("Common_Disconnected")),
             };
         }
 
         return _snapshot.CurrentStatus switch
         {
-            ConnectionStatus.Connected => (TrayHealthSeverity.Ok, "Connected"),
-            ConnectionStatus.Connecting => (TrayHealthSeverity.Caution, "Connecting…"),
-            ConnectionStatus.Error => (TrayHealthSeverity.Critical, "Connection error"),
-            _ => (TrayHealthSeverity.Neutral, "Disconnected"),
+            ConnectionStatus.Connected => (TrayHealthSeverity.Ok, LocalizationHelper.GetString("Common_Connected")),
+            ConnectionStatus.Connecting => (TrayHealthSeverity.Caution, LocalizationHelper.GetString("ConnectionPlan_Connecting")),
+            ConnectionStatus.Error => (TrayHealthSeverity.Critical, LocalizationHelper.GetString("Common_ConnectionError")),
+            _ => (TrayHealthSeverity.Neutral, LocalizationHelper.GetString("Common_Disconnected")),
         };
     }
 
@@ -134,7 +135,7 @@ internal sealed class TrayDashboardSummaryBuilder
         var updatedUtc = updated.Kind == DateTimeKind.Utc ? updated : updated.ToUniversalTime();
         var age = _nowUtc - updatedUtc;
         if (age < TimeSpan.Zero) age = TimeSpan.Zero;
-        return $"Updated {FormatAge(age)}";
+        return string.Format(LocalizationHelper.GetString("TraySummary_UpdatedFormat"), FormatAge(age));
     }
 
     private string? BuildMetricsLine(bool isConnected)
@@ -145,7 +146,7 @@ internal sealed class TrayDashboardSummaryBuilder
         if (nodesTotal > 0)
         {
             var online = _snapshot.Nodes.Count(n => n.IsOnline);
-            parts.Add($"{online}/{nodesTotal} {(nodesTotal == 1 ? "node" : "nodes")}");
+            parts.Add(string.Format(LocalizationHelper.GetString(nodesTotal == 1 ? "TraySummary_NodeOneFormat" : "TraySummary_NodeFormat"), online, nodesTotal));
         }
 
         var sessionCount = _snapshot.Sessions.Length;
@@ -153,8 +154,12 @@ internal sealed class TrayDashboardSummaryBuilder
         {
             var active = _snapshot.Sessions.Count(session => SessionRunState.IsWorking(session.ToSessionInfo()));
             parts.Add(active > 0
-                ? $"{sessionCount} {(sessionCount == 1 ? "session" : "sessions")} ({active} working)"
-                : $"{sessionCount} {(sessionCount == 1 ? "session" : "sessions")}");
+                ? sessionCount == 1
+                    ? string.Format(LocalizationHelper.GetString("TraySummary_OneWorkingFormat"), active)
+                    : string.Format(LocalizationHelper.GetString("TraySummary_SessionsWorkingFormat"), sessionCount, active)
+                : sessionCount == 1
+                    ? LocalizationHelper.GetString("TraySummary_SessionsOne")
+                    : string.Format(LocalizationHelper.GetString("TraySummary_SessionsFormat"), sessionCount));
         }
 
         if (isConnected)

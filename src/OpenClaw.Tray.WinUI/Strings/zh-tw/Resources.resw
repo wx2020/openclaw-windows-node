@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:element name="root" ns1:IsDataSet="true">
@@ -6719,7 +6719,7 @@
     <value>Job completed</value>
   </data>
   <data name="CronPage_JobCompletedRanSuccessfully" xml:space="preserve">
-    <value>"{0}" ran successfully and was removed.</value>
+    <value>"{0}" 已成功執行並被移除。</value>
   </data>
   <data name="CronPage_RunNotStarted" xml:space="preserve">
     <value>執行未啟動</value>
@@ -8240,4 +8240,243 @@
   <data name="ChannelsPage_BannerSavedNotRunningMessage" xml:space="preserve"><value>閘道已接受設定，但未啟動該通道。請展開下方通道：狀態區域與診斷詳細資料會說明原因。</value></data>
   <data name="ChannelsPage_BannerRunningTitleFormat" xml:space="preserve"><value>{0} 正在執行</value></data>
   <data name="ChannelsPage_BannerRunningMessage" xml:space="preserve"><value>設定已儲存，通道已啟動。</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>複製</value></data>
+  <data name="Common_Copied" xml:space="preserve"><value>已複製</value></data>
+  <data name="Common_CopyFailed" xml:space="preserve"><value>複製失敗</value></data>
+  <data name="Common_NotConnected" xml:space="preserve"><value>未連線</value></data>
+  <data name="Common_Refresh" xml:space="preserve"><value>重新整理</value></data>
+  <data name="Common_Refreshing" xml:space="preserve"><value>正在重新整理...</value></data>
+  <data name="Common_NotFound" xml:space="preserve"><value>找不到</value></data>
+  <data name="Common_Close" xml:space="preserve"><value>關閉</value></data>
+  <data name="Common_Continue" xml:space="preserve"><value>繼續</value></data>
+  <data name="Common_Record" xml:space="preserve"><value>錄音</value></data>
+  <data name="Common_Stop" xml:space="preserve"><value>停止</value></data>
+  <data name="Common_Recording" xml:space="preserve"><value>錄音中</value></data>
+  <data name="Common_AllAgents" xml:space="preserve"><value>所有智能體</value></data>
+  <data name="Common_ErrorFormat" xml:space="preserve"><value>錯誤：{0}</value></data>
+  <data name="App_DeepLinkTitle" xml:space="preserve"><value>確認 OpenClaw 操作</value></data>
+  <data name="App_DeepLinkBodyFormat" xml:space="preserve"><value>有深層連結要求{0}。</value></data>
+  <data name="SchemaConfigEditor_DefaultValueFormat" xml:space="preserve"><value>預設值：{0}</value></data>
+  <data name="SchemaConfigEditor_ComplexArrayHint" xml:space="preserve"><value>此陣列包含複雜項目。請在下方編輯其 JSON；儲存前會先做本機驗證。</value></data>
+  <data name="SchemaConfigEditor_ObjectHint" xml:space="preserve"><value>請輸入 JSON 物件，例如 {"key": "value"}。變更會在儲存前驗證。</value></data>
+  <data name="SessionCheckpoint_TitleFormat" xml:space="preserve"><value>檢查點：{0}</value></data>
+  <data name="SessionCheckpoint_Empty" xml:space="preserve"><value>尚無壓縮檢查點。壓縮此工作階段後會建立一個檢查點，可從中分支或還原。</value></data>
+  <data name="ChannelsPage_RefreshFailedTitle" xml:space="preserve"><value>無法重新整理通道</value></data>
+  <data name="ChannelsPage_SectionLinking" xml:space="preserve"><value>正在連結</value></data>
+  <data name="ChannelsPage_LinkHint" xml:space="preserve"><value>點選「顯示 QR 碼」開始將手機連結到此裝置。</value></data>
+  <data name="ChannelsPage_WhyNotWorking" xml:space="preserve"><value>為什麼沒有作用？</value></data>
+  <data name="ChannelsPage_ShowQr" xml:space="preserve"><value>顯示 QR 碼</value></data>
+  <data name="ChannelsPage_Relink" xml:space="preserve"><value>重新連結</value></data>
+  <data name="ChannelsPage_ProviderMissingFormat" xml:space="preserve"><value>您的閘道尚無法啟動 {0} 的 QR 碼連結，因為它沒有載入 {0} 的網頁登入提供者。網頁/QR 碼連結在託管閘道的機器上執行，需要在該端修正，而不是在匣式應用程式。</value></data>
+  <data name="ChannelsPage_ProviderMissingAction" xml:space="preserve"><value>在閘道主機上安裝該提供者後，請返回並再次點選「顯示 QR 碼」。</value></data>
+  <data name="ChannelsPage_WebLoginUnsupportedFormat" xml:space="preserve"><value>此閘道版本尚不支援 {0} 的 QR 碼連結。QR 碼/網頁連結在託管閘道的機器上執行：請將閘道更新到支援網頁登入的版本，然後返回並再次點選「顯示 QR 碼」。</value></data>
+  <data name="ChannelsPage_NotConnectedHint" xml:space="preserve"><value>未連線到閘道。請先開啟連線設定進行連線。</value></data>
+  <data name="ChannelsPage_RequestingQr" xml:space="preserve"><value>正在向閘道要求 QR 碼…</value></data>
+  <data name="ChannelsPage_LinkFailedNotConnectedFormat" xml:space="preserve"><value>無法連結 {0}：未連線到閘道。</value></data>
+  <data name="ChannelsPage_LinkFailedGatewayErrorFormat" xml:space="preserve"><value>無法連結 {0}。閘道傳回錯誤：請查看下方詳細資料。</value></data>
+  <data name="ChannelsPage_LinkWaiting" xml:space="preserve"><value>仍在等待：如果 QR 碼已過期，請再次點選「顯示 QR 碼」。</value></data>
+  <data name="ChannelsPage_LinkWaitFailedFormat" xml:space="preserve"><value>{0} 的連結等待失敗。請查看下方詳細資料。</value></data>
+  <data name="ChannelsPage_QrMalformed" xml:space="preserve"><value>QR 碼解析失敗：閘道傳回的 data URL 格式不正確。</value></data>
+  <data name="ChannelsPage_QrInvalidBase64" xml:space="preserve"><value>QR 碼解析失敗：閘道傳回的 base64 無效。</value></data>
+  <data name="ChannelsPage_QrDecodeFailedFormat" xml:space="preserve"><value>QR 碼解析失敗：{0}</value></data>
+  <data name="ChannelsPage_PluginInstallHintFormat" xml:space="preserve"><value>通道外掛由閘道載入，而不是匣式應用程式：因此安裝要在託管閘道的機器上進行。若儲存後 {0} 仍未啟動，可能是外掛尚未安裝。</value></data>
+  <data name="ChannelsPage_PluginInstallAction" xml:space="preserve"><value>請在託管閘道的機器上執行此命令。完成後返回並點選重新整理。</value></data>
+  <data name="ChannelsPage_PluginInstallDocs" xml:space="preserve"><value>外掛安裝文件 →</value></data>
+  <data name="ChatPage_AccessibilitySessionTitle" xml:space="preserve"><value>協助工具工作階段</value></data>
+  <data name="ChatPage_RouteTargetFormat" xml:space="preserve"><value>路由目標：{0}</value></data>
+  <data name="ConfigPage_FolderLabelFormat" xml:space="preserve"><value>📁 {0}</value></data>
+  <data name="ConfigPage_SelectChildSectionHint" xml:space="preserve"><value>請選擇一個子區段以編輯欄位。完整根設定可在 JSON 預覽中檢視。</value></data>
+  <data name="ConfigPage_SchemaPreviewOnlyHint" xml:space="preserve"><value>此區段僅在 JSON 預覽中顯示，因為該 schema 結構尚不支援在表單中編輯。</value></data>
+  <data name="ConfigPage_SelectSectionHint" xml:space="preserve"><value>請選擇一個區段以預覽其 JSON。</value></data>
+  <data name="ConfigPage_PreviewUnavailable" xml:space="preserve"><value>所選區段的 JSON 預覽無法使用。</value></data>
+  <data name="ConfigPage_NoReadPermission" xml:space="preserve"><value>無法載入設定，因為此操作員權杖沒有讀取權限。</value></data>
+  <data name="ConfigPage_UnavailableTitle" xml:space="preserve"><value>設定無法使用</value></data>
+  <data name="ConfigPage_MissingReadPermissionTitle" xml:space="preserve"><value>缺少 operator.read 權限</value></data>
+  <data name="ConfigPage_PreviewUnavailableNoPermission" xml:space="preserve"><value>沒有讀取權限時無法預覽設定。</value></data>
+  <data name="ConfigPage_LoadingSection" xml:space="preserve"><value>正在載入區段...</value></data>
+  <data name="ConnectionPage_AuthModeBulletFormat" xml:space="preserve"><value>• {0}</value></data>
+  <data name="ConnectionPage_WslBullet" xml:space="preserve"><value>• WSL</value></data>
+  <data name="ConnectionPage_LastConnectedBulletFormat" xml:space="preserve"><value>• {0}</value></data>
+  <data name="ConnectionPage_TestFailedHint" xml:space="preserve"><value>無法測試閘道連線。請檢查 URL 後重試。</value></data>
+  <data name="CronPage_JobCountFormat" xml:space="preserve"><value>({0})</value></data>
+  <data name="DebugPage_NoLogFile" xml:space="preserve"><value>找不到記錄檔。</value></data>
+  <data name="DebugPage_LogReadFailedFormat" xml:space="preserve"><value>讀取記錄失敗：{0}</value></data>
+  <data name="DebugPage_NoDeviceKeyFile" xml:space="preserve"><value>沒有裝置金鑰檔案</value></data>
+  <data name="InstancesPage_NodeStatusFormat" xml:space="preserve"><value>· {0}</value></data>
+  <data name="SettingsPage_RemoveGatewayIntro" xml:space="preserve"><value>這將永久移除以下內容：</value></data>
+  <data name="SettingsPage_RemoveWslDistroFormat" xml:space="preserve"><value>• WSL 發行版：{0}（及其磁碟映像）</value></data>
+  <data name="SettingsPage_RemovePreservedNote" xml:space="preserve"><value>已保留：您的 MCP 權杖和根裝置金鑰不會被刪除。</value></data>
+  <data name="SettingsPage_RemoveCannotUndo" xml:space="preserve"><value>此操作無法復原。</value></data>
+  <data name="SettingsPage_RemoveGatewayTitle" xml:space="preserve"><value>移除本機閘道？</value></data>
+  <data name="ConnectionStatus_ServicesUnavailable" xml:space="preserve"><value>閘道連線服務無法使用。</value></data>
+  <data name="VoiceOverlay_TestTitle" xml:space="preserve"><value>測試語音輸入</value></data>
+  <data name="WindowManager_LocalAiAttentionTitle" xml:space="preserve"><value>本機 AI 設定需要處理</value></data>
+  <data name="WindowManager_LocalAiAttentionRepairMessage" xml:space="preserve"><value>請先重新連線原本的原生閘道、停止本機 AI 並釋放其閘道擁有權，然後再為其 WSL 修復。</value></data>
+  <data name="WindowManager_LocalAiAttentionIdentifyMessage" xml:space="preserve"><value>OpenClaw 無法安全識別受管理的 WSL 閘道。請檢查連線設定後再重試安裝。</value></data>
+  <data name="Setup_AllSetTitle" xml:space="preserve"><value>全部就緒！</value></data>
+  <data name="Setup_ReadySubtitle" xml:space="preserve"><value>OpenClaw 已準備就緒</value></data>
+  <data name="Setup_ReadyWithLocalAi" xml:space="preserve"><value>OpenClaw 與本機 AI 均已就緒</value></data>
+  <data name="Setup_OpenChat" xml:space="preserve"><value>開啟聊天</value></data>
+  <data name="Setup_RestartRequiredTitle" xml:space="preserve"><value>需要重新開機</value></data>
+  <data name="Setup_RestartPrompt" xml:space="preserve"><value>OpenClaw 需要重新開機 Windows 才能繼續安裝。現在要重新開機嗎？</value></data>
+  <data name="Setup_SetupFailedTitle" xml:space="preserve"><value>安裝失敗</value></data>
+  <data name="Setup_ViewFullLogFormat" xml:space="preserve"><value>檢視完整記錄 → {0}</value></data>
+  <data name="Setup_OpenLocalAiLogsFormat" xml:space="preserve"><value>開啟本機 AI 記錄 → {0}</value></data>
+  <data name="Setup_WindowsRestarting" xml:space="preserve"><value>Windows 正在重新開機...</value></data>
+  <data name="Setup_RestartFailedFormat" xml:space="preserve"><value>無法重新開機 Windows：{0}</value></data>
+  <data name="Setup_AnotherTaskActive" xml:space="preserve"><value>另一個安裝工作仍在進行。請等待其完成後再啟動 OpenClaw 新手引導。</value></data>
+  <data name="Setup_WizardProblemTitle" xml:space="preserve"><value>OpenClaw 新手引導發生問題</value></data>
+  <data name="Setup_WizardQuestionsSubtitle" xml:space="preserve"><value>幾個簡單問題，用於連線您的智能體</value></data>
+  <data name="Setup_WizardDefaultAiModel" xml:space="preserve"><value>預設 AI 模型</value></data>
+  <data name="Setup_WizardMore" xml:space="preserve"><value>更多 ▾</value></data>
+  <data name="Setup_WizardRestartedVerifying" xml:space="preserve"><value>閘道已重新啟動，正在驗證端點歸屬...</value></data>
+  <data name="Setup_WizardNeedsAttentionTitle" xml:space="preserve"><value>精靈需要處理</value></data>
+  <data name="Setup_WizardStartAgain" xml:space="preserve"><value>重新啟動精靈</value></data>
+  <data name="Setup_WizardTerminalOpenedNative" xml:space="preserve"><value>已開啟此原生設定檔的終端機。核准配對後請選擇「重試」；修改設定後請選擇「重新啟動閘道」。</value></data>
+  <data name="Setup_WizardTerminalOpenedDistroFormat" xml:space="preserve"><value>已在 {0} 中開啟終端機。安裝該工具後，請選擇「重新啟動閘道」。</value></data>
+  <data name="Setup_WizardTerminalOpenFailedFormat" xml:space="preserve"><value>無法開啟終端機：{0}</value></data>
+  <data name="TrayMenu_PairingPendingFormat" xml:space="preserve"><value>等待配對核准（{0}）</value></data>
+  <data name="TrayMenu_Gateway" xml:space="preserve"><value>閘道</value></data>
+  <data name="TrayMenu_GatewayAutomationFormat" xml:space="preserve"><value>閘道{0}。啟用以開啟連線設定。</value></data>
+  <data name="TrayMenu_Sessions" xml:space="preserve"><value>工作階段</value></data>
+  <data name="TrayMenu_SessionsHeaderFormat" xml:space="preserve"><value>工作階段（{0}）</value></data>
+  <data name="TrayMenu_SessionsDetailFormat" xml:space="preserve"><value>{0} 個進行中 · {1} 個權杖</value></data>
+  <data name="TrayMenu_SessionsAutomationFormat" xml:space="preserve"><value>工作階段。{0} 個進行中。{1} 個權杖。</value></data>
+  <data name="TrayMenu_Usage" xml:space="preserve"><value>用量</value></data>
+  <data name="TrayMenu_UsageAutomationFormat" xml:space="preserve"><value>用量。{0}。</value></data>
+  <data name="TrayMenu_UsageNoData" xml:space="preserve"><value>無資料</value></data>
+  <data name="TrayMenu_UsageNoDataYet" xml:space="preserve"><value>尚無用量資料</value></data>
+  <data name="TrayMenu_UsageProviders" xml:space="preserve"><value>服務商</value></data>
+  <data name="TrayMenu_UsageByModel" xml:space="preserve"><value>依模型</value></data>
+  <data name="TrayMenu_UsageTokensFormat" xml:space="preserve"><value>{0} 個權杖</value></data>
+  <data name="TrayMenu_UsageInOutFormat" xml:space="preserve"><value>輸入 {0} · 輸出 {1}</value></data>
+  <data name="TrayMenu_UsageRequestsFormat" xml:space="preserve"><value>{0} 次要求</value></data>
+  <data name="TrayMenu_CapabilitiesFormat" xml:space="preserve"><value>能力（{0}）· 命令（{1}）</value></data>
+  <data name="TrayMenu_Permissions" xml:space="preserve"><value>權限</value></data>
+  <data name="TrayMenu_PermissionsAutomation" xml:space="preserve"><value>權限子功能表</value></data>
+  <data name="TrayMenu_SessionUnknown" xml:space="preserve"><value>未知</value></data>
+  <data name="TrayMenu_PermNode" xml:space="preserve"><value>Windows 節點</value></data>
+  <data name="TrayMenu_PermNodeDescription" xml:space="preserve"><value>在此電腦上以本機節點執行 OpenClaw</value></data>
+  <data name="TrayMenu_PermSystem" xml:space="preserve"><value>系統工具</value></data>
+  <data name="TrayMenu_PermSystemDescription" xml:space="preserve"><value>允許智能體在此電腦上執行 shell 命令與指令碼</value></data>
+  <data name="TrayMenu_PermBrowser" xml:space="preserve"><value>瀏覽器控制</value></data>
+  <data name="TrayMenu_PermBrowserDescription" xml:space="preserve"><value>允許智能體透過代理驅動瀏覽器</value></data>
+  <data name="TrayMenu_PermCamera" xml:space="preserve"><value>攝影機</value></data>
+  <data name="TrayMenu_PermCameraDescription" xml:space="preserve"><value>允許在工作階段中擷取網路攝影機畫面</value></data>
+  <data name="TrayMenu_PermCanvas" xml:space="preserve"><value>畫布</value></data>
+  <data name="TrayMenu_PermCanvasDescription" xml:space="preserve"><value>在聊天中呈現產生的 HTML 畫布</value></data>
+  <data name="TrayMenu_PermScreen" xml:space="preserve"><value>螢幕擷取</value></data>
+  <data name="TrayMenu_PermScreenDescription" xml:space="preserve"><value>與智能體分享您的螢幕內容</value></data>
+  <data name="TrayMenu_PermLocation" xml:space="preserve"><value>位置</value></data>
+  <data name="TrayMenu_PermLocationDescription" xml:space="preserve"><value>分享此裝置的位置</value></data>
+  <data name="TrayMenu_PermTts" xml:space="preserve"><value>語音（TTS）</value></data>
+  <data name="TrayMenu_PermTtsDescription" xml:space="preserve"><value>朗讀回覆</value></data>
+  <data name="TrayMenu_PermStt" xml:space="preserve"><value>語音轉文字（STT）</value></data>
+  <data name="TrayMenu_PermSttDescription" xml:space="preserve"><value>使用語音輸入</value></data>
+  <data name="TrayMenu_PermOllama" xml:space="preserve"><value>Ollama</value></data>
+  <data name="TrayMenu_PermOllamaDescription" xml:space="preserve"><value>允許智能體使用此電腦上另行安裝的 Ollama 模型</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>取消</value></data>
+  <data name="Common_ParenthesizedCountFormat" xml:space="preserve"><value>({0})</value></data>
+  <data name="CommandCenter_LocalMcpFailedTitle" xml:space="preserve"><value>本機 MCP 失敗</value></data>
+  <data name="CommandCenter_LocalMcpOnlyTitle" xml:space="preserve"><value>僅本機 MCP</value></data>
+  <data name="CommandCenter_ConnectionDegradedTitle" xml:space="preserve"><value>連線已降級</value></data>
+  <data name="CommandCenter_PairingRequiredTitle" xml:space="preserve"><value>需要配對</value></data>
+  <data name="SettingsPage_RemoveItemsFormat" xml:space="preserve"><value>• WSL 發行版：{0}（及其磁碟映像）
+• 開機自動啟動登錄項目
+• 閘道認證（權杖與引導權杖將被清除）
+• 安裝狀態（新手引導將重設）</value></data>
+  <data name="SettingsPage_RemovePreservedItems" xml:space="preserve"><value>已保留：您的 MCP 權杖和根裝置金鑰不會被刪除。
+已移除：本機閘道身分認證與登錄記錄。</value></data>
+  <data name="SettingsPage_RemoveGatewayPrimary" xml:space="preserve"><value>移除本機閘道</value></data>
+  <data name="Common_Reconnect" xml:space="preserve"><value>重新連線</value></data>
+  <data name="Common_TextFile" xml:space="preserve"><value>文字檔</value></data>
+  <data name="ConnectionPlan_NoGatewayHeadline" xml:space="preserve"><value>尚未設定閘道</value></data>
+  <data name="ConnectionPlan_NoGatewaySub" xml:space="preserve"><value>新增閘道以開始使用。</value></data>
+  <data name="ConnectionPlan_PickGatewaySub" xml:space="preserve"><value>在下方選擇一個閘道，或新增閘道。</value></data>
+  <data name="ConnectionPlan_ReachingGateway" xml:space="preserve"><value>正在連線閘道</value></data>
+  <data name="ConnectionPlan_NodePairingRejected" xml:space="preserve"><value>節點配對被拒絕。</value></data>
+  <data name="ConnectionPlan_NodeRateLimited" xml:space="preserve"><value>節點已被閘道限流。</value></data>
+  <data name="ConnectionPlan_NodeError" xml:space="preserve"><value>節點回報錯誤。</value></data>
+  <data name="ConnectionPlan_NodeNotConnected" xml:space="preserve"><value>節點模式已啟用，但節點尚未連線。</value></data>
+  <data name="ConnectionPlan_ConnectionImpaired" xml:space="preserve"><value>連線已受損。</value></data>
+  <data name="ConnectionPlan_ConnectionDegraded" xml:space="preserve"><value>連線已降級</value></data>
+  <data name="ConnectionPlan_RestartTunnel" xml:space="preserve"><value>重新啟動通道</value></data>
+  <data name="ConnectionPlan_AwaitingApproval" xml:space="preserve"><value>等待核准</value></data>
+  <data name="ConnectionPlan_AwaitingApprovalSub" xml:space="preserve"><value>請在閘道主機上核准此用戶端。連線會自動恢復。</value></data>
+  <data name="ConnectionPlan_RunOnGatewayHost" xml:space="preserve"><value>在閘道主機上執行：</value></data>
+  <data name="ConnectionPlan_TailscaleUnavailable" xml:space="preserve"><value>Tailscale 閘道無法使用</value></data>
+  <data name="ConnectionPlan_TailnetUnreachableFormat" xml:space="preserve"><value>無法連線到私有 tailnet 端點 {0}。</value></data>
+  <data name="ConnectionPlan_PortConflict" xml:space="preserve"><value>本機閘道連接埠衝突</value></data>
+  <data name="ConnectionPlan_PortConflictSub" xml:space="preserve"><value>另一個處理序正在使用此受管理閘道位址。OpenClaw 不會將閘道認證傳送到未經驗證的端點。</value></data>
+  <data name="ConnectionPlan_AuthFailed" xml:space="preserve"><value>驗證失敗</value></data>
+  <data name="ConnectionPlan_TokenInvalidFormat" xml:space="preserve"><value>{0} 的權杖已失效。</value></data>
+  <data name="ConnectionPlan_RePairing" xml:space="preserve"><value>裝置需要重新配對</value></data>
+  <data name="ConnectionPlan_DeviceTokenUntrustedFormat" xml:space="preserve"><value>閘道已不再信任 {0} 儲存的裝置權杖。</value></data>
+  <data name="ConnectionPlan_NotEnoughAccess" xml:space="preserve"><value>權限不足</value></data>
+  <data name="ConnectionPlan_MissingScopesFormat" xml:space="preserve"><value>此裝置已連線，但缺少在 {0} 上所需的權限範圍。</value></data>
+  <data name="ConnectionPlan_SecureFailed" xml:space="preserve"><value>安全連線失敗</value></data>
+  <data name="ConnectionPlan_SecureFailedSub" xml:space="preserve"><value>無法為閘道的傳輸建立安全連線。</value></data>
+  <data name="ConnectionPlan_TooManyAttempts" xml:space="preserve"><value>失敗次數過多</value></data>
+  <data name="ConnectionPlan_TooManyAttemptsSub" xml:space="preserve"><value>閘道正在暫時限制此用戶端的連線嘗試。</value></data>
+  <data name="ConnectionPlan_CantReachGateway" xml:space="preserve"><value>無法連線閘道</value></data>
+  <data name="ConnectionPlan_SshTunnelDown" xml:space="preserve"><value>SSH 通道已中斷：</value></data>
+  <data name="ConnectionPlan_LastAttemptFailed" xml:space="preserve"><value> 上次嘗試失敗。</value></data>
+  <data name="ConnectionPlan_GatewayErrorSub" xml:space="preserve"><value>閘道傳回錯誤。</value></data>
+  <data name="ConnectionPlan_ConnectionRefused" xml:space="preserve"><value>連線被拒絕。</value></data>
+  <data name="ConnectionPlan_ConnectionRefusedAtFormat" xml:space="preserve"><value>{0} 拒絕連線。</value></data>
+  <data name="ConnectionPlan_ViaSshTunnel" xml:space="preserve"><value>經 SSH 通道</value></data>
+  <data name="ConnectionPlan_CredentialNodeDeviceToken" xml:space="preserve"><value>透過節點裝置權杖配對</value></data>
+  <data name="ConnectionPlan_CredentialDeviceToken" xml:space="preserve"><value>透過裝置權杖配對</value></data>
+  <data name="ConnectionPlan_CredentialSharedToken" xml:space="preserve"><value>共用權杖</value></data>
+  <data name="ConnectionPlan_CredentialBootstrapToken" xml:space="preserve"><value>引導權杖</value></data>
+  <data name="ConnectionPlan_UpFormat" xml:space="preserve"><value>已執行 {0}</value></data>
+  <data name="ConnectionPlan_UptimeDaysHoursFormat" xml:space="preserve"><value>{0} 天 {1} 小時</value></data>
+  <data name="ConnectionPlan_UptimeHoursMinutesFormat" xml:space="preserve"><value>{0} 小時 {1} 分</value></data>
+  <data name="ConnectionPlan_UptimeMinutesFormat" xml:space="preserve"><value>{0} 分鐘</value></data>
+  <data name="ConnectionPlan_UptimeSecondsFormat" xml:space="preserve"><value>{0} 秒</value></data>
+  <data name="CronPage_FormWaitLoading" xml:space="preserve"><value>請等待最新的排程工作載入完成後再儲存變更。</value></data>
+  <data name="CronPage_FormNameRequired" xml:space="preserve"><value>名稱為必填。</value></data>
+  <data name="CronPage_FormPromptRequired" xml:space="preserve"><value>提示詞為必填。</value></data>
+  <data name="CronPage_FormNotConnected" xml:space="preserve"><value>未連線到閘道。</value></data>
+  <data name="CronPage_FormCronRequired" xml:space="preserve"><value>Cron 運算式為必填。</value></data>
+  <data name="CronPage_FormIntervalInvalid" xml:space="preserve"><value>請輸入有效的間隔數字。</value></data>
+  <data name="CronPage_FormDateRequired" xml:space="preserve"><value>「at」排程需要填寫日期。</value></data>
+  <data name="CronPage_FormTimeInvalid" xml:space="preserve"><value>時間無效。請使用「3:30 PM」或「15:30」格式。</value></data>
+  <data name="CronPage_FormFutureRequired" xml:space="preserve"><value>排程時間必須在未來。</value></data>
+  <data name="CronPage_Delivered" xml:space="preserve"><value>已投遞</value></data>
+  <data name="CronPage_Overdue" xml:space="preserve"><value>已逾期</value></data>
+  <data name="CronPage_NextInFormat" xml:space="preserve"><value>下次 {0}</value></data>
+  <data name="Common_Connected" xml:space="preserve"><value>已連線</value></data>
+  <data name="Common_Retry" xml:space="preserve"><value>重試</value></data>
+  <data name="ConnectionPlan_Disconnecting" xml:space="preserve"><value>正在中斷…</value></data>
+  <data name="ConnectionPlan_Connecting" xml:space="preserve"><value>正在連線…</value></data>
+  <data name="Chat_Composer_Slash_Loading" xml:space="preserve"><value>正在載入命令...</value></data>
+  <data name="CommandCenter_Detail_LocalMcpListening" xml:space="preserve"><value>本機 MCP 工具正在此電腦上接聽，但沒有閘道節點連線。</value></data>
+  <data name="CommandCenter_Detail_OperatorRoleBlocked" xml:space="preserve"><value>操作員連線可用，但有一個必要角色被封鎖。</value></data>
+  <data name="CommandCenter_Detail_ApprovePairing" xml:space="preserve"><value>核准待處理的操作員或節點配對要求以完成連線。</value></data>
+  <data name="CommandCenter_Detail_NotConnected" xml:space="preserve"><value>匣式應用程式目前未連線到閘道。</value></data>
+  <data name="CommandCenter_Detail_NoChannelsReported" xml:space="preserve"><value>閘道健康狀態資料未回報任何通道。</value></data>
+  <data name="CommandCenter_Detail_NodeModeInventories" xml:space="preserve"><value>節點模式已連線。通道/工作階段清單會在閘道健康事件可用時填入。</value></data>
+  <data name="CommandCenter_Detail_ChannelsNotRunning" xml:space="preserve"><value>通道已設定，但沒有任何通道回報執行/就緒狀態。</value></data>
+  <data name="CommandCenter_Detail_NoNodesReported" xml:space="preserve"><value>node.list 未回報任何已連線節點。請配對 Windows 節點，或確認操作員權杖具有節點清單存取權限。</value></data>
+  <data name="CommandCenter_Detail_BrowserProxyHost" xml:space="preserve"><value>browser.proxy 需要相容的瀏覽器控制主機在閘道連接埠 + 2 上接聽。</value></data>
+  <data name="Chat_Status_WaitingApproval" xml:space="preserve"><value>等待核准</value></data>
+  <data name="Chat_Status_Working" xml:space="preserve"><value>處理中</value></data>
+  <data name="Chat_Status_AgentError" xml:space="preserve"><value>智能體錯誤</value></data>
+  <data name="Chat_Status_Compacting" xml:space="preserve"><value>正在壓縮內容</value></data>
+  <data name="Chat_Status_RetryingAfterCompaction" xml:space="preserve"><value>內容壓縮後重試</value></data>
+  <data name="Chat_Status_RetryingRequest" xml:space="preserve"><value>正在重試模型要求</value></data>
+  <data name="ConnectionPlan_CredentialFallbackFormat" xml:space="preserve"><value>{0}（回退）</value></data>
+  <data name="ConnectionPlan_CredentialPairingRequiredFormat" xml:space="preserve"><value>{0}（需要配對）</value></data>
+  <data name="Common_Disconnected" xml:space="preserve"><value>已中斷</value></data>
+  <data name="Common_ConnectionError" xml:space="preserve"><value>連線錯誤</value></data>
+  <data name="TraySummary_UpdatedFormat" xml:space="preserve"><value>更新於 {0}</value></data>
+  <data name="TraySummary_NodeOneFormat" xml:space="preserve"><value>{0}/{1} 個節點</value></data>
+  <data name="TraySummary_NodeFormat" xml:space="preserve"><value>{0}/{1} 個節點</value></data>
+  <data name="TraySummary_SessionsOne" xml:space="preserve"><value>1 個工作階段</value></data>
+  <data name="TraySummary_OneWorkingFormat" xml:space="preserve"><value>1 個工作階段（{0} 個進行中）</value></data>
+  <data name="TraySummary_SessionsFormat" xml:space="preserve"><value>{0} 個工作階段</value></data>
+  <data name="TraySummary_SessionsWorkingFormat" xml:space="preserve"><value>{0} 個工作階段（{1} 個進行中）</value></data>
+  <data name="TrayMenu_Server" xml:space="preserve"><value>伺服器</value></data>
+  <data name="TrayMenu_PendingApproval" xml:space="preserve"><value>等待核准</value></data>
 </root>

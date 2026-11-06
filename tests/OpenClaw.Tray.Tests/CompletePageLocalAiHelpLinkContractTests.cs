@@ -39,7 +39,7 @@ public sealed class CompletePageLocalAiHelpLinkContractTests
         Assert.Contains(
             "var displayDirectory = LogFileLauncher.ResolveRealPath(detail.LogDirectory);",
             source);
-        Assert.Contains("ViewServerLogLink.Content = $\"Open Local AI logs → {displayDirectory}\";", source);
+        Assert.Contains("ViewServerLogLink.Content = SetupLocalization.Format(\"Setup_OpenLocalAiLogsFormat\", displayDirectory);", source);
     }
 
     /// <summary>

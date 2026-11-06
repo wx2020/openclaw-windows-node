@@ -630,8 +630,8 @@ internal sealed class WindowManager : IWindowManager
             _callbacks.GetAppNotificationService()?.Show(new AppNotification
             {
                 Id = $"local-ai-native-owner-{Guid.NewGuid():N}",
-                Title = "Local AI setup needs attention",
-                Message = "Reconnect the original native Gateway, stop Local AI and release its Gateway ownership before repairing it for WSL.",
+                Title = LocalizationHelper.GetString("WindowManager_LocalAiAttentionTitle"),
+                Message = LocalizationHelper.GetString("WindowManager_LocalAiAttentionRepairMessage"),
                 Severity = AppNotificationSeverity.Warning,
                 Source = "local-ai",
                 ActionRoute = "local-ai",
@@ -655,8 +655,8 @@ internal sealed class WindowManager : IWindowManager
             _callbacks.GetAppNotificationService()?.Show(new AppNotification
             {
                 Id = $"local-ai-setup-owner-{Guid.NewGuid():N}",
-                Title = "Local AI setup needs attention",
-                Message = "OpenClaw could not safely identify the managed WSL gateway. Review Connection settings before retrying setup.",
+                Title = LocalizationHelper.GetString("WindowManager_LocalAiAttentionTitle"),
+                Message = LocalizationHelper.GetString("WindowManager_LocalAiAttentionIdentifyMessage"),
                 Severity = AppNotificationSeverity.Warning,
                 Source = "local-ai",
                 DedupeKey = "local-ai-setup-owner",

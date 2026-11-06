@@ -1,6 +1,7 @@
 using OpenClaw.Shared;
 using OpenClaw.Shared.Sessions;
 using OpenClawTray.Chat;
+using L10n = OpenClawTray.Helpers.LocalizationHelper;
 using OpenClawTray.Services;
 using System.Collections.Immutable;
 using System.Globalization;
@@ -39,10 +40,10 @@ internal sealed class TrayMenuPresenter
             items.Add(new TrayMenuElement
             {
                 Kind = TrayMenuElementKind.Action,
-                Text = $"Pairing approval pending ({pendingCount})",
+                Text = string.Format(L10n.GetString("TrayMenu_PairingPendingFormat"), pendingCount),
                 Icon = TrayMenuIconIdentity.Approvals,
                 ActionId = "hub",
-                AutomationName = $"Pairing approval pending ({pendingCount})",
+                AutomationName = string.Format(L10n.GetString("TrayMenu_PairingPendingFormat"), pendingCount),
             });
         }
 
@@ -153,13 +154,13 @@ internal sealed class TrayMenuPresenter
         return new TrayMenuElement
         {
             Kind = TrayMenuElementKind.GatewayCard,
-            Text = "Gateway",
+            Text = L10n.GetString("TrayMenu_Gateway"),
             Detail = string.Join(" · ", detailParts),
             Error = _snapshot.AuthFailureMessage,
             Badge = badge,
             ActionId = "connection",
             Accent = ToAccent(ConnectionStatusPresenter.Accent(_snapshot.OverallState, _snapshot.CurrentStatus)),
-            AutomationName = $"Gateway {statusText}. Activate to open connection settings.",
+            AutomationName = string.Format(L10n.GetString("TrayMenu_GatewayAutomationFormat"), statusText),
             Children = BuildGatewayFlyout(isConnected, statusText, gatewayUri),
         };
     }
@@ -170,7 +171,7 @@ internal sealed class TrayMenuPresenter
         Uri? gatewayUri)
     {
         var items = ImmutableArray.CreateBuilder<TrayMenuElement>();
-        items.Add(Header("Gateway"));
+        items.Add(Header(L10n.GetString("TrayMenu_Gateway")));
         items.Add(new TrayMenuElement
         {
             Kind = TrayMenuElementKind.StatusCard,
@@ -184,7 +185,7 @@ internal sealed class TrayMenuPresenter
 
         if (_snapshot.GatewaySelf is { HasAnyDetails: true } self)
         {
-            items.Add(Header("Server"));
+            items.Add(Header(L10n.GetString("TrayMenu_Server")));
             if (!string.IsNullOrEmpty(self.ServerVersion)) items.Add(KeyValue("Version", $"v{self.ServerVersion}"));
             if (!string.IsNullOrEmpty(self.AuthMode)) items.Add(KeyValue("Auth", self.AuthMode));
             if (self.Protocol.HasValue) items.Add(KeyValue("Protocol", $"v{self.Protocol}"));
@@ -211,7 +212,7 @@ internal sealed class TrayMenuPresenter
         var pending = _snapshot.NodePendingPairCount + _snapshot.DevicePendingPairCount;
         if (pending > 0)
         {
-            items.Add(Header("Pending approval"));
+            items.Add(Header(L10n.GetString("TrayMenu_PendingApproval")));
             if (_snapshot.NodePendingPairCount > 0)
                 items.Add(KeyValue("Nodes", _snapshot.NodePendingPairCount.ToString(CultureInfo.InvariantCulture)));
             if (_snapshot.DevicePendingPairCount > 0)
@@ -261,7 +262,7 @@ internal sealed class TrayMenuPresenter
 
         if (!node.Capabilities.IsEmpty || !node.Commands.IsEmpty)
         {
-            items.Add(Header($"Capabilities ({node.CapabilityCount}) · Commands ({node.CommandCount})"));
+            items.Add(Header(string.Format(L10n.GetString("TrayMenu_CapabilitiesFormat"), node.CapabilityCount, node.CommandCount)));
             var commandGroups = node.Commands
                 .GroupBy(CommandGroup, StringComparer.OrdinalIgnoreCase)
                 .ToDictionary(
@@ -289,17 +290,17 @@ internal sealed class TrayMenuPresenter
         var working = sessions.Count(session => SessionRunState.IsWorking(session.ToSessionInfo()));
         var totalTokens = sessions.Sum(TrayDashboardSummaryBuilder.SessionUsedTokens);
         var children = ImmutableArray.CreateBuilder<TrayMenuElement>();
-        children.Add(Header($"Sessions ({sessions.Count})"));
+        children.Add(Header(string.Format(L10n.GetString("TrayMenu_SessionsHeaderFormat"), sessions.Count)));
         foreach (var session in sessions.Take(8))
             children.Add(BuildSessionCard(session));
 
         return new TrayMenuElement
         {
             Kind = TrayMenuElementKind.SessionsSummary,
-            Text = "Sessions",
-            Detail = $"{working} working · {FormatTokenCount(totalTokens)} tokens",
+            Text = L10n.GetString("TrayMenu_Sessions"),
+            Detail = string.Format(L10n.GetString("TrayMenu_SessionsDetailFormat"), working, FormatTokenCount(totalTokens)),
             ActionId = "sessions",
-            AutomationName = $"Sessions. {working} working. {FormatTokenCount(totalTokens)} tokens.",
+            AutomationName = string.Format(L10n.GetString("TrayMenu_SessionsAutomationFormat"), working, FormatTokenCount(totalTokens)),
             Children = children.ToImmutable(),
         };
     }
@@ -318,7 +319,7 @@ internal sealed class TrayMenuPresenter
         {
             Kind = TrayMenuElementKind.SessionCard,
             Text = title,
-            Detail = string.IsNullOrEmpty(session.Model) ? "unknown" : session.Model,
+            Detail = string.IsNullOrEmpty(session.Model) ? L10n.GetString("TrayMenu_SessionUnknown") : session.Model,
             Secondary = usage,
             Tertiary = session.UpdatedAt.HasValue ? FormatRelative(session.UpdatedAt.Value) : null,
             ProgressPercent = percent,
@@ -331,16 +332,16 @@ internal sealed class TrayMenuPresenter
         var totalTokens = TotalUsageTokens();
         var cost = TotalUsageCost();
         var summary = cost <= 0 && totalTokens <= 0
-            ? "no data"
+            ? L10n.GetString("TrayMenu_UsageNoData")
             : $"${cost.ToString("F2", CultureInfo.InvariantCulture)} · {FormatTokenCount(totalTokens)} tokens";
 
         return new TrayMenuElement
         {
             Kind = TrayMenuElementKind.UsageSummary,
-            Text = "Usage",
+            Text = L10n.GetString("TrayMenu_Usage"),
             Detail = summary,
             ActionId = "usage",
-            AutomationName = $"Usage. {summary}.",
+            AutomationName = string.Format(L10n.GetString("TrayMenu_UsageAutomationFormat"), summary),
             Children = BuildUsageFlyout(totalTokens, cost),
         };
     }
@@ -348,7 +349,7 @@ internal sealed class TrayMenuPresenter
     private ImmutableArray<TrayMenuElement> BuildUsageFlyout(long totalTokens, double cost)
     {
         var items = ImmutableArray.CreateBuilder<TrayMenuElement>();
-        items.Add(Header("Usage"));
+        items.Add(Header(L10n.GetString("TrayMenu_Usage")));
 
         var inputTokens = _snapshot.Usage?.InputTokens ?? _snapshot.Sessions.Sum(session => session.InputTokens);
         var outputTokens = _snapshot.Usage?.OutputTokens ?? _snapshot.Sessions.Sum(session => session.OutputTokens);
@@ -356,10 +357,10 @@ internal sealed class TrayMenuPresenter
         if (totalTokens > 0 || cost > 0)
         {
             var details = new List<string>();
-            if (totalTokens > 0) details.Add($"{FormatTokenCount(totalTokens)} tokens");
+            if (totalTokens > 0) details.Add(string.Format(L10n.GetString("TrayMenu_UsageTokensFormat"), FormatTokenCount(totalTokens)));
             if (inputTokens > 0 || outputTokens > 0)
-                details.Add($"in {FormatTokenCount(inputTokens)} · out {FormatTokenCount(outputTokens)}");
-            if (requests > 0) details.Add($"{requests} requests");
+                details.Add(string.Format(L10n.GetString("TrayMenu_UsageInOutFormat"), FormatTokenCount(inputTokens), FormatTokenCount(outputTokens)));
+            if (requests > 0) details.Add(string.Format(L10n.GetString("TrayMenu_UsageRequestsFormat"), requests));
             items.Add(new TrayMenuElement
             {
                 Kind = TrayMenuElementKind.UsageTotals,
@@ -369,12 +370,12 @@ internal sealed class TrayMenuPresenter
         }
         else
         {
-            items.Add(new TrayMenuElement { Kind = TrayMenuElementKind.Text, Text = "No usage data yet" });
+            items.Add(new TrayMenuElement { Kind = TrayMenuElementKind.Text, Text = L10n.GetString("TrayMenu_UsageNoDataYet") });
         }
 
         if (_snapshot.UsageStatus is { Providers.IsEmpty: false } usageStatus)
         {
-            items.Add(Header("Providers"));
+            items.Add(Header(L10n.GetString("TrayMenu_UsageProviders")));
             foreach (var provider in usageStatus.Providers)
             {
                 var header = !string.IsNullOrEmpty(provider.DisplayName)
@@ -415,9 +416,9 @@ internal sealed class TrayMenuPresenter
             .ToArray();
         if (byModel.Length > 0)
         {
-            items.Add(Header("By Model"));
+            items.Add(Header(L10n.GetString("TrayMenu_UsageByModel")));
             foreach (var model in byModel)
-                items.Add(KeyValue(model.Model, $"{FormatTokenCount(model.Tokens)} tokens"));
+                items.Add(KeyValue(model.Model, string.Format(L10n.GetString("TrayMenu_UsageTokensFormat"), FormatTokenCount(model.Tokens))));
         }
 
         items.Add(Spacer());
@@ -427,33 +428,33 @@ internal sealed class TrayMenuPresenter
     private static TrayMenuElement BuildPermissions(TrayMenuSettingsSnapshot settings) => new()
     {
         Kind = TrayMenuElementKind.Flyout,
-        Text = "Permissions",
+        Text = L10n.GetString("TrayMenu_Permissions"),
         Icon = TrayMenuIconIdentity.Permissions,
         ActionId = "permissions",
-        AutomationName = "Permissions submenu",
+        AutomationName = L10n.GetString("TrayMenu_PermissionsAutomation"),
         Children =
         [
-            Header("Permissions"),
-            Toggle("Windows node", TrayMenuIconIdentity.System,
-                "Run OpenClaw as a local node on this PC", settings.EnableNodeMode),
-            Toggle("System tools", TrayMenuIconIdentity.Terminal,
-                "Let agents run shell commands and scripts on this PC", settings.NodeSystemRunEnabled),
-            Toggle("Browser control", TrayMenuIconIdentity.Browser,
-                "Let agents drive web browsers via proxy", settings.NodeBrowserProxyEnabled),
-            Toggle("Camera", TrayMenuIconIdentity.Camera,
-                "Allow webcam capture during sessions", settings.NodeCameraEnabled),
-            Toggle("Canvas", TrayMenuIconIdentity.Canvas,
-                "Render generated HTML canvases in chat", settings.NodeCanvasEnabled),
-            Toggle("Screen capture", TrayMenuIconIdentity.Screen,
-                "Share what's on your screen with the agent", settings.NodeScreenEnabled),
-            Toggle("Location", TrayMenuIconIdentity.Location,
-                "Share this device's location", settings.NodeLocationEnabled),
-            Toggle("Voice (TTS)", TrayMenuIconIdentity.Voice,
-                "Read responses out loud", settings.NodeTtsEnabled),
-            Toggle("Speech-to-text (STT)", TrayMenuIconIdentity.Speech,
-                "Dictate input by speaking", settings.NodeSttEnabled),
-            Toggle("Ollama", TrayMenuIconIdentity.Ollama,
-                "Let agents use Ollama models installed separately on this PC", settings.NodeOllamaInferenceEnabled),
+            Header(L10n.GetString("TrayMenu_Permissions")),
+            Toggle(L10n.GetString("TrayMenu_PermNode"), TrayMenuIconIdentity.System,
+                L10n.GetString("TrayMenu_PermNodeDescription"), settings.EnableNodeMode),
+            Toggle(L10n.GetString("TrayMenu_PermSystem"), TrayMenuIconIdentity.Terminal,
+                L10n.GetString("TrayMenu_PermSystemDescription"), settings.NodeSystemRunEnabled),
+            Toggle(L10n.GetString("TrayMenu_PermBrowser"), TrayMenuIconIdentity.Browser,
+                L10n.GetString("TrayMenu_PermBrowserDescription"), settings.NodeBrowserProxyEnabled),
+            Toggle(L10n.GetString("TrayMenu_PermCamera"), TrayMenuIconIdentity.Camera,
+                L10n.GetString("TrayMenu_PermCameraDescription"), settings.NodeCameraEnabled),
+            Toggle(L10n.GetString("TrayMenu_PermCanvas"), TrayMenuIconIdentity.Canvas,
+                L10n.GetString("TrayMenu_PermCanvasDescription"), settings.NodeCanvasEnabled),
+            Toggle(L10n.GetString("TrayMenu_PermScreen"), TrayMenuIconIdentity.Screen,
+                L10n.GetString("TrayMenu_PermScreenDescription"), settings.NodeScreenEnabled),
+            Toggle(L10n.GetString("TrayMenu_PermLocation"), TrayMenuIconIdentity.Location,
+                L10n.GetString("TrayMenu_PermLocationDescription"), settings.NodeLocationEnabled),
+            Toggle(L10n.GetString("TrayMenu_PermTts"), TrayMenuIconIdentity.Voice,
+                L10n.GetString("TrayMenu_PermTtsDescription"), settings.NodeTtsEnabled),
+            Toggle(L10n.GetString("TrayMenu_PermStt"), TrayMenuIconIdentity.Speech,
+                L10n.GetString("TrayMenu_PermSttDescription"), settings.NodeSttEnabled),
+            Toggle(L10n.GetString("TrayMenu_PermOllama"), TrayMenuIconIdentity.Ollama,
+                L10n.GetString("TrayMenu_PermOllamaDescription"), settings.NodeOllamaInferenceEnabled),
             Spacer(),
         ],
     };

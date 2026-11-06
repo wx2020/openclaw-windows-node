@@ -27,6 +27,15 @@ public class LocalizationValidationTests
 
     private static readonly HashSet<string> InvariantOrDeferredResourceKeys = new(StringComparer.Ordinal)
     {
+        // Symbol-only or brand-only values that read identically in every locale.
+        "Common_ParenthesizedCountFormat",
+        "ConfigPage_FolderLabelFormat",
+        "ConnectionPage_AuthModeBulletFormat",
+        "ConnectionPage_LastConnectedBulletFormat",
+        "ConnectionPage_WslBullet",
+        "CronPage_JobCountFormat",
+        "InstancesPage_NodeStatusFormat",
+        "TrayMenu_PermOllama",
         // Updater dependency recovery is seeded in English across every locale.
         // Translate the explanation and manual-release action together after review.
         "Update_Message_Unavailable",

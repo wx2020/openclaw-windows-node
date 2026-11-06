@@ -31,16 +31,16 @@ public sealed class PermissionSettingsWriterRoutingTests
 
         AssertInOrder(
             buildPermissionsFlyout,
-            "\"Windows node\"",
-            "\"System tools\"",
-            "\"Browser control\"",
-            "\"Camera\"",
-            "\"Canvas\"",
-            "\"Screen capture\"",
-            "\"Location\"",
-            "\"Voice (TTS)\"",
-            "\"Speech-to-text (STT)\"",
-            "\"Ollama\"");
+            "\"TrayMenu_PermNode\"",
+            "\"TrayMenu_PermSystem\"",
+            "\"TrayMenu_PermBrowser\"",
+            "\"TrayMenu_PermCamera\"",
+            "\"TrayMenu_PermCanvas\"",
+            "\"TrayMenu_PermScreen\"",
+            "\"TrayMenu_PermLocation\"",
+            "\"TrayMenu_PermTts\"",
+            "\"TrayMenu_PermStt\"",
+            "\"TrayMenu_PermOllama\"");
 
         Assert.Contains("ActionId = $\"perm-toggle|{text}\"", source);
         Assert.DoesNotContain("SettingsManager", source);

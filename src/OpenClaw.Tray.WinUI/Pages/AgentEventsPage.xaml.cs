@@ -179,7 +179,7 @@ public sealed partial class AgentEventsPage : Page
         EventsList.ItemsSource = list;
         EventsList.Visibility = list.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
         EmptyState.Visibility = list.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-        CountText.Text = $"({_allEvents.Count})";
+        CountText.Text = LocalizationHelper.Format("Common_ParenthesizedCountFormat", _allEvents.Count);
         StatusText.Text = string.Format(LocalizationHelper.GetString("AgentEventsPage_EventsStatus"), list.Count, _allEvents.Count);
     }
 

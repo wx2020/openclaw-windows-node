@@ -303,7 +303,7 @@ public sealed partial class ConfigPage : Page
                 var label = "Full config";
                 if (dirtyCount > 0) label += $" • {dirtyCount} changed";
                 if (invalidCount > 0) label += $" • {invalidCount} issue{(invalidCount == 1 ? "" : "s")}";
-                rootNode.Content = $"📁 {label}";
+                rootNode.Content = LocalizationHelper.Format("ConfigPage_FolderLabelFormat", label);
                 _nodeMap[rootNode] = ("", rootElement);
                 ConfigTree.RootNodes.Add(rootNode);
             }
@@ -347,7 +347,7 @@ public sealed partial class ConfigPage : Page
             if (dirtyCount > 0) label += $" • {dirtyCount} changed";
             if (invalidCount > 0) label += $" • {invalidCount} issue{(invalidCount == 1 ? "" : "s")}";
 
-            node.Content = $"📁 {label}";
+            node.Content = LocalizationHelper.Format("ConfigPage_FolderLabelFormat", label);
             node.IsExpanded = !string.IsNullOrWhiteSpace(_searchText) && (selfMatches || childVisible);
             _nodeMap[node] = (path, configValue ?? s_emptyObject);
             parent.Add(node);
@@ -405,7 +405,7 @@ public sealed partial class ConfigPage : Page
             {
                 DetailPanel.Children.Add(new TextBlock
                 {
-                    Text = "Select a child section to edit fields. The full root config is available in the JSON preview.",
+                    Text = LocalizationHelper.GetString("ConfigPage_SelectChildSectionHint"),
                     Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"],
                     TextWrapping = TextWrapping.Wrap
                 });
@@ -437,7 +437,7 @@ public sealed partial class ConfigPage : Page
 
         DetailPanel.Children.Add(new TextBlock
         {
-            Text = "This section is shown in the JSON preview because the schema shape is not editable in the form yet.",
+            Text = LocalizationHelper.GetString("ConfigPage_SchemaPreviewOnlyHint"),
             Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"],
             TextWrapping = TextWrapping.Wrap
         });
@@ -751,7 +751,7 @@ public sealed partial class ConfigPage : Page
         var previewSnapshot = GetPreviewSnapshot();
         if (!previewSnapshot.HasRoot)
         {
-            SelectedJsonCaption.Text = "Select a section to preview its JSON.";
+            SelectedJsonCaption.Text = LocalizationHelper.GetString("ConfigPage_SelectSectionHint");
             RenderJsonDiff("{}", "{}");
             return;
         }
@@ -798,7 +798,7 @@ public sealed partial class ConfigPage : Page
         catch (Exception ex)
         {
             Logger.Warn($"[ConfigPage] Failed to build selected JSON preview: {ex.Message}");
-            SelectedJsonCaption.Text = "Selected section JSON preview is unavailable.";
+            SelectedJsonCaption.Text = LocalizationHelper.GetString("ConfigPage_PreviewUnavailable");
             RenderJsonDiff(gatewayElement.GetRawText(), proposedElement.GetRawText());
         }
     }
@@ -1221,14 +1221,14 @@ public sealed partial class ConfigPage : Page
         _showSchemaFallback = true;
         ConfigTree.RootNodes.Clear();
         DetailPanel.Children.Clear();
-        DetailPlaceholder.Text = "Config cannot be loaded because this operator token does not have read permission.";
+        DetailPlaceholder.Text = LocalizationHelper.GetString("ConfigPage_NoReadPermission");
         DetailPlaceholder.Visibility = Visibility.Visible;
         DetailBreadcrumb.Text = "";
-        DetailPath.Text = "Config unavailable";
-        DetailType.Text = "Missing operator.read permission";
+        DetailPath.Text = LocalizationHelper.GetString("ConfigPage_UnavailableTitle");
+        DetailType.Text = LocalizationHelper.GetString("ConfigPage_MissingReadPermissionTitle");
         ResetSectionButton.Visibility = Visibility.Collapsed;
         RenderJsonDiff("{}", "{}");
-        SelectedJsonCaption.Text = "Config preview is unavailable without read permission.";
+        SelectedJsonCaption.Text = LocalizationHelper.GetString("ConfigPage_PreviewUnavailableNoPermission");
         ApplyPaneVisibility();
     }
 
@@ -1366,7 +1366,7 @@ public sealed partial class ConfigPage : Page
     {
         var renderVersion = ++_detailRenderVersion;
         DetailPath.Text = string.IsNullOrEmpty(path) ? "Full config" : path;
-        DetailType.Text = "Loading section...";
+        DetailType.Text = LocalizationHelper.GetString("ConfigPage_LoadingSection");
         ResetSectionButton.Visibility = Visibility.Collapsed;
         DetailLoadingText.Text = string.IsNullOrEmpty(path)
             ? LocalizationHelper.GetString("ConfigPage_LoadingFullConfigPreview")

@@ -423,28 +423,24 @@ public sealed partial class SettingsPage : Page
         var dialogContent = new StackPanel { Spacing = 8 };
         dialogContent.Children.Add(new TextBlock
         {
-            Text = "This will permanently remove the following:",
+            Text = LocalizationHelper.GetString("SettingsPage_RemoveGatewayIntro"),
             TextWrapping = TextWrapping.Wrap
         });
         dialogContent.Children.Add(new TextBlock
         {
-            Text = $"• WSL distro: {AppIdentity.SetupDistroName} (and its disk image)\n" +
-                   "• Autostart registry entry\n" +
-                   "• Gateway credentials (token and bootstrap token cleared)\n" +
-                   "• Setup state (onboarding will reset)",
+            Text = LocalizationHelper.Format("SettingsPage_RemoveItemsFormat", AppIdentity.SetupDistroName),
             TextWrapping = TextWrapping.Wrap,
             Opacity = 0.7
         });
         dialogContent.Children.Add(new TextBlock
         {
-            Text = "Preserved: Your MCP token and root device key are NOT deleted.\n" +
-                   "Removed: Local gateway identity credentials and registry records.",
+            Text = LocalizationHelper.GetString("SettingsPage_RemovePreservedItems"),
             TextWrapping = TextWrapping.Wrap,
             Opacity = 0.7
         });
         dialogContent.Children.Add(new TextBlock
         {
-            Text = "This cannot be undone.",
+            Text = LocalizationHelper.GetString("SettingsPage_RemoveCannotUndo"),
             TextWrapping = TextWrapping.Wrap,
             Margin = new Microsoft.UI.Xaml.Thickness(0, 4, 0, 0),
             Opacity = 0.7
@@ -452,10 +448,10 @@ public sealed partial class SettingsPage : Page
 
         var dialog = new ContentDialog
         {
-            Title = "Remove Local Gateway?",
+            Title = LocalizationHelper.GetString("SettingsPage_RemoveGatewayTitle"),
             Content = dialogContent,
-            PrimaryButtonText = "Remove Local Gateway",
-            CloseButtonText = "Cancel",
+            PrimaryButtonText = LocalizationHelper.GetString("SettingsPage_RemoveGatewayPrimary"),
+            CloseButtonText = LocalizationHelper.GetString("Common_Cancel"),
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = XamlRoot
         };

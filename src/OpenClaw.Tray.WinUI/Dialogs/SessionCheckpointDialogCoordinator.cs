@@ -117,7 +117,7 @@ internal sealed class SessionCheckpointDialogCoordinator
             isMainState);
         var dialog = new ContentDialog
         {
-            Title = $"Checkpoints: {name}",
+            Title = LocalizationHelper.Format("SessionCheckpoint_TitleFormat", name),
             Content = body,
             PrimaryButtonText = branchTarget is not null
                 ? (restoreTarget is not null ? "Branch from latest" : "Branch from latest targetable")
@@ -147,7 +147,7 @@ internal sealed class SessionCheckpointDialogCoordinator
         {
             body.Children.Add(new TextBlock
             {
-                Text = "No compaction checkpoints yet. Compacting this session creates one you can branch from or restore to.",
+                Text = LocalizationHelper.GetString("SessionCheckpoint_Empty"),
                 TextWrapping = TextWrapping.Wrap,
             });
             return body;

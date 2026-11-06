@@ -8241,4 +8241,243 @@ Ga na inschrijving terug naar Instellingen &gt; Windows Update en controleer op 
   <data name="ChannelsPage_BannerSavedNotRunningMessage" xml:space="preserve"><value>The gateway accepted the settings but didn't start the channel. Expand the channel below: the Status section and the diagnostic disclosure will show why.</value></data>
   <data name="ChannelsPage_BannerRunningTitleFormat" xml:space="preserve"><value>{0} is running</value></data>
   <data name="ChannelsPage_BannerRunningMessage" xml:space="preserve"><value>Configuration saved and the channel is up.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Copy</value></data>
+  <data name="Common_Copied" xml:space="preserve"><value>Copied</value></data>
+  <data name="Common_CopyFailed" xml:space="preserve"><value>Copy failed</value></data>
+  <data name="Common_NotConnected" xml:space="preserve"><value>Not connected</value></data>
+  <data name="Common_Refresh" xml:space="preserve"><value>Refresh</value></data>
+  <data name="Common_Refreshing" xml:space="preserve"><value>Refreshing...</value></data>
+  <data name="Common_NotFound" xml:space="preserve"><value>Not found</value></data>
+  <data name="Common_Close" xml:space="preserve"><value>Close</value></data>
+  <data name="Common_Continue" xml:space="preserve"><value>Continue</value></data>
+  <data name="Common_Record" xml:space="preserve"><value>Record</value></data>
+  <data name="Common_Stop" xml:space="preserve"><value>Stop</value></data>
+  <data name="Common_Recording" xml:space="preserve"><value>Recording</value></data>
+  <data name="Common_AllAgents" xml:space="preserve"><value>All Agents</value></data>
+  <data name="Common_ErrorFormat" xml:space="preserve"><value>Error: {0}</value></data>
+  <data name="App_DeepLinkTitle" xml:space="preserve"><value>Confirm OpenClaw action</value></data>
+  <data name="App_DeepLinkBodyFormat" xml:space="preserve"><value>A deep link wants to {0}.</value></data>
+  <data name="SchemaConfigEditor_DefaultValueFormat" xml:space="preserve"><value>Default: {0}</value></data>
+  <data name="SchemaConfigEditor_ComplexArrayHint" xml:space="preserve"><value>This array uses complex items. Edit its JSON below; local validation will run before Save is enabled.</value></data>
+  <data name="SchemaConfigEditor_ObjectHint" xml:space="preserve"><value>Enter a JSON object, e.g. {"key": "value"}. Changes are validated before Save is enabled.</value></data>
+  <data name="SessionCheckpoint_TitleFormat" xml:space="preserve"><value>Checkpoints: {0}</value></data>
+  <data name="SessionCheckpoint_Empty" xml:space="preserve"><value>No compaction checkpoints yet. Compacting this session creates one you can branch from or restore to.</value></data>
+  <data name="ChannelsPage_RefreshFailedTitle" xml:space="preserve"><value>Couldn't refresh channels</value></data>
+  <data name="ChannelsPage_SectionLinking" xml:space="preserve"><value>LINKING</value></data>
+  <data name="ChannelsPage_LinkHint" xml:space="preserve"><value>Click "Show QR" to start linking your phone to this device.</value></data>
+  <data name="ChannelsPage_WhyNotWorking" xml:space="preserve"><value>Why isn't this working?</value></data>
+  <data name="ChannelsPage_ShowQr" xml:space="preserve"><value>Show QR</value></data>
+  <data name="ChannelsPage_Relink" xml:space="preserve"><value>Relink</value></data>
+  <data name="ChannelsPage_ProviderMissingFormat" xml:space="preserve"><value>Your gateway can't start {0} QR linking yet. It doesn't have the {0} web-login provider loaded. Web/QR linking runs on the machine that hosts your gateway, so this is fixed there, not in the tray.</value></data>
+  <data name="ChannelsPage_ProviderMissingAction" xml:space="preserve"><value>After installing the provider on your gateway host, come back and click Show QR again.</value></data>
+  <data name="ChannelsPage_WebLoginUnsupportedFormat" xml:space="preserve"><value>This gateway version doesn't support QR linking for {0} yet. QR/web linking runs on the machine that hosts your gateway: update your gateway to a version that supports web login, then come back and click Show QR again.</value></data>
+  <data name="ChannelsPage_NotConnectedHint" xml:space="preserve"><value>Not connected to a gateway. Open Connection settings to connect first.</value></data>
+  <data name="ChannelsPage_RequestingQr" xml:space="preserve"><value>Requesting QR code from the gateway…</value></data>
+  <data name="ChannelsPage_LinkFailedNotConnectedFormat" xml:space="preserve"><value>Couldn't link {0}. Not connected to the gateway.</value></data>
+  <data name="ChannelsPage_LinkFailedGatewayErrorFormat" xml:space="preserve"><value>Couldn't link {0}. The gateway returned an error: see details below.</value></data>
+  <data name="ChannelsPage_LinkWaiting" xml:space="preserve"><value>Still waiting: click Show QR again if the code has expired.</value></data>
+  <data name="ChannelsPage_LinkWaitFailedFormat" xml:space="preserve"><value>Link wait failed for {0}. See details below.</value></data>
+  <data name="ChannelsPage_QrMalformed" xml:space="preserve"><value>QR decode failed: malformed data URL from gateway.</value></data>
+  <data name="ChannelsPage_QrInvalidBase64" xml:space="preserve"><value>QR decode failed: invalid base64 from gateway.</value></data>
+  <data name="ChannelsPage_QrDecodeFailedFormat" xml:space="preserve"><value>QR decode failed: {0}</value></data>
+  <data name="ChannelsPage_PluginInstallHintFormat" xml:space="preserve"><value>Channel plugins are loaded by the gateway, not the tray: so installs happen on the machine that hosts your gateway. If {0} isn't coming up after Save, the plugin may not be installed yet.</value></data>
+  <data name="ChannelsPage_PluginInstallAction" xml:space="preserve"><value>Run this command on the machine that hosts your gateway. After it finishes, come back and click Refresh.</value></data>
+  <data name="ChannelsPage_PluginInstallDocs" xml:space="preserve"><value>Plugin install docs →</value></data>
+  <data name="ChatPage_AccessibilitySessionTitle" xml:space="preserve"><value>Accessibility session</value></data>
+  <data name="ChatPage_RouteTargetFormat" xml:space="preserve"><value>Route target: {0}</value></data>
+  <data name="ConfigPage_FolderLabelFormat" xml:space="preserve"><value>📁 {0}</value></data>
+  <data name="ConfigPage_SelectChildSectionHint" xml:space="preserve"><value>Select a child section to edit fields. The full root config is available in the JSON preview.</value></data>
+  <data name="ConfigPage_SchemaPreviewOnlyHint" xml:space="preserve"><value>This section is shown in the JSON preview because the schema shape is not editable in the form yet.</value></data>
+  <data name="ConfigPage_SelectSectionHint" xml:space="preserve"><value>Select a section to preview its JSON.</value></data>
+  <data name="ConfigPage_PreviewUnavailable" xml:space="preserve"><value>Selected section JSON preview is unavailable.</value></data>
+  <data name="ConfigPage_NoReadPermission" xml:space="preserve"><value>Config cannot be loaded because this operator token does not have read permission.</value></data>
+  <data name="ConfigPage_UnavailableTitle" xml:space="preserve"><value>Config unavailable</value></data>
+  <data name="ConfigPage_MissingReadPermissionTitle" xml:space="preserve"><value>Missing operator.read permission</value></data>
+  <data name="ConfigPage_PreviewUnavailableNoPermission" xml:space="preserve"><value>Config preview is unavailable without read permission.</value></data>
+  <data name="ConfigPage_LoadingSection" xml:space="preserve"><value>Loading section...</value></data>
+  <data name="ConnectionPage_AuthModeBulletFormat" xml:space="preserve"><value>• {0}</value></data>
+  <data name="ConnectionPage_WslBullet" xml:space="preserve"><value>• WSL</value></data>
+  <data name="ConnectionPage_LastConnectedBulletFormat" xml:space="preserve"><value>• {0}</value></data>
+  <data name="ConnectionPage_TestFailedHint" xml:space="preserve"><value>Unable to test gateway connection. Check the URL and try again.</value></data>
+  <data name="CronPage_JobCountFormat" xml:space="preserve"><value>({0})</value></data>
+  <data name="DebugPage_NoLogFile" xml:space="preserve"><value>No log file found.</value></data>
+  <data name="DebugPage_LogReadFailedFormat" xml:space="preserve"><value>Failed to read log: {0}</value></data>
+  <data name="DebugPage_NoDeviceKeyFile" xml:space="preserve"><value>No device key file</value></data>
+  <data name="InstancesPage_NodeStatusFormat" xml:space="preserve"><value>· {0}</value></data>
+  <data name="SettingsPage_RemoveGatewayIntro" xml:space="preserve"><value>This will permanently remove the following:</value></data>
+  <data name="SettingsPage_RemoveWslDistroFormat" xml:space="preserve"><value>• WSL distro: {0} (and its disk image)</value></data>
+  <data name="SettingsPage_RemovePreservedNote" xml:space="preserve"><value>Preserved: Your MCP token and root device key are NOT deleted.</value></data>
+  <data name="SettingsPage_RemoveCannotUndo" xml:space="preserve"><value>This cannot be undone.</value></data>
+  <data name="SettingsPage_RemoveGatewayTitle" xml:space="preserve"><value>Remove Local Gateway?</value></data>
+  <data name="ConnectionStatus_ServicesUnavailable" xml:space="preserve"><value>Gateway connection services are unavailable.</value></data>
+  <data name="VoiceOverlay_TestTitle" xml:space="preserve"><value>Test Voice Input</value></data>
+  <data name="WindowManager_LocalAiAttentionTitle" xml:space="preserve"><value>Local AI setup needs attention</value></data>
+  <data name="WindowManager_LocalAiAttentionRepairMessage" xml:space="preserve"><value>Reconnect the original native Gateway, stop Local AI and release its Gateway ownership before repairing it for WSL.</value></data>
+  <data name="WindowManager_LocalAiAttentionIdentifyMessage" xml:space="preserve"><value>OpenClaw could not safely identify the managed WSL gateway. Review Connection settings before retrying setup.</value></data>
+  <data name="Setup_AllSetTitle" xml:space="preserve"><value>All set!</value></data>
+  <data name="Setup_ReadySubtitle" xml:space="preserve"><value>OpenClaw is ready to go</value></data>
+  <data name="Setup_ReadyWithLocalAi" xml:space="preserve"><value>OpenClaw and Local AI are ready</value></data>
+  <data name="Setup_OpenChat" xml:space="preserve"><value>Open chat</value></data>
+  <data name="Setup_RestartRequiredTitle" xml:space="preserve"><value>Restart required</value></data>
+  <data name="Setup_RestartPrompt" xml:space="preserve"><value>OpenClaw needs to restart Windows to continue the installation. Would you like to restart now?</value></data>
+  <data name="Setup_SetupFailedTitle" xml:space="preserve"><value>Setup failed</value></data>
+  <data name="Setup_ViewFullLogFormat" xml:space="preserve"><value>View full log → {0}</value></data>
+  <data name="Setup_OpenLocalAiLogsFormat" xml:space="preserve"><value>Open Local AI logs → {0}</value></data>
+  <data name="Setup_WindowsRestarting" xml:space="preserve"><value>Windows is restarting...</value></data>
+  <data name="Setup_RestartFailedFormat" xml:space="preserve"><value>Windows could not be restarted: {0}</value></data>
+  <data name="Setup_AnotherTaskActive" xml:space="preserve"><value>Another setup task is still active. Wait for it to finish, then start OpenClaw onboard.</value></data>
+  <data name="Setup_WizardProblemTitle" xml:space="preserve"><value>OpenClaw onboard hit a problem</value></data>
+  <data name="Setup_WizardQuestionsSubtitle" xml:space="preserve"><value>A few quick questions to connect your agent</value></data>
+  <data name="Setup_WizardDefaultAiModel" xml:space="preserve"><value>Default AI model</value></data>
+  <data name="Setup_WizardMore" xml:space="preserve"><value>More ▾</value></data>
+  <data name="Setup_WizardRestartedVerifying" xml:space="preserve"><value>Gateway restarted; verifying endpoint ownership...</value></data>
+  <data name="Setup_WizardNeedsAttentionTitle" xml:space="preserve"><value>Wizard needs attention</value></data>
+  <data name="Setup_WizardStartAgain" xml:space="preserve"><value>Start wizard again</value></data>
+  <data name="Setup_WizardTerminalOpenedNative" xml:space="preserve"><value>Opened this native profile's terminal. After approving pairing, choose Retry. After changing configuration, choose Restart gateway.</value></data>
+  <data name="Setup_WizardTerminalOpenedDistroFormat" xml:space="preserve"><value>Opened a terminal in {0}. Install the tool, then choose Restart gateway.</value></data>
+  <data name="Setup_WizardTerminalOpenFailedFormat" xml:space="preserve"><value>Couldn't open a terminal: {0}</value></data>
+  <data name="TrayMenu_PairingPendingFormat" xml:space="preserve"><value>Pairing approval pending ({0})</value></data>
+  <data name="TrayMenu_Gateway" xml:space="preserve"><value>Gateway</value></data>
+  <data name="TrayMenu_GatewayAutomationFormat" xml:space="preserve"><value>Gateway {0}. Activate to open connection settings.</value></data>
+  <data name="TrayMenu_Sessions" xml:space="preserve"><value>Sessions</value></data>
+  <data name="TrayMenu_SessionsHeaderFormat" xml:space="preserve"><value>Sessions ({0})</value></data>
+  <data name="TrayMenu_SessionsDetailFormat" xml:space="preserve"><value>{0} working · {1} tokens</value></data>
+  <data name="TrayMenu_SessionsAutomationFormat" xml:space="preserve"><value>Sessions. {0} working. {1} tokens.</value></data>
+  <data name="TrayMenu_Usage" xml:space="preserve"><value>Usage</value></data>
+  <data name="TrayMenu_UsageAutomationFormat" xml:space="preserve"><value>Usage. {0}.</value></data>
+  <data name="TrayMenu_UsageNoData" xml:space="preserve"><value>no data</value></data>
+  <data name="TrayMenu_UsageNoDataYet" xml:space="preserve"><value>No usage data yet</value></data>
+  <data name="TrayMenu_UsageProviders" xml:space="preserve"><value>Providers</value></data>
+  <data name="TrayMenu_UsageByModel" xml:space="preserve"><value>By Model</value></data>
+  <data name="TrayMenu_UsageTokensFormat" xml:space="preserve"><value>{0} tokens</value></data>
+  <data name="TrayMenu_UsageInOutFormat" xml:space="preserve"><value>in {0} · out {1}</value></data>
+  <data name="TrayMenu_UsageRequestsFormat" xml:space="preserve"><value>{0} requests</value></data>
+  <data name="TrayMenu_CapabilitiesFormat" xml:space="preserve"><value>Capabilities ({0}) · Commands ({1})</value></data>
+  <data name="TrayMenu_Permissions" xml:space="preserve"><value>Permissions</value></data>
+  <data name="TrayMenu_PermissionsAutomation" xml:space="preserve"><value>Permissions submenu</value></data>
+  <data name="TrayMenu_SessionUnknown" xml:space="preserve"><value>unknown</value></data>
+  <data name="TrayMenu_PermNode" xml:space="preserve"><value>Windows node</value></data>
+  <data name="TrayMenu_PermNodeDescription" xml:space="preserve"><value>Run OpenClaw as a local node on this PC</value></data>
+  <data name="TrayMenu_PermSystem" xml:space="preserve"><value>System tools</value></data>
+  <data name="TrayMenu_PermSystemDescription" xml:space="preserve"><value>Let agents run shell commands and scripts on this PC</value></data>
+  <data name="TrayMenu_PermBrowser" xml:space="preserve"><value>Browser control</value></data>
+  <data name="TrayMenu_PermBrowserDescription" xml:space="preserve"><value>Let agents drive web browsers via proxy</value></data>
+  <data name="TrayMenu_PermCamera" xml:space="preserve"><value>Camera</value></data>
+  <data name="TrayMenu_PermCameraDescription" xml:space="preserve"><value>Allow webcam capture during sessions</value></data>
+  <data name="TrayMenu_PermCanvas" xml:space="preserve"><value>Canvas</value></data>
+  <data name="TrayMenu_PermCanvasDescription" xml:space="preserve"><value>Render generated HTML canvases in chat</value></data>
+  <data name="TrayMenu_PermScreen" xml:space="preserve"><value>Screen capture</value></data>
+  <data name="TrayMenu_PermScreenDescription" xml:space="preserve"><value>Share what's on your screen with the agent</value></data>
+  <data name="TrayMenu_PermLocation" xml:space="preserve"><value>Location</value></data>
+  <data name="TrayMenu_PermLocationDescription" xml:space="preserve"><value>Share this device's location</value></data>
+  <data name="TrayMenu_PermTts" xml:space="preserve"><value>Voice (TTS)</value></data>
+  <data name="TrayMenu_PermTtsDescription" xml:space="preserve"><value>Read responses out loud</value></data>
+  <data name="TrayMenu_PermStt" xml:space="preserve"><value>Speech-to-text (STT)</value></data>
+  <data name="TrayMenu_PermSttDescription" xml:space="preserve"><value>Dictate input by speaking</value></data>
+  <data name="TrayMenu_PermOllama" xml:space="preserve"><value>Ollama</value></data>
+  <data name="TrayMenu_PermOllamaDescription" xml:space="preserve"><value>Let agents use Ollama models installed separately on this PC</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Common_ParenthesizedCountFormat" xml:space="preserve"><value>({0})</value></data>
+  <data name="CommandCenter_LocalMcpFailedTitle" xml:space="preserve"><value>Local MCP failed</value></data>
+  <data name="CommandCenter_LocalMcpOnlyTitle" xml:space="preserve"><value>Local MCP only</value></data>
+  <data name="CommandCenter_ConnectionDegradedTitle" xml:space="preserve"><value>Connection degraded</value></data>
+  <data name="CommandCenter_PairingRequiredTitle" xml:space="preserve"><value>Pairing required</value></data>
+  <data name="SettingsPage_RemoveItemsFormat" xml:space="preserve"><value>• WSL distro: {0} (and its disk image)
+• Autostart registry entry
+• Gateway credentials (token and bootstrap token cleared)
+• Setup state (onboarding will reset)</value></data>
+  <data name="SettingsPage_RemovePreservedItems" xml:space="preserve"><value>Preserved: Your MCP token and root device key are NOT deleted.
+Removed: Local gateway identity credentials and registry records.</value></data>
+  <data name="SettingsPage_RemoveGatewayPrimary" xml:space="preserve"><value>Remove Local Gateway</value></data>
+  <data name="Common_Reconnect" xml:space="preserve"><value>Reconnect</value></data>
+  <data name="Common_TextFile" xml:space="preserve"><value>Text file</value></data>
+  <data name="ConnectionPlan_NoGatewayHeadline" xml:space="preserve"><value>No gateway yet</value></data>
+  <data name="ConnectionPlan_NoGatewaySub" xml:space="preserve"><value>Add a gateway to get started.</value></data>
+  <data name="ConnectionPlan_PickGatewaySub" xml:space="preserve"><value>Pick a gateway below, or add a new one.</value></data>
+  <data name="ConnectionPlan_ReachingGateway" xml:space="preserve"><value>Reaching gateway</value></data>
+  <data name="ConnectionPlan_NodePairingRejected" xml:space="preserve"><value>Node pairing was rejected.</value></data>
+  <data name="ConnectionPlan_NodeRateLimited" xml:space="preserve"><value>Node is rate-limited by the gateway.</value></data>
+  <data name="ConnectionPlan_NodeError" xml:space="preserve"><value>Node reported an error.</value></data>
+  <data name="ConnectionPlan_NodeNotConnected" xml:space="preserve"><value>Node mode is enabled, but the node has not connected.</value></data>
+  <data name="ConnectionPlan_ConnectionImpaired" xml:space="preserve"><value>Connection is impaired.</value></data>
+  <data name="ConnectionPlan_ConnectionDegraded" xml:space="preserve"><value>Connection degraded</value></data>
+  <data name="ConnectionPlan_RestartTunnel" xml:space="preserve"><value>Restart tunnel</value></data>
+  <data name="ConnectionPlan_AwaitingApproval" xml:space="preserve"><value>Awaiting approval</value></data>
+  <data name="ConnectionPlan_AwaitingApprovalSub" xml:space="preserve"><value>Approve this client on the gateway host. Connection will resume automatically.</value></data>
+  <data name="ConnectionPlan_RunOnGatewayHost" xml:space="preserve"><value>Run on the gateway host:</value></data>
+  <data name="ConnectionPlan_TailscaleUnavailable" xml:space="preserve"><value>Tailscale gateway unavailable</value></data>
+  <data name="ConnectionPlan_TailnetUnreachableFormat" xml:space="preserve"><value>Can't reach the private tailnet endpoint {0}.</value></data>
+  <data name="ConnectionPlan_PortConflict" xml:space="preserve"><value>Local gateway port conflict</value></data>
+  <data name="ConnectionPlan_PortConflictSub" xml:space="preserve"><value>Another process is using this managed gateway address. OpenClaw will not send gateway credentials to an unverified endpoint.</value></data>
+  <data name="ConnectionPlan_AuthFailed" xml:space="preserve"><value>Authentication failed</value></data>
+  <data name="ConnectionPlan_TokenInvalidFormat" xml:space="preserve"><value>Token for {0} is no longer valid.</value></data>
+  <data name="ConnectionPlan_RePairing" xml:space="preserve"><value>Device needs re-pairing</value></data>
+  <data name="ConnectionPlan_DeviceTokenUntrustedFormat" xml:space="preserve"><value>The saved device token for {0} is no longer trusted by the gateway.</value></data>
+  <data name="ConnectionPlan_NotEnoughAccess" xml:space="preserve"><value>Not enough access</value></data>
+  <data name="ConnectionPlan_MissingScopesFormat" xml:space="preserve"><value>This device is connected but lacks the scopes it needs on {0}.</value></data>
+  <data name="ConnectionPlan_SecureFailed" xml:space="preserve"><value>Secure connection failed</value></data>
+  <data name="ConnectionPlan_SecureFailedSub" xml:space="preserve"><value>The gateway's transport could not be secured.</value></data>
+  <data name="ConnectionPlan_TooManyAttempts" xml:space="preserve"><value>Too many failed attempts</value></data>
+  <data name="ConnectionPlan_TooManyAttemptsSub" xml:space="preserve"><value>The gateway is temporarily limiting connection attempts from this client.</value></data>
+  <data name="ConnectionPlan_CantReachGateway" xml:space="preserve"><value>Can't reach gateway</value></data>
+  <data name="ConnectionPlan_SshTunnelDown" xml:space="preserve"><value>SSH tunnel is down: </value></data>
+  <data name="ConnectionPlan_LastAttemptFailed" xml:space="preserve"><value> last attempt failed.</value></data>
+  <data name="ConnectionPlan_GatewayErrorSub" xml:space="preserve"><value>Gateway returned an error.</value></data>
+  <data name="ConnectionPlan_ConnectionRefused" xml:space="preserve"><value>Connection refused.</value></data>
+  <data name="ConnectionPlan_ConnectionRefusedAtFormat" xml:space="preserve"><value>Connection refused at {0}.</value></data>
+  <data name="ConnectionPlan_ViaSshTunnel" xml:space="preserve"><value>via SSH tunnel</value></data>
+  <data name="ConnectionPlan_CredentialNodeDeviceToken" xml:space="preserve"><value>paired via node device token</value></data>
+  <data name="ConnectionPlan_CredentialDeviceToken" xml:space="preserve"><value>paired via device token</value></data>
+  <data name="ConnectionPlan_CredentialSharedToken" xml:space="preserve"><value>shared token</value></data>
+  <data name="ConnectionPlan_CredentialBootstrapToken" xml:space="preserve"><value>bootstrap token</value></data>
+  <data name="ConnectionPlan_UpFormat" xml:space="preserve"><value>up {0}</value></data>
+  <data name="ConnectionPlan_UptimeDaysHoursFormat" xml:space="preserve"><value>{0}d {1}h</value></data>
+  <data name="ConnectionPlan_UptimeHoursMinutesFormat" xml:space="preserve"><value>{0}h {1}m</value></data>
+  <data name="ConnectionPlan_UptimeMinutesFormat" xml:space="preserve"><value>{0}m</value></data>
+  <data name="ConnectionPlan_UptimeSecondsFormat" xml:space="preserve"><value>{0}s</value></data>
+  <data name="CronPage_FormWaitLoading" xml:space="preserve"><value>Wait for the latest cron jobs to finish loading before saving changes.</value></data>
+  <data name="CronPage_FormNameRequired" xml:space="preserve"><value>Name is required.</value></data>
+  <data name="CronPage_FormPromptRequired" xml:space="preserve"><value>Prompt is required.</value></data>
+  <data name="CronPage_FormNotConnected" xml:space="preserve"><value>Not connected to gateway.</value></data>
+  <data name="CronPage_FormCronRequired" xml:space="preserve"><value>Cron expression is required.</value></data>
+  <data name="CronPage_FormIntervalInvalid" xml:space="preserve"><value>Enter a valid interval number.</value></data>
+  <data name="CronPage_FormDateRequired" xml:space="preserve"><value>Date is required for 'at' schedule.</value></data>
+  <data name="CronPage_FormTimeInvalid" xml:space="preserve"><value>Invalid time. Use format like '3:30 PM' or '15:30'.</value></data>
+  <data name="CronPage_FormFutureRequired" xml:space="preserve"><value>Scheduled time must be in the future.</value></data>
+  <data name="CronPage_Delivered" xml:space="preserve"><value>delivered</value></data>
+  <data name="CronPage_Overdue" xml:space="preserve"><value>overdue</value></data>
+  <data name="CronPage_NextInFormat" xml:space="preserve"><value>next in {0}</value></data>
+  <data name="Common_Connected" xml:space="preserve"><value>Connected</value></data>
+  <data name="Common_Retry" xml:space="preserve"><value>Retry</value></data>
+  <data name="ConnectionPlan_Disconnecting" xml:space="preserve"><value>Disconnecting…</value></data>
+  <data name="ConnectionPlan_Connecting" xml:space="preserve"><value>Connecting…</value></data>
+  <data name="Chat_Composer_Slash_Loading" xml:space="preserve"><value>Loading commands...</value></data>
+  <data name="CommandCenter_Detail_LocalMcpListening" xml:space="preserve"><value>Local MCP tools are listening on this PC without a gateway node connection.</value></data>
+  <data name="CommandCenter_Detail_OperatorRoleBlocked" xml:space="preserve"><value>The operator connection is available, but one required role is blocked.</value></data>
+  <data name="CommandCenter_Detail_ApprovePairing" xml:space="preserve"><value>Approve the pending operator or node pairing request to finish connecting.</value></data>
+  <data name="CommandCenter_Detail_NotConnected" xml:space="preserve"><value>The tray is not currently connected to the gateway.</value></data>
+  <data name="CommandCenter_Detail_NoChannelsReported" xml:space="preserve"><value>The gateway health payload did not report any channels.</value></data>
+  <data name="CommandCenter_Detail_NodeModeInventories" xml:space="preserve"><value>Node mode is connected. Channel/session inventories are filled from gateway health events when available.</value></data>
+  <data name="CommandCenter_Detail_ChannelsNotRunning" xml:space="preserve"><value>Channels are configured but none are reporting a running/ready state.</value></data>
+  <data name="CommandCenter_Detail_NoNodesReported" xml:space="preserve"><value>node.list did not report any connected nodes. Pair a Windows node or verify the operator token has node inventory access.</value></data>
+  <data name="CommandCenter_Detail_BrowserProxyHost" xml:space="preserve"><value>browser.proxy needs a compatible browser-control host listening on the gateway port + 2.</value></data>
+  <data name="Chat_Status_WaitingApproval" xml:space="preserve"><value>Waiting for approval</value></data>
+  <data name="Chat_Status_Working" xml:space="preserve"><value>Working</value></data>
+  <data name="Chat_Status_AgentError" xml:space="preserve"><value>Agent error</value></data>
+  <data name="Chat_Status_Compacting" xml:space="preserve"><value>Compacting context</value></data>
+  <data name="Chat_Status_RetryingAfterCompaction" xml:space="preserve"><value>Retrying after context compaction</value></data>
+  <data name="Chat_Status_RetryingRequest" xml:space="preserve"><value>Retrying the model request</value></data>
+  <data name="ConnectionPlan_CredentialFallbackFormat" xml:space="preserve"><value>{0} (fallback)</value></data>
+  <data name="ConnectionPlan_CredentialPairingRequiredFormat" xml:space="preserve"><value>{0} (pairing required)</value></data>
+  <data name="Common_Disconnected" xml:space="preserve"><value>Disconnected</value></data>
+  <data name="Common_ConnectionError" xml:space="preserve"><value>Connection error</value></data>
+  <data name="TraySummary_UpdatedFormat" xml:space="preserve"><value>Updated {0}</value></data>
+  <data name="TraySummary_NodeOneFormat" xml:space="preserve"><value>{0}/{1} node</value></data>
+  <data name="TraySummary_NodeFormat" xml:space="preserve"><value>{0}/{1} nodes</value></data>
+  <data name="TraySummary_SessionsOne" xml:space="preserve"><value>1 session</value></data>
+  <data name="TraySummary_OneWorkingFormat" xml:space="preserve"><value>1 session ({0} working)</value></data>
+  <data name="TraySummary_SessionsFormat" xml:space="preserve"><value>{0} sessions</value></data>
+  <data name="TraySummary_SessionsWorkingFormat" xml:space="preserve"><value>{0} sessions ({1} working)</value></data>
+  <data name="TrayMenu_Server" xml:space="preserve"><value>Server</value></data>
+  <data name="TrayMenu_PendingApproval" xml:space="preserve"><value>Pending approval</value></data>
 </root>

@@ -64,9 +64,36 @@ namespace OpenClawTray
 
 namespace OpenClawTray.Helpers
 {
+    /// <summary>
+    /// Test stand-in for the WinUI resource helper. Resolves en-us values from the
+    /// repository resource file so source-linked pages see the same copy the app ships,
+    /// without a WinRT dependency. Unknown keys fall back to the key itself.
+    /// </summary>
     public static class LocalizationHelper
     {
-        public static string GetString(string key) => key;
+        private static readonly System.Collections.Generic.Dictionary<string, string> s_en = Load();
+
+        public static string GetString(string key) =>
+            s_en.TryGetValue(key, out var value) ? value : key;
+
+        private static System.Collections.Generic.Dictionary<string, string> Load()
+        {
+            var map = new System.Collections.Generic.Dictionary<string, string>(StringComparer.Ordinal);
+            var dir = AppContext.BaseDirectory;
+            while (!string.IsNullOrEmpty(dir))
+            {
+                var candidate = Path.Combine(dir, "src", "OpenClaw.Tray.WinUI", "Strings", "en-us", "Resources.resw");
+                if (File.Exists(candidate))
+                {
+                    var doc = System.Xml.Linq.XDocument.Load(candidate);
+                    foreach (var data in doc.Root!.Elements("data"))
+                        map[(string?)data.Attribute("name") ?? ""] = data.Element("value")?.Value ?? "";
+                    break;
+                }
+                dir = Path.GetDirectoryName(dir);
+            }
+            return map;
+        }
     }
 }
 

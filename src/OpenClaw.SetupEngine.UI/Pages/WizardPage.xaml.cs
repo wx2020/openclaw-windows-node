@@ -92,15 +92,15 @@ public sealed partial class WizardPage : Page
 
         if (SetupPreview.RequestedPage == "wizard-error")
         {
-            TitleText.Text = "OpenClaw onboard hit a problem";
+            TitleText.Text = SetupLocalization.GetString("Setup_WizardProblemTitle");
             ShowError("The gateway restarted before the current wizard step finished. Your setup is still installed; choose Start wizard again, or use More options to restart onboard or skip and exit.");
             return;
         }
 
-        StatusText.Text = "A few quick questions to connect your agent";
+        StatusText.Text = SetupLocalization.GetString("Setup_WizardQuestionsSubtitle");
         _stepType = "select";
         _stepId = "model";
-        TitleText.Text = "Default AI model";
+        TitleText.Text = SetupLocalization.GetString("Setup_WizardDefaultAiModel");
         SelectOptions.Visibility = Visibility.Visible;
         foreach (var (val, lbl) in new[] { ("opus", "claude-opus-4.8"), ("sonnet", "claude-sonnet-4.6"), ("haiku", "claude-haiku-4.5") })
         {
@@ -111,7 +111,7 @@ public sealed partial class WizardPage : Page
             });
         }
         SelectOptions.SelectedIndex = 0;
-        PrimaryButton.Content = "Continue";
+        PrimaryButton.Content = SetupLocalization.GetString("Common_Continue");
         PrimaryButton.IsEnabled = true;
         SecondaryButton.Visibility = Visibility.Collapsed;
     }
@@ -480,7 +480,7 @@ public sealed partial class WizardPage : Page
             BusyRing.Visibility = Visibility.Collapsed;
             BusyRing.IsActive = false;
             ShowRecoveryActions();
-            StatusText.Text = "A few quick questions to connect your agent";
+            StatusText.Text = SetupLocalization.GetString("Setup_WizardQuestionsSubtitle");
             PrimaryButton.IsEnabled = !WizardSelection.RequiresAnswer(_stepType);
             SecondaryButton.IsEnabled = true;
             PrimaryButton.Content = _stepType == "confirm" ? "Yes" : "Continue";
@@ -532,7 +532,7 @@ public sealed partial class WizardPage : Page
         BusyRing.IsActive = true;
         StatusText.Text = string.IsNullOrWhiteSpace(message) ? "Working…" : "Setting things up…";
         PrimaryButton.IsEnabled = false;
-        PrimaryButton.Content = "Continue";
+        PrimaryButton.Content = SetupLocalization.GetString("Common_Continue");
         SecondaryButton.IsEnabled = false;
         SecondaryButton.Visibility = Visibility.Collapsed;
         ShowRecoveryActions();
@@ -586,7 +586,7 @@ public sealed partial class WizardPage : Page
             {
                 var moreButton = new Button
                 {
-                    Content = "More ▾",
+                    Content = SetupLocalization.GetString("Setup_WizardMore"),
                     MinWidth = 100,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     Background = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent),
@@ -978,7 +978,7 @@ public sealed partial class WizardPage : Page
                     _currentTitle,
                     _currentMessage))
             {
-                StatusText.Text = "Gateway restarted; verifying endpoint ownership...";
+                StatusText.Text = SetupLocalization.GetString("Setup_WizardRestartedVerifying");
                 var reconnected = await WaitForReconnectAsync(
                     connection.Client,
                     TimeSpan.FromSeconds(60));
@@ -1505,7 +1505,7 @@ public sealed partial class WizardPage : Page
             IsTextSelectionEnabled = true,
             VerticalAlignment = VerticalAlignment.Center
         };
-        var copy = new Button { Content = "Copy", Padding = new Thickness(8, 4, 8, 4) };
+        var copy = new Button { Content = SetupLocalization.GetString("Common_Copy"), Padding = new Thickness(8, 4, 8, 4) };
         copy.Click += (_, _) =>
         {
             var package = new DataPackage();
@@ -1538,10 +1538,10 @@ public sealed partial class WizardPage : Page
         _finalizationErrorState = false;
         BusyRing.Visibility = Visibility.Collapsed;
         BusyRing.IsActive = false;
-        StatusText.Text = "Wizard needs attention";
+        StatusText.Text = SetupLocalization.GetString("Setup_WizardNeedsAttentionTitle");
         ErrorText.Text = message;
         ErrorText.Visibility = Visibility.Visible;
-        PrimaryButton.Content = "Start wizard again";
+        PrimaryButton.Content = SetupLocalization.GetString("Setup_WizardStartAgain");
         PrimaryButton.IsEnabled = true;
         SecondaryButton.IsEnabled = false;
         SecondaryButton.Visibility = Visibility.Collapsed;
@@ -1601,11 +1601,11 @@ public sealed partial class WizardPage : Page
             try
             {
                 native.OpenRecoveryTerminal();
-                StatusText.Text = "Opened this native profile's terminal. After approving pairing, choose Retry. After changing configuration, choose Restart gateway.";
+                StatusText.Text = SetupLocalization.GetString("Setup_WizardTerminalOpenedNative");
             }
             catch (Exception ex)
             {
-                ErrorText.Text = $"Couldn't open a terminal: {ex.Message}";
+                ErrorText.Text = SetupLocalization.Format("Setup_WizardTerminalOpenFailedFormat", ex.Message);
                 ErrorText.Visibility = Visibility.Visible;
             }
             return;
@@ -1616,11 +1616,11 @@ public sealed partial class WizardPage : Page
         try
         {
             new GatewayTerminalLauncher(NullLogger.Instance).Open(_hostAccessPlan);
-            StatusText.Text = $"Opened a terminal in {_hostAccessPlan.DistroName}. Install the tool, then choose Restart gateway.";
+            StatusText.Text = SetupLocalization.Format("Setup_WizardTerminalOpenedDistroFormat", _hostAccessPlan.DistroName);
         }
         catch (Exception ex)
         {
-            ErrorText.Text = $"Couldn't open a terminal: {ex.Message}";
+            ErrorText.Text = SetupLocalization.Format("Setup_WizardTerminalOpenFailedFormat", ex.Message);
             ErrorText.Visibility = Visibility.Visible;
         }
     }

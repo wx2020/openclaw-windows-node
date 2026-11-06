@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:element name="root" ns1:IsDataSet="true">
@@ -6719,7 +6719,7 @@
     <value>任务已完成</value>
   </data>
   <data name="CronPage_JobCompletedRanSuccessfully" xml:space="preserve">
-    <value>"{0}" ran successfully and was removed.</value>
+    <value>"{0}" 已成功运行并被移除。</value>
   </data>
   <data name="CronPage_RunNotStarted" xml:space="preserve">
     <value>运行未启动</value>
@@ -8048,7 +8048,7 @@
   <data name="SandboxPage_ApplyPreset" xml:space="preserve"><value>应用预设</value></data>
   <data name="SandboxPage_PresetStrict.Text" xml:space="preserve"><value>严格</value></data>
   <data name="SandboxPage_PresetBalanced.Text" xml:space="preserve"><value>平衡</value></data>
-  <data name="SandboxPage_Title.Text" xml:space="preserve"><value>节点沙箱</value></data>
+  <data name="SandboxPage_Title.Text" xml:space="preserve"><value>Node Sandbox</value></data>
   <data name="SandboxPage_ResolvedFolders.Header" xml:space="preserve"><value>包含的文件夹</value></data>
   <data name="SandboxPage_FileAccessReadOnly" xml:space="preserve"><value>可以读取您的用户配置文件目录和个人文件夹，包括重定向文件夹。下方的附加权限也可能允许更改。受保护的文件夹仍被阻止。</value></data>
   <data name="SandboxPage_FileAccessReadWrite" xml:space="preserve"><value>程序可以读取和更改您的用户配置文件目录和个人文件夹中的文件，包括重定向文件夹。受保护的文件夹仍被阻止。</value></data>
@@ -8240,4 +8240,243 @@
   <data name="ChannelsPage_BannerSavedNotRunningMessage" xml:space="preserve"><value>网关已接受设置，但未启动该通道。请展开下方通道：状态区域和诊断详情会说明原因。</value></data>
   <data name="ChannelsPage_BannerRunningTitleFormat" xml:space="preserve"><value>{0} 正在运行</value></data>
   <data name="ChannelsPage_BannerRunningMessage" xml:space="preserve"><value>配置已保存，通道已启动。</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>复制</value></data>
+  <data name="Common_Copied" xml:space="preserve"><value>已复制</value></data>
+  <data name="Common_CopyFailed" xml:space="preserve"><value>复制失败</value></data>
+  <data name="Common_NotConnected" xml:space="preserve"><value>未连接</value></data>
+  <data name="Common_Refresh" xml:space="preserve"><value>刷新</value></data>
+  <data name="Common_Refreshing" xml:space="preserve"><value>正在刷新...</value></data>
+  <data name="Common_NotFound" xml:space="preserve"><value>未找到</value></data>
+  <data name="Common_Close" xml:space="preserve"><value>关闭</value></data>
+  <data name="Common_Continue" xml:space="preserve"><value>继续</value></data>
+  <data name="Common_Record" xml:space="preserve"><value>录音</value></data>
+  <data name="Common_Stop" xml:space="preserve"><value>停止</value></data>
+  <data name="Common_Recording" xml:space="preserve"><value>录音中</value></data>
+  <data name="Common_AllAgents" xml:space="preserve"><value>全部智能体</value></data>
+  <data name="Common_ErrorFormat" xml:space="preserve"><value>错误：{0}</value></data>
+  <data name="App_DeepLinkTitle" xml:space="preserve"><value>确认 OpenClaw 操作</value></data>
+  <data name="App_DeepLinkBodyFormat" xml:space="preserve"><value>有深度链接请求{0}。</value></data>
+  <data name="SchemaConfigEditor_DefaultValueFormat" xml:space="preserve"><value>默认值：{0}</value></data>
+  <data name="SchemaConfigEditor_ComplexArrayHint" xml:space="preserve"><value>此数组包含复杂元素。请在下方编辑其 JSON；保存前会先做本地校验。</value></data>
+  <data name="SchemaConfigEditor_ObjectHint" xml:space="preserve"><value>请输入 JSON 对象，例如 {"key": "value"}。更改会在保存前校验。</value></data>
+  <data name="SessionCheckpoint_TitleFormat" xml:space="preserve"><value>检查点：{0}</value></data>
+  <data name="SessionCheckpoint_Empty" xml:space="preserve"><value>暂无压缩检查点。压缩此会话后会创建一个检查点，可从中分支或恢复。</value></data>
+  <data name="ChannelsPage_RefreshFailedTitle" xml:space="preserve"><value>无法刷新通道</value></data>
+  <data name="ChannelsPage_SectionLinking" xml:space="preserve"><value>正在关联</value></data>
+  <data name="ChannelsPage_LinkHint" xml:space="preserve"><value>点击「显示二维码」开始将手机关联到此设备。</value></data>
+  <data name="ChannelsPage_WhyNotWorking" xml:space="preserve"><value>为什么不起作用？</value></data>
+  <data name="ChannelsPage_ShowQr" xml:space="preserve"><value>显示二维码</value></data>
+  <data name="ChannelsPage_Relink" xml:space="preserve"><value>重新关联</value></data>
+  <data name="ChannelsPage_ProviderMissingFormat" xml:space="preserve"><value>您的网关尚无法启动 {0} 的二维码关联，因为它没有加载 {0} 的网页登录提供程序。网页/二维码关联在托管网关的机器上运行，需要在那边修复，而不是在托盘端。</value></data>
+  <data name="ChannelsPage_ProviderMissingAction" xml:space="preserve"><value>在网关主机上安装该提供程序后，请返回并再次点击「显示二维码」。</value></data>
+  <data name="ChannelsPage_WebLoginUnsupportedFormat" xml:space="preserve"><value>此网关版本尚不支持 {0} 的二维码关联。二维码/网页关联在托管网关的机器上运行：请将网关更新到支持网页登录的版本，然后返回并再次点击「显示二维码」。</value></data>
+  <data name="ChannelsPage_NotConnectedHint" xml:space="preserve"><value>未连接到网关。请先打开连接设置进行连接。</value></data>
+  <data name="ChannelsPage_RequestingQr" xml:space="preserve"><value>正在向网关请求二维码…</value></data>
+  <data name="ChannelsPage_LinkFailedNotConnectedFormat" xml:space="preserve"><value>无法关联 {0}：未连接到网关。</value></data>
+  <data name="ChannelsPage_LinkFailedGatewayErrorFormat" xml:space="preserve"><value>无法关联 {0}。网关返回了错误：请查看下方详情。</value></data>
+  <data name="ChannelsPage_LinkWaiting" xml:space="preserve"><value>仍在等待：如果二维码已过期，请再次点击「显示二维码」。</value></data>
+  <data name="ChannelsPage_LinkWaitFailedFormat" xml:space="preserve"><value>{0} 的关联等待失败。请查看下方详情。</value></data>
+  <data name="ChannelsPage_QrMalformed" xml:space="preserve"><value>二维码解析失败：网关返回的 data URL 格式不正确。</value></data>
+  <data name="ChannelsPage_QrInvalidBase64" xml:space="preserve"><value>二维码解析失败：网关返回的 base64 无效。</value></data>
+  <data name="ChannelsPage_QrDecodeFailedFormat" xml:space="preserve"><value>二维码解析失败：{0}</value></data>
+  <data name="ChannelsPage_PluginInstallHintFormat" xml:space="preserve"><value>通道插件由网关加载，而不是托盘端：因此安装要在托管网关的机器上进行。如果保存后 {0} 仍未启动，可能是插件尚未安装。</value></data>
+  <data name="ChannelsPage_PluginInstallAction" xml:space="preserve"><value>请在托管网关的机器上运行此命令。完成后返回并点击刷新。</value></data>
+  <data name="ChannelsPage_PluginInstallDocs" xml:space="preserve"><value>插件安装文档 →</value></data>
+  <data name="ChatPage_AccessibilitySessionTitle" xml:space="preserve"><value>辅助功能会话</value></data>
+  <data name="ChatPage_RouteTargetFormat" xml:space="preserve"><value>路由目标：{0}</value></data>
+  <data name="ConfigPage_FolderLabelFormat" xml:space="preserve"><value>📁 {0}</value></data>
+  <data name="ConfigPage_SelectChildSectionHint" xml:space="preserve"><value>请选择一个子分区以编辑字段。完整根配置可在 JSON 预览中查看。</value></data>
+  <data name="ConfigPage_SchemaPreviewOnlyHint" xml:space="preserve"><value>此分区仅在 JSON 预览中显示，因为该 schema 结构尚不支持在表单中编辑。</value></data>
+  <data name="ConfigPage_SelectSectionHint" xml:space="preserve"><value>请选择一个分区以预览其 JSON。</value></data>
+  <data name="ConfigPage_PreviewUnavailable" xml:space="preserve"><value>所选分区的 JSON 预览不可用。</value></data>
+  <data name="ConfigPage_NoReadPermission" xml:space="preserve"><value>无法加载配置，因为此操作员令牌没有读取权限。</value></data>
+  <data name="ConfigPage_UnavailableTitle" xml:space="preserve"><value>配置不可用</value></data>
+  <data name="ConfigPage_MissingReadPermissionTitle" xml:space="preserve"><value>缺少 operator.read 权限</value></data>
+  <data name="ConfigPage_PreviewUnavailableNoPermission" xml:space="preserve"><value>没有读取权限时无法预览配置。</value></data>
+  <data name="ConfigPage_LoadingSection" xml:space="preserve"><value>正在加载分区...</value></data>
+  <data name="ConnectionPage_AuthModeBulletFormat" xml:space="preserve"><value>• {0}</value></data>
+  <data name="ConnectionPage_WslBullet" xml:space="preserve"><value>• WSL</value></data>
+  <data name="ConnectionPage_LastConnectedBulletFormat" xml:space="preserve"><value>• {0}</value></data>
+  <data name="ConnectionPage_TestFailedHint" xml:space="preserve"><value>无法测试网关连接。请检查 URL 后重试。</value></data>
+  <data name="CronPage_JobCountFormat" xml:space="preserve"><value>({0})</value></data>
+  <data name="DebugPage_NoLogFile" xml:space="preserve"><value>未找到日志文件。</value></data>
+  <data name="DebugPage_LogReadFailedFormat" xml:space="preserve"><value>读取日志失败：{0}</value></data>
+  <data name="DebugPage_NoDeviceKeyFile" xml:space="preserve"><value>无设备密钥文件</value></data>
+  <data name="InstancesPage_NodeStatusFormat" xml:space="preserve"><value>· {0}</value></data>
+  <data name="SettingsPage_RemoveGatewayIntro" xml:space="preserve"><value>这将永久移除以下内容：</value></data>
+  <data name="SettingsPage_RemoveWslDistroFormat" xml:space="preserve"><value>• WSL 发行版：{0}（及其磁盘映像）</value></data>
+  <data name="SettingsPage_RemovePreservedNote" xml:space="preserve"><value>已保留：您的 MCP 令牌和根设备密钥不会被删除。</value></data>
+  <data name="SettingsPage_RemoveCannotUndo" xml:space="preserve"><value>此操作无法撤销。</value></data>
+  <data name="SettingsPage_RemoveGatewayTitle" xml:space="preserve"><value>移除本地网关？</value></data>
+  <data name="ConnectionStatus_ServicesUnavailable" xml:space="preserve"><value>网关连接服务不可用。</value></data>
+  <data name="VoiceOverlay_TestTitle" xml:space="preserve"><value>测试语音输入</value></data>
+  <data name="WindowManager_LocalAiAttentionTitle" xml:space="preserve"><value>本地 AI 设置需要处理</value></data>
+  <data name="WindowManager_LocalAiAttentionRepairMessage" xml:space="preserve"><value>请先重新连接原来的原生网关、停止本地 AI 并释放其网关所有权，然后再为其 WSL 修复。</value></data>
+  <data name="WindowManager_LocalAiAttentionIdentifyMessage" xml:space="preserve"><value>OpenClaw 无法安全识别受管理的 WSL 网关。请检查连接设置后再重试安装。</value></data>
+  <data name="Setup_AllSetTitle" xml:space="preserve"><value>全部就绪！</value></data>
+  <data name="Setup_ReadySubtitle" xml:space="preserve"><value>OpenClaw 已准备就绪</value></data>
+  <data name="Setup_ReadyWithLocalAi" xml:space="preserve"><value>OpenClaw 与本地 AI 均已就绪</value></data>
+  <data name="Setup_OpenChat" xml:space="preserve"><value>打开聊天</value></data>
+  <data name="Setup_RestartRequiredTitle" xml:space="preserve"><value>需要重启</value></data>
+  <data name="Setup_RestartPrompt" xml:space="preserve"><value>OpenClaw 需要重启 Windows 才能继续安装。现在重启吗？</value></data>
+  <data name="Setup_SetupFailedTitle" xml:space="preserve"><value>安装失败</value></data>
+  <data name="Setup_ViewFullLogFormat" xml:space="preserve"><value>查看完整日志 → {0}</value></data>
+  <data name="Setup_OpenLocalAiLogsFormat" xml:space="preserve"><value>打开本地 AI 日志 → {0}</value></data>
+  <data name="Setup_WindowsRestarting" xml:space="preserve"><value>Windows 正在重启...</value></data>
+  <data name="Setup_RestartFailedFormat" xml:space="preserve"><value>无法重启 Windows：{0}</value></data>
+  <data name="Setup_AnotherTaskActive" xml:space="preserve"><value>另一个安装任务仍在进行。请等待其完成后再启动 OpenClaw 新手引导。</value></data>
+  <data name="Setup_WizardProblemTitle" xml:space="preserve"><value>OpenClaw 新手引导遇到问题</value></data>
+  <data name="Setup_WizardQuestionsSubtitle" xml:space="preserve"><value>几个简单问题，用于连接您的智能体</value></data>
+  <data name="Setup_WizardDefaultAiModel" xml:space="preserve"><value>默认 AI 模型</value></data>
+  <data name="Setup_WizardMore" xml:space="preserve"><value>更多 ▾</value></data>
+  <data name="Setup_WizardRestartedVerifying" xml:space="preserve"><value>网关已重启，正在验证端点归属...</value></data>
+  <data name="Setup_WizardNeedsAttentionTitle" xml:space="preserve"><value>向导需要处理</value></data>
+  <data name="Setup_WizardStartAgain" xml:space="preserve"><value>重新启动向导</value></data>
+  <data name="Setup_WizardTerminalOpenedNative" xml:space="preserve"><value>已打开此原生配置的终端。批准配对后请选择「重试」；修改配置后请选择「重启网关」。</value></data>
+  <data name="Setup_WizardTerminalOpenedDistroFormat" xml:space="preserve"><value>已在 {0} 中打开终端。安装该工具后，请选择「重启网关」。</value></data>
+  <data name="Setup_WizardTerminalOpenFailedFormat" xml:space="preserve"><value>无法打开终端：{0}</value></data>
+  <data name="TrayMenu_PairingPendingFormat" xml:space="preserve"><value>等待配对批准（{0}）</value></data>
+  <data name="TrayMenu_Gateway" xml:space="preserve"><value>网关</value></data>
+  <data name="TrayMenu_GatewayAutomationFormat" xml:space="preserve"><value>网关{0}。激活以打开连接设置。</value></data>
+  <data name="TrayMenu_Sessions" xml:space="preserve"><value>会话</value></data>
+  <data name="TrayMenu_SessionsHeaderFormat" xml:space="preserve"><value>会话（{0}）</value></data>
+  <data name="TrayMenu_SessionsDetailFormat" xml:space="preserve"><value>{0} 个进行中 · {1} 个令牌</value></data>
+  <data name="TrayMenu_SessionsAutomationFormat" xml:space="preserve"><value>会话。{0} 个进行中。{1} 个令牌。</value></data>
+  <data name="TrayMenu_Usage" xml:space="preserve"><value>用量</value></data>
+  <data name="TrayMenu_UsageAutomationFormat" xml:space="preserve"><value>用量。{0}。</value></data>
+  <data name="TrayMenu_UsageNoData" xml:space="preserve"><value>无数据</value></data>
+  <data name="TrayMenu_UsageNoDataYet" xml:space="preserve"><value>暂无用量数据</value></data>
+  <data name="TrayMenu_UsageProviders" xml:space="preserve"><value>服务商</value></data>
+  <data name="TrayMenu_UsageByModel" xml:space="preserve"><value>按模型</value></data>
+  <data name="TrayMenu_UsageTokensFormat" xml:space="preserve"><value>{0} 个令牌</value></data>
+  <data name="TrayMenu_UsageInOutFormat" xml:space="preserve"><value>输入 {0} · 输出 {1}</value></data>
+  <data name="TrayMenu_UsageRequestsFormat" xml:space="preserve"><value>{0} 次请求</value></data>
+  <data name="TrayMenu_CapabilitiesFormat" xml:space="preserve"><value>能力（{0}）· 命令（{1}）</value></data>
+  <data name="TrayMenu_Permissions" xml:space="preserve"><value>权限</value></data>
+  <data name="TrayMenu_PermissionsAutomation" xml:space="preserve"><value>权限子菜单</value></data>
+  <data name="TrayMenu_SessionUnknown" xml:space="preserve"><value>未知</value></data>
+  <data name="TrayMenu_PermNode" xml:space="preserve"><value>Windows 节点</value></data>
+  <data name="TrayMenu_PermNodeDescription" xml:space="preserve"><value>在此电脑上以本地节点运行 OpenClaw</value></data>
+  <data name="TrayMenu_PermSystem" xml:space="preserve"><value>系统工具</value></data>
+  <data name="TrayMenu_PermSystemDescription" xml:space="preserve"><value>允许智能体在此电脑上运行 shell 命令和脚本</value></data>
+  <data name="TrayMenu_PermBrowser" xml:space="preserve"><value>浏览器控制</value></data>
+  <data name="TrayMenu_PermBrowserDescription" xml:space="preserve"><value>允许智能体通过代理驱动浏览器</value></data>
+  <data name="TrayMenu_PermCamera" xml:space="preserve"><value>摄像头</value></data>
+  <data name="TrayMenu_PermCameraDescription" xml:space="preserve"><value>允许在会话中采集摄像头画面</value></data>
+  <data name="TrayMenu_PermCanvas" xml:space="preserve"><value>画布</value></data>
+  <data name="TrayMenu_PermCanvasDescription" xml:space="preserve"><value>在聊天中渲染生成的 HTML 画布</value></data>
+  <data name="TrayMenu_PermScreen" xml:space="preserve"><value>屏幕捕获</value></data>
+  <data name="TrayMenu_PermScreenDescription" xml:space="preserve"><value>与智能体共享您的屏幕内容</value></data>
+  <data name="TrayMenu_PermLocation" xml:space="preserve"><value>位置</value></data>
+  <data name="TrayMenu_PermLocationDescription" xml:space="preserve"><value>共享此设备的位置</value></data>
+  <data name="TrayMenu_PermTts" xml:space="preserve"><value>语音（TTS）</value></data>
+  <data name="TrayMenu_PermTtsDescription" xml:space="preserve"><value>朗读回复</value></data>
+  <data name="TrayMenu_PermStt" xml:space="preserve"><value>语音转文字（STT）</value></data>
+  <data name="TrayMenu_PermSttDescription" xml:space="preserve"><value>使用语音输入</value></data>
+  <data name="TrayMenu_PermOllama" xml:space="preserve"><value>Ollama</value></data>
+  <data name="TrayMenu_PermOllamaDescription" xml:space="preserve"><value>允许智能体使用此电脑上单独安装的 Ollama 模型</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>取消</value></data>
+  <data name="Common_ParenthesizedCountFormat" xml:space="preserve"><value>({0})</value></data>
+  <data name="CommandCenter_LocalMcpFailedTitle" xml:space="preserve"><value>本地 MCP 失败</value></data>
+  <data name="CommandCenter_LocalMcpOnlyTitle" xml:space="preserve"><value>仅本地 MCP</value></data>
+  <data name="CommandCenter_ConnectionDegradedTitle" xml:space="preserve"><value>连接已降级</value></data>
+  <data name="CommandCenter_PairingRequiredTitle" xml:space="preserve"><value>需要配对</value></data>
+  <data name="SettingsPage_RemoveItemsFormat" xml:space="preserve"><value>• WSL 发行版：{0}（及其磁盘映像）
+• 开机自启注册表项
+• 网关凭据（令牌与引导令牌将被清除）
+• 安装状态（新手引导将重置）</value></data>
+  <data name="SettingsPage_RemovePreservedItems" xml:space="preserve"><value>已保留：您的 MCP 令牌和根设备密钥不会被删除。
+已移除：本地网关身份凭据和注册表记录。</value></data>
+  <data name="SettingsPage_RemoveGatewayPrimary" xml:space="preserve"><value>移除本地网关</value></data>
+  <data name="Common_Reconnect" xml:space="preserve"><value>重新连接</value></data>
+  <data name="Common_TextFile" xml:space="preserve"><value>文本文件</value></data>
+  <data name="ConnectionPlan_NoGatewayHeadline" xml:space="preserve"><value>尚未配置网关</value></data>
+  <data name="ConnectionPlan_NoGatewaySub" xml:space="preserve"><value>添加网关以开始使用。</value></data>
+  <data name="ConnectionPlan_PickGatewaySub" xml:space="preserve"><value>在下方选择一个网关，或添加新的网关。</value></data>
+  <data name="ConnectionPlan_ReachingGateway" xml:space="preserve"><value>正在连接网关</value></data>
+  <data name="ConnectionPlan_NodePairingRejected" xml:space="preserve"><value>节点配对被拒绝。</value></data>
+  <data name="ConnectionPlan_NodeRateLimited" xml:space="preserve"><value>节点已被网关限流。</value></data>
+  <data name="ConnectionPlan_NodeError" xml:space="preserve"><value>节点报告了错误。</value></data>
+  <data name="ConnectionPlan_NodeNotConnected" xml:space="preserve"><value>节点模式已启用，但节点尚未连接。</value></data>
+  <data name="ConnectionPlan_ConnectionImpaired" xml:space="preserve"><value>连接已受损。</value></data>
+  <data name="ConnectionPlan_ConnectionDegraded" xml:space="preserve"><value>连接已降级</value></data>
+  <data name="ConnectionPlan_RestartTunnel" xml:space="preserve"><value>重启隧道</value></data>
+  <data name="ConnectionPlan_AwaitingApproval" xml:space="preserve"><value>等待批准</value></data>
+  <data name="ConnectionPlan_AwaitingApprovalSub" xml:space="preserve"><value>请在网关主机上批准此客户端。连接会自动恢复。</value></data>
+  <data name="ConnectionPlan_RunOnGatewayHost" xml:space="preserve"><value>在网关主机上运行：</value></data>
+  <data name="ConnectionPlan_TailscaleUnavailable" xml:space="preserve"><value>Tailscale 网关不可用</value></data>
+  <data name="ConnectionPlan_TailnetUnreachableFormat" xml:space="preserve"><value>无法访问私有 tailnet 端点 {0}。</value></data>
+  <data name="ConnectionPlan_PortConflict" xml:space="preserve"><value>本地网关端口冲突</value></data>
+  <data name="ConnectionPlan_PortConflictSub" xml:space="preserve"><value>另一个进程正在使用此受管理网关地址。OpenClaw 不会将网关凭据发送到未经验证的端点。</value></data>
+  <data name="ConnectionPlan_AuthFailed" xml:space="preserve"><value>认证失败</value></data>
+  <data name="ConnectionPlan_TokenInvalidFormat" xml:space="preserve"><value>{0} 的令牌已失效。</value></data>
+  <data name="ConnectionPlan_RePairing" xml:space="preserve"><value>设备需要重新配对</value></data>
+  <data name="ConnectionPlan_DeviceTokenUntrustedFormat" xml:space="preserve"><value>网关已不再信任 {0} 保存的设备令牌。</value></data>
+  <data name="ConnectionPlan_NotEnoughAccess" xml:space="preserve"><value>权限不足</value></data>
+  <data name="ConnectionPlan_MissingScopesFormat" xml:space="preserve"><value>此设备已连接，但缺少在 {0} 上所需的权限范围。</value></data>
+  <data name="ConnectionPlan_SecureFailed" xml:space="preserve"><value>安全连接失败</value></data>
+  <data name="ConnectionPlan_SecureFailedSub" xml:space="preserve"><value>无法为网关的传输建立安全连接。</value></data>
+  <data name="ConnectionPlan_TooManyAttempts" xml:space="preserve"><value>失败次数过多</value></data>
+  <data name="ConnectionPlan_TooManyAttemptsSub" xml:space="preserve"><value>网关正在暂时限制此客户端的连接尝试。</value></data>
+  <data name="ConnectionPlan_CantReachGateway" xml:space="preserve"><value>无法连接网关</value></data>
+  <data name="ConnectionPlan_SshTunnelDown" xml:space="preserve"><value>SSH 隧道已断开：</value></data>
+  <data name="ConnectionPlan_LastAttemptFailed" xml:space="preserve"><value> 上次尝试失败。</value></data>
+  <data name="ConnectionPlan_GatewayErrorSub" xml:space="preserve"><value>网关返回了错误。</value></data>
+  <data name="ConnectionPlan_ConnectionRefused" xml:space="preserve"><value>连接被拒绝。</value></data>
+  <data name="ConnectionPlan_ConnectionRefusedAtFormat" xml:space="preserve"><value>{0} 拒绝连接。</value></data>
+  <data name="ConnectionPlan_ViaSshTunnel" xml:space="preserve"><value>经 SSH 隧道</value></data>
+  <data name="ConnectionPlan_CredentialNodeDeviceToken" xml:space="preserve"><value>通过节点设备令牌配对</value></data>
+  <data name="ConnectionPlan_CredentialDeviceToken" xml:space="preserve"><value>通过设备令牌配对</value></data>
+  <data name="ConnectionPlan_CredentialSharedToken" xml:space="preserve"><value>共享令牌</value></data>
+  <data name="ConnectionPlan_CredentialBootstrapToken" xml:space="preserve"><value>引导令牌</value></data>
+  <data name="ConnectionPlan_UpFormat" xml:space="preserve"><value>已运行 {0}</value></data>
+  <data name="ConnectionPlan_UptimeDaysHoursFormat" xml:space="preserve"><value>{0} 天 {1} 小时</value></data>
+  <data name="ConnectionPlan_UptimeHoursMinutesFormat" xml:space="preserve"><value>{0} 小时 {1} 分</value></data>
+  <data name="ConnectionPlan_UptimeMinutesFormat" xml:space="preserve"><value>{0} 分钟</value></data>
+  <data name="ConnectionPlan_UptimeSecondsFormat" xml:space="preserve"><value>{0} 秒</value></data>
+  <data name="CronPage_FormWaitLoading" xml:space="preserve"><value>请等待最新的定时任务加载完成后再保存更改。</value></data>
+  <data name="CronPage_FormNameRequired" xml:space="preserve"><value>名称为必填项。</value></data>
+  <data name="CronPage_FormPromptRequired" xml:space="preserve"><value>提示词为必填项。</value></data>
+  <data name="CronPage_FormNotConnected" xml:space="preserve"><value>未连接到网关。</value></data>
+  <data name="CronPage_FormCronRequired" xml:space="preserve"><value>Cron 表达式为必填项。</value></data>
+  <data name="CronPage_FormIntervalInvalid" xml:space="preserve"><value>请输入有效的间隔数字。</value></data>
+  <data name="CronPage_FormDateRequired" xml:space="preserve"><value>「at」计划需要填写日期。</value></data>
+  <data name="CronPage_FormTimeInvalid" xml:space="preserve"><value>时间无效。请使用「3:30 PM」或「15:30」格式。</value></data>
+  <data name="CronPage_FormFutureRequired" xml:space="preserve"><value>计划时间必须在未来。</value></data>
+  <data name="CronPage_Delivered" xml:space="preserve"><value>已投递</value></data>
+  <data name="CronPage_Overdue" xml:space="preserve"><value>已逾期</value></data>
+  <data name="CronPage_NextInFormat" xml:space="preserve"><value>下次 {0}</value></data>
+  <data name="Common_Connected" xml:space="preserve"><value>已连接</value></data>
+  <data name="Common_Retry" xml:space="preserve"><value>重试</value></data>
+  <data name="ConnectionPlan_Disconnecting" xml:space="preserve"><value>正在断开…</value></data>
+  <data name="ConnectionPlan_Connecting" xml:space="preserve"><value>正在连接…</value></data>
+  <data name="Chat_Composer_Slash_Loading" xml:space="preserve"><value>正在加载命令...</value></data>
+  <data name="CommandCenter_Detail_LocalMcpListening" xml:space="preserve"><value>本地 MCP 工具正在此电脑上监听，但没有网关节点连接。</value></data>
+  <data name="CommandCenter_Detail_OperatorRoleBlocked" xml:space="preserve"><value>操作员连接可用，但有一个必需的角色被阻止。</value></data>
+  <data name="CommandCenter_Detail_ApprovePairing" xml:space="preserve"><value>批准待处理的操作员或节点配对请求以完成连接。</value></data>
+  <data name="CommandCenter_Detail_NotConnected" xml:space="preserve"><value>托盘当前未连接到网关。</value></data>
+  <data name="CommandCenter_Detail_NoChannelsReported" xml:space="preserve"><value>网关健康状态数据未上报任何通道。</value></data>
+  <data name="CommandCenter_Detail_NodeModeInventories" xml:space="preserve"><value>节点模式已连接。通道/会话清单会在网关健康事件可用时填充。</value></data>
+  <data name="CommandCenter_Detail_ChannelsNotRunning" xml:space="preserve"><value>通道已配置，但没有任何通道报告运行/就绪状态。</value></data>
+  <data name="CommandCenter_Detail_NoNodesReported" xml:space="preserve"><value>node.list 未上报任何已连接节点。请配对 Windows 节点，或确认操作员令牌具有节点清单访问权限。</value></data>
+  <data name="CommandCenter_Detail_BrowserProxyHost" xml:space="preserve"><value>browser.proxy 需要兼容的浏览器控制主机在网关端口 + 2 上监听。</value></data>
+  <data name="Chat_Status_WaitingApproval" xml:space="preserve"><value>等待批准</value></data>
+  <data name="Chat_Status_Working" xml:space="preserve"><value>处理中</value></data>
+  <data name="Chat_Status_AgentError" xml:space="preserve"><value>智能体错误</value></data>
+  <data name="Chat_Status_Compacting" xml:space="preserve"><value>正在压缩上下文</value></data>
+  <data name="Chat_Status_RetryingAfterCompaction" xml:space="preserve"><value>上下文压缩后重试</value></data>
+  <data name="Chat_Status_RetryingRequest" xml:space="preserve"><value>正在重试模型请求</value></data>
+  <data name="ConnectionPlan_CredentialFallbackFormat" xml:space="preserve"><value>{0}（回退）</value></data>
+  <data name="ConnectionPlan_CredentialPairingRequiredFormat" xml:space="preserve"><value>{0}（需要配对）</value></data>
+  <data name="Common_Disconnected" xml:space="preserve"><value>已断开</value></data>
+  <data name="Common_ConnectionError" xml:space="preserve"><value>连接错误</value></data>
+  <data name="TraySummary_UpdatedFormat" xml:space="preserve"><value>更新于 {0}</value></data>
+  <data name="TraySummary_NodeOneFormat" xml:space="preserve"><value>{0}/{1} 个节点</value></data>
+  <data name="TraySummary_NodeFormat" xml:space="preserve"><value>{0}/{1} 个节点</value></data>
+  <data name="TraySummary_SessionsOne" xml:space="preserve"><value>1 个会话</value></data>
+  <data name="TraySummary_OneWorkingFormat" xml:space="preserve"><value>1 个会话（{0} 个进行中）</value></data>
+  <data name="TraySummary_SessionsFormat" xml:space="preserve"><value>{0} 个会话</value></data>
+  <data name="TraySummary_SessionsWorkingFormat" xml:space="preserve"><value>{0} 个会话（{1} 个进行中）</value></data>
+  <data name="TrayMenu_Server" xml:space="preserve"><value>服务器</value></data>
+  <data name="TrayMenu_PendingApproval" xml:space="preserve"><value>等待批准</value></data>
 </root>

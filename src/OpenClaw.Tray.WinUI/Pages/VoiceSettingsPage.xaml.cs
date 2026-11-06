@@ -373,7 +373,7 @@ public sealed partial class VoiceSettingsPage : Page
         };
         var pillLabel = new TextBlock
         {
-            Text = "Recording",
+            Text = LocalizationHelper.GetString("Common_Recording"),
             FontSize = 11,
             Foreground = new SolidColorBrush(accentColor),
             VerticalAlignment = VerticalAlignment.Center
@@ -428,7 +428,7 @@ public sealed partial class VoiceSettingsPage : Page
                 _inlineTestVoiceService ??= new VoiceService(new AppLogger(), CurrentApp.Settings);
                 _inlineTestListening = true;
                 InlineTestBtnIcon.Glyph = "\uE71A";
-                InlineTestBtnLabel.Text = "Stop";
+                InlineTestBtnLabel.Text = LocalizationHelper.GetString("Common_Stop");
                 SetInlineTestStatus("");
                 EnsureInlineTestPill();
                 _inlineTestPillContainer!.Visibility = Visibility.Visible;
@@ -450,7 +450,7 @@ public sealed partial class VoiceSettingsPage : Page
                 SetInlineTestStatus("Could not start voice input");
                 _inlineTestListening = false;
                 InlineTestBtnIcon.Glyph = "\uE720";
-                InlineTestBtnLabel.Text = "Record";
+                InlineTestBtnLabel.Text = LocalizationHelper.GetString("Common_Record");
                 InlineTestPillHost.Visibility = Visibility.Collapsed;
                 if (_inlineTestPillContainer != null)
                     _inlineTestPillContainer.Visibility = Visibility.Collapsed;
@@ -473,7 +473,7 @@ public sealed partial class VoiceSettingsPage : Page
         }
         _inlineTestListening = false;
         InlineTestBtnIcon.Glyph = "\uE720";
-        InlineTestBtnLabel.Text = "Record";
+        InlineTestBtnLabel.Text = LocalizationHelper.GetString("Common_Record");
         SetInlineTestStatus(InlineTestTranscriptPanel.Children.Count > 0 ? "" : "Done");
         InlineTestPillHost.Visibility = Visibility.Collapsed;
         if (_inlineTestPillContainer != null)

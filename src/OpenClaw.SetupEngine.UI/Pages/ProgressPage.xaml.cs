@@ -424,7 +424,7 @@ public sealed partial class ProgressPage : Page, IAsyncDisposable
         if (SetupWindow.Active?.TryNavigateToWizard() == true)
             return;
 
-        MilestoneStatusText.Text = "Another setup task is still active. Wait for it to finish, then start OpenClaw onboard.";
+        MilestoneStatusText.Text = SetupLocalization.GetString("Setup_AnotherTaskActive");
     }
 
     private static List<SetupStep> BuildSteps(SetupConfig config, bool localAiRecoveryOnly = false)

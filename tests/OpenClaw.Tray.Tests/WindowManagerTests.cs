@@ -111,7 +111,7 @@ public sealed class WindowManagerTests
         AssertInOrder(manager[start..end],
             "TryNavigateToExistingNativeLocalAi(native)",
             "_callbacks.GetLocalAiGatewayLifecycle?.Invoke()?.HasNativeBinding == true",
-            "release its Gateway ownership before repairing it for WSL.",
+            "WindowManager_LocalAiAttentionRepairMessage",
             "ShowHub(\"local-ai\");",
             "return;",
             "await ResolveLocalAiSetupRouteAsync()",
