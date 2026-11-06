@@ -216,3 +216,12 @@ Colors in `DESIGN.md` are **preview-only** swatches. When a color has a `resourc
 
 <sub>Managed by [Colophon](https://github.com/karkarl/colophon) - edit `DESIGN.md` to change the system; this block only points to it.</sub>
 <!-- colophon:end -->
+
+## Simplified Chinese fork (branch `zh-cn`)
+
+This branch ships a Simplified Chinese build of the tray app. See `docs/LOCALIZATION_ZH.md` for the fork delta, the rebase procedure and the local build notes (NuGet mirror, Windows 10 CET workaround).
+
+- UI copy belongs in `src/OpenClaw.Tray.WinUI/Strings/<locale>/Resources.resw`; never rewrite generated `.pri`/XBF files.
+- The zh-cn and zh-tw resource files may carry translations ahead of the Latin-script locales; `LocalizationValidationTests` allows that rollout order.
+- Never use a status token from the gateway payload as display text. Resolve a state enum (see `ChannelsPage.ChannelBadge`) and look the label up in resources.
+- Update checks in this branch point at the fork (`wx2020/openclaw-windows-node`) so an upstream release cannot replace the Chinese build.
