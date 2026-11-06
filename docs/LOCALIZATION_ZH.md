@@ -51,9 +51,9 @@ Notes specific to this machine:
 2. `git rebase origin/vX.Y.Z` (or merge that tag into `zh-cn`).
 3. Resolve `Resources.resw` conflicts by keeping the upstream key set and
    re-applying this branch's values; conflicts are almost always append-only.
-4. If upstream added new keys, run
-   `python .tmp/zh-cn/import_tm.py --tm-dir <old patch project>` to see which
-   new entries can be filled from the legacy translation memory.
+4. If upstream added new keys, fill them from the legacy translation memory
+   (`import_tm.py`, kept with the old binary-patch project under `.tmp/`, not
+   committed here) or translate them directly.
 5. Re-run the verification commands above and push.
 
 ## Known remaining work
