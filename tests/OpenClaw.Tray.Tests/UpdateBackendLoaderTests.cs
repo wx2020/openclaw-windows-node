@@ -165,7 +165,7 @@ public sealed class UpdateBackendLoaderTests
         Assert.Contains("catch (Exception ex) when (UpdateBackendLoader.IsDependencyFailure(ex))", coordinator);
         Assert.Contains("ReportUpdaterUnavailable(ex);", coordinator);
         Assert.Contains("NavigateUri = new Uri(UpdateBackendLoader.ReleasesUrl)", coordinator);
-        Assert.Equal("https://github.com/openclaw/openclaw-windows-node/releases/latest",
+        Assert.Equal("https://github.com/wx2020/openclaw-windows-node/releases/latest",
             UpdateBackendLoader.ReleasesUrl);
 
         var resources = Directory.GetFiles(Path.Combine(root, "src"), "Resources.resw", SearchOption.AllDirectories);

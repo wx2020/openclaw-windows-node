@@ -1,0 +1,44 @@
+name: zh-cn build
+
+# Builds the Simplified Chinese fork payload. Kept separate from the upstream
+# CI matrix so the translation work stays cheap to run and easy to rebase.
+on:
+  workflow_dispatch:
+  push:
+    branches: [zh-cn]
+    paths:
+      - "src/OpenClaw.Tray.WinUI/Strings/**"
+      - "src/OpenClaw.Tray.WinUI/**"
+      - "tests/OpenClaw.Tray.Tests/LocalizationValidationTests.cs"
+      - ".github/workflows/zh-cn-build.yml"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore
+        run: dotnet restore src/OpenClaw.Tray.WinUI/OpenClaw.Tray.WinUI.csproj -r win-x64
+
+      - name: Localization tests
+        run: >
+          dotnet test tests/OpenClaw.Tray.Tests/OpenClaw.Tray.Tests.csproj
+          -c Release --filter "FullyQualifiedName~Localization"
+
+      - name: Publish
+        run: >
+          dotnet publish src/OpenClaw.Tray.WinUI/OpenClaw.Tray.WinUI.csproj
+          -c Release -r win-x64 --self-contained true --no-restore -o publish
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openclaw-zh-cn-win-x64
+          path: publish/
+          if-no-files-found: error

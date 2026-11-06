@@ -16,7 +16,7 @@ internal interface IUpdateBackend : IUpdateCheckBoundary
 /// </summary>
 internal sealed class UpdateBackendLoader(Func<IUpdateBackend> factory)
 {
-    internal const string ReleasesUrl = "https://github.com/openclaw/openclaw-windows-node/releases/latest";
+    internal const string ReleasesUrl = "https://github.com/wx2020/openclaw-windows-node/releases/latest";
     private IUpdateBackend? _backend;
     public Exception? Failure { get; private set; }
 

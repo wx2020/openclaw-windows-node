@@ -9,7 +9,13 @@ namespace OpenClawTray.Services;
 
 internal sealed class UpdatumUpdateBackend : IUpdateBackend
 {
-    private readonly UpdatumManager _updater = new("openclaw", "openclaw-windows-node")
+    // This fork ships its own Chinese build. Pointing the updater at the upstream
+    // repository would let an official (English) release replace it, so updates
+    // come from the fork's releases instead.
+    private const string UpdateRepositoryOwner = "wx2020";
+    private const string UpdateRepositoryName = "openclaw-windows-node";
+
+    private readonly UpdatumManager _updater = new(UpdateRepositoryOwner, UpdateRepositoryName)
     {
         FetchOnlyLatestRelease = true,
         InstallUpdateSingleFileExecutableName = "OpenClaw.Tray.WinUI",
