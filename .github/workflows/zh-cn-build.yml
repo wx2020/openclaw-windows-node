@@ -7,9 +7,8 @@ on:
   push:
     branches: [zh-cn]
     paths:
-      - "src/OpenClaw.Tray.WinUI/Strings/**"
-      - "src/OpenClaw.Tray.WinUI/**"
-      - "tests/OpenClaw.Tray.Tests/LocalizationValidationTests.cs"
+      - "src/**"
+      - "tests/OpenClaw.Tray.Tests/**"
       - ".github/workflows/zh-cn-build.yml"
 
 jobs:
