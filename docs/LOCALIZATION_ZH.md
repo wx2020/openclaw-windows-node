@@ -74,16 +74,27 @@ English words left inside Chinese sentences need the surrounding spaces removed
 
 The release pipeline builds the tray from `zh-cn`, gates on the localization
 tests and publishes a GitHub Release whose portable zip is the asset the
-in-app updater consumes. The workflow file lives on the `zh-cn` branch only;
-`workflow_dispatch` works from that branch directly (zh-cn-build.yml already
-proves a branch-only workflow registers and runs on this fork). The fork's
-`main` is the untouched upstream mirror and is never pushed to.
+in-app updater consumes. The workflow file lives on the `zh-cn` branch only.
+The fork's `main` is the untouched upstream mirror and is never pushed to.
 
-Run it: `gh workflow run zh-cn-release.yml --ref zh-cn -R wx2020/openclaw-windows-node`
-(-f mode=manual for a patch release; default mode=auto). Scheduled workflows
-only fire from the default branch, so the daily upstream check must be driven
-externally with the command above (or a repository_dispatch once a dispatcher
-workflow exists on a default branch).
+Trigger: queue tag pushes, NOT `workflow_dispatch` (dispatch, schedule and
+repository_dispatch all require the workflow file on the default branch; push
+events read the workflow from the pushed ref). Create the queue ref at the
+zh-cn HEAD, the workflow deletes it after reading it:
+
+```bash
+# auto mode: follow upstream stable (the daily check)
+gh api -X POST repos/wx2020/openclaw-windows-node/git/refs \
+  -f ref=refs/tags/zh-check-$(date +%s) -f sha="$(git rev-parse fork/zh-cn)"
+
+# manual mode: patch release of the current HEAD
+gh api -X POST repos/wx2020/openclaw-windows-node/git/refs \
+  -f ref=refs/tags/zh-patch-$(date +%s) -f sha="$(git rev-parse fork/zh-cn)"
+```
+
+workflow_dispatch remains in the file only as a fallback for a repo whose
+default branch carries this workflow. A queue tag also starts the fork's
+CodeQL / Copilot-setup workflows as harmless no-op runs.
 
 Tag scheme `zh-<X.Y.Z>.<n>`: `<X.Y.Z>` mirrors the upstream stable base tag,
 `<n>` counts releases on that base. Updatum compares only the numeric prefix
