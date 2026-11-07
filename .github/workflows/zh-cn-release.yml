@@ -5,10 +5,15 @@ name: zh-cn release
 # The workflow file lives on the zh-cn branch only. The fork's main branch is
 # the untouched upstream mirror; nothing is ever pushed there, so the upstream
 # pipeline (ci.yml, daily-alpha-release.yml, ...) can never fire on this fork.
-# Scheduled GitHub workflows only run from the default branch, so the daily
-# upstream check is an external `gh workflow run zh-cn-release.yml --ref zh-cn`
-# (workflow_dispatch works on any branch the file exists on; zh-cn-build.yml
-# already proves a zh-cn-only workflow registers and runs on this fork).
+# workflow_dispatch / schedule / repository_dispatch all require the workflow
+# file on the DEFAULT branch, so the triggers here are tag pushes instead:
+# push events read the workflow file from the pushed ref, which works from
+# any branch. Two queue tags drive the pipeline (create the ref at the zh-cn
+# HEAD, the workflow deletes it after reading it):
+#   zh-check-<ts>  -> auto mode  (daily upstream stable follow-up check)
+#   zh-patch-<ts>  -> manual mode (patch release of the current HEAD)
+#   gh api -X POST repos/wx2020/openclaw-windows-node/git/refs \
+#        -f ref=refs/tags/zh-check-$(date +%s) -f sha=$(zh-cn HEAD sha)
 #
 # Upstream discovery is tag based, not release based: upstream sometimes has a
 # stable tag without a published release (v2026.10.8), and published releases
@@ -31,15 +36,22 @@ name: zh-cn release
 # which is Updatum's default asset regex, so the portable zip is the asset the
 # updater picks (FetchOnlyLatestRelease, non-prerelease, latest-marked).
 #
-# Modes:
-#   auto   (default; the daily external check uses this): follow upstream
-#          stable as described above. A rebase or localization-test failure
-#          aborts the whole run (no half-translated release); the next daily
-#          check retries after a manual fix. Same base: no-op (warning when
-#          translation commits wait for a manual release).
-#   manual: release the current zh-cn HEAD as a patch on the current base
-#          (first release, translation fixes). Never rebases.
+# Modes (selected by the queue tag; workflow_dispatch kept as a fallback for
+# a repo whose default branch carries this file):
+#   auto   : follow upstream stable. When the newest upstream non-prerelease
+#            tag differs from the tag zh-cn currently descends from, rebase
+#            zh-cn onto it, gate on the localization tests, force-with-lease
+#            push the branch, build, release as zh-<new-base>.1. A rebase or
+#            test failure aborts the whole run (no half-translated release);
+#            the next daily check retries after a manual fix. Same base:
+#            no-op (warning when translation commits wait for a release).
+#   manual : release the current zh-cn HEAD as a patch on the current base
+#            (first release, translation fixes). Never rebases.
 on:
+  push:
+    tags:
+      - "zh-check-*"
+      - "zh-patch-*"
   workflow_dispatch:
     inputs:
       mode:
@@ -80,9 +92,18 @@ jobs:
         id: plan
         shell: pwsh
         env:
+          GH_TOKEN: ${{ github.token }}
           MODE: ${{ inputs.mode || 'auto' }}
         run: |
           $ErrorActionPreference = 'Stop'
+
+          # Queue-tag trigger: the tag name selects the mode (zh-check-* ->
+          # auto, zh-patch-* -> manual) and overrides the dispatch input.
+          if ($env:GITHUB_EVENT_NAME -eq 'push' -and "$env:GITHUB_REF" -like 'refs/tags/zh-*') {
+            $queueTag = $env:GITHUB_REF -replace '^refs/tags/', ''
+            $env:MODE = if ($queueTag -like 'zh-patch-*') { 'manual' } else { 'auto' }
+            Write-Host "queue tag $queueTag -> mode=$($env:MODE)"
+          }
 
           function Convert-TagVersion([string]$Tag) {
             # v2026.10.8 -> 2026.10.8.0 ; v2026.9.8-1 -> 2026.9.8.1 ; zh-2026.10.8.2 -> 2026.10.8.2
@@ -154,10 +175,13 @@ jobs:
               $releasedSha = (git rev-parse "$($lastZhTag)^{commit}" 2>$null | Out-String).Trim()
             }
             if ($lastZhTag -and $releasedSha -ne $headSha) {
-              Write-Host "::warning::zh-cn has commits newer than release $lastZhTag. Run this workflow with mode=manual to publish them."
+              Write-Host "::warning::zh-cn has commits newer than release $lastZhTag. Push a zh-patch-* tag to publish them."
             }
             else {
               Write-Host "::notice::zh-cn (base $baseTag) is up to date with upstream stable $upstreamTag."
+            }
+            if ($queueTag) {
+              git push origin ":refs/tags/$queueTag"
             }
             'action=noop' >> $env:GITHUB_OUTPUT
             exit 0
@@ -176,6 +200,14 @@ jobs:
           "base_tag=$releaseBaseTag" >> $env:GITHUB_OUTPUT
           "ver=$ver" >> $env:GITHUB_OUTPUT
           "zip_name=OpenClawTray-$ver-zh-win-x64.zip" >> $env:GITHUB_OUTPUT
+
+          # The queue tag has served its purpose; remove it so the namespace
+          # stays clean (a leftover tag with the same name would block the
+          # next dispatch).
+          if ($queueTag) {
+            git push origin ":refs/tags/$queueTag"
+          }
+
           Write-Host "action=$action base=$releaseBaseTag upstream=$upstreamTag version=$ver"
 
       - name: Rebase zh-cn onto the new upstream stable
