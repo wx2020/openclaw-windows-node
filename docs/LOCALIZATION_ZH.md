@@ -70,6 +70,44 @@ English words left inside Chinese sentences need the surrounding spaces removed
    committed here) or translate them directly.
 5. Re-run the verification commands above and push.
 
+## Releasing (workflow `zh-cn-release.yml`)
+
+The release pipeline builds the tray from `zh-cn`, gates on the localization
+tests and publishes a GitHub Release whose portable zip is the asset the
+in-app updater consumes. The workflow file lives on the `zh-cn` branch only;
+`workflow_dispatch` works from that branch directly (zh-cn-build.yml already
+proves a branch-only workflow registers and runs on this fork). The fork's
+`main` is the untouched upstream mirror and is never pushed to.
+
+Run it: `gh workflow run zh-cn-release.yml --ref zh-cn -R wx2020/openclaw-windows-node`
+(-f mode=manual for a patch release; default mode=auto). Scheduled workflows
+only fire from the default branch, so the daily upstream check must be driven
+externally with the command above (or a repository_dispatch once a dispatcher
+workflow exists on a default branch).
+
+Tag scheme `zh-<X.Y.Z>.<n>`: `<X.Y.Z>` mirrors the upstream stable base tag,
+`<n>` counts releases on that base. Updatum compares only the numeric prefix
+of a tag, so `zh-2026.10.8.2 > zh-2026.10.8.1` and patch releases on one base
+still raise the in-app update prompt. The `zh-` prefix deliberately misses the
+upstream ci.yml `v*` tag trigger. Asset:
+`OpenClawTray-<X.Y.Z>.<n>-zh-win-x64.zip` (contains `win-x64`, Updatum's
+default asset regex; the release is latest-marked and not a prerelease, which
+is what `UpdatumUpdateBackend` with `FetchOnlyLatestRelease` selects).
+
+Version injection: the build passes `-p:DisableGitVersionTask=true
+-p:Version=<X.Y.Z>.<n>`; GitVersion.MsBuild is bypassed and the exe/dll carry
+`FileVersion <X.Y.Z>.<n>` and `ProductVersion <X.Y.Z>.<n>+<commit-sha>` (the
+.NET SDK appends the sha from `_SOURCE_GIT_SHA`-style metadata). Verified
+locally 2026-11-07, including after a GitVersion-active test build.
+
+Upstream stable discovery is tag based (`git for-each-ref refs/tags/v*`,
+newest by `[version]` order, `^v<digits>(.<digits>)+(-<digits>)?$`), not
+release based: upstream sometimes ships a stable tag without a release
+(v2026.10.8) and releases can lag tags. A rebase happens only when the newest
+upstream stable tag is strictly newer than the tag `git describe` reports for
+zh-cn HEAD. Rebase conflicts or localization-test failures abort the run (no
+half-translated release); the next daily check retries after a manual fix.
+
 ## Known remaining work
 
 - `OpenClaw.SetupEngine.UI` has no compiled resource map of its own in unpackaged

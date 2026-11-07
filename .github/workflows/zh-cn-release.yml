@@ -1,0 +1,301 @@
+name: zh-cn release
+
+# Release pipeline for the Simplified Chinese fork payload.
+#
+# The workflow file lives on the zh-cn branch only. The fork's main branch is
+# the untouched upstream mirror; nothing is ever pushed there, so the upstream
+# pipeline (ci.yml, daily-alpha-release.yml, ...) can never fire on this fork.
+# Scheduled GitHub workflows only run from the default branch, so the daily
+# upstream check is an external `gh workflow run zh-cn-release.yml --ref zh-cn`
+# (workflow_dispatch works on any branch the file exists on; zh-cn-build.yml
+# already proves a zh-cn-only workflow registers and runs on this fork).
+#
+# Upstream discovery is tag based, not release based: upstream sometimes has a
+# stable tag without a published release (v2026.10.8), and published releases
+# can lag the tags. A "stable" tag matches ^v<digits>(.<digits>)+(-<digits>)?$;
+# prerelease tags (-alpha.N, -msixtest.N, ...) never match. The newest stable
+# tag wins by System.Version order (v2026.10.8 -> 2026.10.8.0, hotfix
+# v2026.9.8-1 -> 2026.9.8.1). A rebase happens only when the newest upstream
+# stable tag is strictly NEWER than the tag zh-cn currently descends from.
+#
+# Tag scheme for our releases: zh-<X.Y.Z>.<n>
+#   <X.Y.Z> mirrors the upstream stable base tag (v2026.10.8 -> 2026.10.8) and
+#   <n> counts releases on that base. Updatum (the in-app updater) compares
+#   only the numeric prefix of a release tag, so zh-2026.10.8.2 >
+#   zh-2026.10.8.1 and patch releases on one base still raise the in-app
+#   update prompt. The zh- prefix deliberately misses the upstream ci.yml
+#   'v*' tag trigger, so a zh tag can never start the upstream pipeline even
+#   if this workflow is ever copied to a default branch.
+#
+# Asset: OpenClawTray-<X.Y.Z>.<n>-zh-win-x64.zip. The name contains "win-x64",
+# which is Updatum's default asset regex, so the portable zip is the asset the
+# updater picks (FetchOnlyLatestRelease, non-prerelease, latest-marked).
+#
+# Modes:
+#   auto   (default; the daily external check uses this): follow upstream
+#          stable as described above. A rebase or localization-test failure
+#          aborts the whole run (no half-translated release); the next daily
+#          check retries after a manual fix. Same base: no-op (warning when
+#          translation commits wait for a manual release).
+#   manual: release the current zh-cn HEAD as a patch on the current base
+#          (first release, translation fixes). Never rebases.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "auto: follow a new upstream stable; manual: patch release on the current base"
+        type: choice
+        default: auto
+        options:
+          - auto
+          - manual
+
+permissions:
+  contents: write
+
+concurrency:
+  group: zh-cn-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.repository == 'wx2020/openclaw-windows-node'
+    runs-on: windows-latest
+    timeout-minutes: 60
+    env:
+      UPSTREAM_REPO: openclaw/openclaw-windows-node
+      TRAY_PROJECT: src/OpenClaw.Tray.WinUI/OpenClaw.Tray.WinUI.csproj
+      TRAY_TESTS: tests/OpenClaw.Tray.Tests/OpenClaw.Tray.Tests.csproj
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: zh-cn
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Plan
+        id: plan
+        shell: pwsh
+        env:
+          MODE: ${{ inputs.mode || 'auto' }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          function Convert-TagVersion([string]$Tag) {
+            # v2026.10.8 -> 2026.10.8.0 ; v2026.9.8-1 -> 2026.9.8.1 ; zh-2026.10.8.2 -> 2026.10.8.2
+            $t = $Tag -replace '^(v|zh-)', ''
+            if ($t -match '^(\d+(?:\.\d+){1,2})\.(\d+)$') { return [version]$t }
+            if ($t -match '^(\d+(?:\.\d+){1,2})-(\d+)$') { return [version]"$($Matches[1]).$($Matches[2])" }
+            if ($t -match '^\d+(?:\.\d+){1,2}$') { return [version]"$t.0" }
+            return $null
+          }
+
+          # checkout checks the branch out detached; name it for the rebase push.
+          git checkout -B zh-cn
+
+          # Tags the fork may miss: upstream tags for discovery + git describe,
+          # the fork's zh tags for the sequence number.
+          git fetch "https://github.com/$env:UPSTREAM_REPO.git" 'refs/tags/v*:refs/tags/v*' --no-tags
+          git fetch origin 'refs/tags/zh-*:refs/tags/zh-*' --no-tags
+
+          # Newest upstream stable tag by version order.
+          $stableRe = '^\d+(?:\.\d+){1,2}(-\d+)?$'
+          $upstreamTag = $null
+          $upstreamVer = [version]'0.0'
+          foreach ($t in (git for-each-ref refs/tags/v* --format='%(refname:short)')) {
+            $bare = $t -replace '^v', ''
+            if ($bare -notmatch $stableRe) { continue }
+            $v = Convert-TagVersion $t
+            if ($v -and $v -gt $upstreamVer) { $upstreamVer = $v; $upstreamTag = $t }
+          }
+          if (-not $upstreamTag) { throw 'No upstream stable tag found.' }
+
+          # Base tag the current zh-cn HEAD descends from (closest reachable
+          # stable tag; the stable tag always sits closer than its alphas).
+          $baseTag = (git describe --match 'v[0-9]*' --abbrev=0 HEAD | Out-String).Trim()
+          if (-not $baseTag -or ((($baseTag -replace '^v', '') -notmatch $stableRe))) {
+            throw "Cannot resolve a stable base tag for zh-cn (git describe gave '$baseTag')."
+          }
+
+          # Newest zh release already published by this fork.
+          $lastZhTag = $null
+          $lastZhVer = [version]'0.0'
+          foreach ($t in (git tag --list 'zh-*')) {
+            if ($t -notmatch '^zh-(\d+(?:\.\d+){2,3})\.(\d+)$') { continue }
+            $v = Convert-TagVersion $t
+            if ($v -and $v -gt $lastZhVer) { $lastZhVer = $v; $lastZhTag = $t }
+          }
+
+          $action = 'noop'
+          $releaseBaseTag = $baseTag
+          $seq = 0
+          if ($env:MODE -eq 'manual') {
+            $action = 'patch'
+            $lastBaseNum = if ($lastZhTag) { ($lastZhTag -replace '^zh-', '') -replace '\.\d+$', '' } else { '' }
+            $baseNum = $baseTag -replace '^v', ''
+            $seq = if ($lastZhTag -and $lastBaseNum -eq $baseNum) {
+              [int]($lastZhTag -replace '^.*\.', '') + 1
+            } else { 1 }
+          }
+          elseif ((Convert-TagVersion $upstreamTag) -gt (Convert-TagVersion $baseTag)) {
+            $action = 'new-base'
+            $seq = 1
+            # From here on the release carries the new upstream base.
+            $releaseBaseTag = $upstreamTag
+          }
+
+          if ($action -eq 'noop') {
+            $headSha = (git rev-parse HEAD | Out-String).Trim()
+            $releasedSha = ''
+            if ($lastZhTag) {
+              $releasedSha = (git rev-parse "$($lastZhTag)^{commit}" 2>$null | Out-String).Trim()
+            }
+            if ($lastZhTag -and $releasedSha -ne $headSha) {
+              Write-Host "::warning::zh-cn has commits newer than release $lastZhTag. Run this workflow with mode=manual to publish them."
+            }
+            else {
+              Write-Host "::notice::zh-cn (base $baseTag) is up to date with upstream stable $upstreamTag."
+            }
+            'action=noop' >> $env:GITHUB_OUTPUT
+            exit 0
+          }
+
+          $baseNum = $releaseBaseTag -replace '^v', ''
+          $ver = "$baseNum.$seq"
+          $tag = "zh-$ver"
+          $existing = (git ls-remote origin "refs/tags/$tag" | Out-String).Trim()
+          if ($existing) {
+            throw "Tag $tag already exists on origin. Resolve the partial release (git push origin :refs/tags/$tag) or wait, then rerun."
+          }
+
+          "action=$action" >> $env:GITHUB_OUTPUT
+          "upstream_tag=$upstreamTag" >> $env:GITHUB_OUTPUT
+          "base_tag=$releaseBaseTag" >> $env:GITHUB_OUTPUT
+          "ver=$ver" >> $env:GITHUB_OUTPUT
+          "zip_name=OpenClawTray-$ver-zh-win-x64.zip" >> $env:GITHUB_OUTPUT
+          Write-Host "action=$action base=$releaseBaseTag upstream=$upstreamTag version=$ver"
+
+      - name: Rebase zh-cn onto the new upstream stable
+        id: rebase
+        if: steps.plan.outputs.action == 'new-base'
+        shell: pwsh
+        env:
+          UPSTREAM_TAG: ${{ steps.plan.outputs.upstream_tag }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git config user.name "zh-cn release bot"
+          git config user.email "actions@github.com"
+
+          $preSha = (git rev-parse HEAD | Out-String).Trim()
+          "pre_sha=$preSha" >> $env:GITHUB_OUTPUT
+
+          git rebase $env:UPSTREAM_TAG
+          if ($LASTEXITCODE -ne 0) {
+            git status
+            git rebase --abort
+            Write-Host "::error::Rebase onto $env:UPSTREAM_TAG hit conflicts. Resolve locally per docs/LOCALIZATION_ZH.md, push, then rerun."
+            exit 1
+          }
+
+      - name: Localization tests (release gate)
+        if: steps.plan.outputs.action != 'noop'
+        shell: pwsh
+        run: |
+          dotnet restore "$env:TRAY_PROJECT" -r win-x64
+          dotnet test "$env:TRAY_TESTS" -c Release --filter "FullyQualifiedName~Localization"
+
+      - name: Push the rebased branch
+        if: steps.plan.outputs.action == 'new-base'
+        shell: pwsh
+        env:
+          PRE_SHA: ${{ steps.rebase.outputs.pre_sha }}
+        run: |
+          git push origin zh-cn "--force-with-lease=zh-cn:$env:PRE_SHA"
+
+      - name: Publish
+        if: steps.plan.outputs.action != 'noop'
+        shell: pwsh
+        env:
+          VER: ${{ steps.plan.outputs.ver }}
+        run: >
+          dotnet publish "$env:TRAY_PROJECT"
+          -c Release -r win-x64 --self-contained true --no-restore
+          -p:DisableGitVersionTask=true "-p:Version=$env:VER"
+          -o publish
+
+      - name: Verify release payload
+        if: steps.plan.outputs.action != 'noop'
+        shell: pwsh
+        env:
+          VER: ${{ steps.plan.outputs.ver }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (-not (Test-Path 'publish/OpenClaw.Tray.WinUI.exe')) {
+            throw 'publish/OpenClaw.Tray.WinUI.exe is missing.'
+          }
+          $info = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PWD/publish/OpenClaw.Tray.WinUI.dll")
+          if ($info.FileVersion -ne $env:VER) {
+            throw "FileVersion '$($info.FileVersion)' does not match the expected version '$env:VER'."
+          }
+          .\scripts\Test-ReleaseNativeDependencies.ps1 -PayloadPath publish -RequireAppLocalVCRuntime
+
+      - name: Create portable zip
+        if: steps.plan.outputs.action != 'noop'
+        shell: pwsh
+        env:
+          ZIP_NAME: ${{ steps.plan.outputs.zip_name }}
+        run: |
+          Compress-Archive -Path publish/* -DestinationPath "$env:ZIP_NAME"
+          Get-Item "$env:ZIP_NAME" | Select-Object Name, Length
+
+      - name: Tag and release
+        if: steps.plan.outputs.action != 'noop'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VER: ${{ steps.plan.outputs.ver }}
+          BASE_TAG: ${{ steps.plan.outputs.base_tag }}
+          ZIP_NAME: ${{ steps.plan.outputs.zip_name }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $tag = "zh-$env:VER"
+
+          $zhCommits = (git log --oneline "$env:BASE_TAG..HEAD" | Out-String).Trim()
+          $body = @"
+          ## OpenClaw Tray 简体中文构建 $env:VER
+
+          - 上游基点：``$env:BASE_TAG``（分支 ``zh-cn``，更新源指向本仓库 release）
+          - 便携包：下载 ``$env:ZIP_NAME`` 解压运行；已装旧版可通过应用内更新升级到 ``$env:VER``
+          - 版本号规则 ``zh-<X.Y.Z>.<n>``：数字段用于应用内更新比较，同基点补丁（末段递增）同样会触发更新提示
+
+          <details><summary>本分支相对上游基点的提交</summary>
+
+          ```
+          $zhCommits
+          ```
+
+          </details>
+
+          > 由 zh-cn-release.yml 自动构建与发布。
+          "@
+          Set-Content -Path release-notes.md -Value $body -Encoding utf8
+
+          git tag $tag
+          git push origin $tag
+          gh release create $tag "$env:ZIP_NAME" `
+            --title "简体中文构建 $env:VER（上游 $env:BASE_TAG）" `
+            --notes-file release-notes.md `
+            --latest
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        if: steps.plan.outputs.action != 'noop'
+        with:
+          name: openclaw-zh-cn-release-${{ steps.plan.outputs.ver }}
+          path: |
+            publish/
+            ${{ steps.plan.outputs.zip_name }}
+          if-no-files-found: error

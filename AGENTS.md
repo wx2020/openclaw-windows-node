@@ -225,3 +225,11 @@ This branch ships a Simplified Chinese build of the tray app. See `docs/LOCALIZA
 - The zh-cn and zh-tw resource files may carry translations ahead of the Latin-script locales; `LocalizationValidationTests` allows that rollout order.
 - Never use a status token from the gateway payload as display text. Resolve a state enum (see `ChannelsPage.ChannelBadge`) and look the label up in resources.
 - Update checks in this branch point at the fork (`wx2020/openclaw-windows-node`) so an upstream release cannot replace the Chinese build.
+
+### Release facts (verified 2026-11-07)
+
+- Upstream cadence: alpha releases daily (double cron 21/22 UTC, DST-aware); stable releases are manual, roughly monthly (`v2026.9.8-1` style hotfix suffixes exist).
+- Upstream ships the tray zip from `ci.yml` (`artifacts/tray-win-x64` -> `OpenClawTray-{semVer}-win-x64.zip`); Updatum's default asset regex (`win-x64`) matches that naming.
+- Updatum version comparison uses only the numeric prefix of a tag (`ExtractVersionRegex`); prerelease gating uses the GitHub prerelease flag, not the tag suffix.
+- Therefore zh-cn release tags follow `v<upstream-version>-zh.<n>` (e.g. `v2026.10.8-zh.1`). A re-publish on the same base (`-zh.2`) will NOT trigger the in-app updater (same numeric version); cross-base updates work normally.
+- Release pipeline (implemented 2026-11-07): `.github/workflows/zh-cn-release.yml` on the zh-cn branch — modes auto (rebase onto a newer upstream stable tag, gate on the localization tests, release `zh-<base>.1`) and manual (patch release `zh-<base>.<n+1>` from current HEAD). Version injection via `-p:DisableGitVersionTask=true -p:Version=<X.Y.Z>.<n>` (GitVersion bypassed, sha still appended by the SDK). Run with `gh workflow run zh-cn-release.yml --ref zh-cn`; scheduled workflows cannot fire from a non-default branch, so the daily upstream check needs an external scheduler running that command. See docs/LOCALIZATION_ZH.md "Releasing".
